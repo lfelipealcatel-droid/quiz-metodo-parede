@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"C:\\\\Users\\\\lfeli\\\\OneDrive\\\\Desktop\\\\quiz-metodo-parede\"; Start-Process powershell -ArgumentList '-NoProfile','-Command','npm run preview -- --port 4173' -WindowStyle Hidden; Start-Sleep -Seconds 3; Write-Host \"Servidor iniciado\")"
+    ]
+  }
+}
