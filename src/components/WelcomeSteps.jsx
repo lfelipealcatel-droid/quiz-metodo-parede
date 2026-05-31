@@ -128,12 +128,14 @@ export function StepBodyType({ update, onNext }) {
   const handle = (v) => { update('bodyType', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 600 }}>Como está seu corpo agora?</h2>
-      {opts.map(([v, l]) => (
-        <button key={v} className="option-btn" onClick={() => handle(v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <h2 className="quiz-title">Como está seu corpo agora?</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className="option-btn" onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -148,21 +150,23 @@ export function StepBelly({ answers, update, onNext }) {
   ];
   return (
     <div className="step">
-      <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 600 }}>Sua barriga está concentrada onde?</h2>
-      {opts.map(([v, l, img]) => (
-        <button
-          key={v}
-          className={`option-btn belly-btn ${answers.bellyLocation === v ? 'selected' : ''}`}
-          onClick={() => update('bellyLocation', v)}
-        >
-          <span className="belly-btn-text">{l}</span>
-          <img src={img} alt={l} className="belly-btn-img" />
-          <span className="check">✓</span>
-        </button>
-      ))}
+      <h2 className="quiz-title">Sua barriga está concentrada onde?</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l, img]) => (
+          <button
+            key={v}
+            className={`option-btn belly-btn ${answers.bellyLocation === v ? 'selected' : ''}`}
+            onClick={() => update('bellyLocation', v)}
+          >
+            <span className="belly-btn-text">{l}</span>
+            <img src={img} alt={l} className="belly-btn-img" />
+            <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
       {answers.bellyLocation && (
         <>
-          <div className="microcopy" style={{ whiteSpace: 'pre-line' }}>
+          <div className="quiz-microcopy" style={{ whiteSpace: 'pre-line' }}>
             💬 {microcopies.bellyLocation[answers.bellyLocation]}
           </div>
           <button className="cta-btn" onClick={onNext}>Continuar →</button>

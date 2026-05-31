@@ -52,19 +52,21 @@ export function StepPastAttempts({ answers, toggle, onNext }) {
 
   return (
     <div className="step">
-      <h2>O que você JÁ tentou e não funcionou?</h2>
-      <p className="sub">Pode marcar várias:</p>
-      {opts.map(([v, l]) => (
-        <div
-          key={v}
-          className={`checkbox-row ${answers.pastAttempts.includes(v) ? 'selected' : ''}`}
-          onClick={() => toggle(v)}
-        >
-          <div className="check-box"></div>{l}
-        </div>
-      ))}
+      <h2 className="quiz-title">O que você JÁ tentou e não funcionou?</h2>
+      <p className="quiz-subhead">Pode marcar várias:</p>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <div
+            key={v}
+            className={`checkbox-row ${answers.pastAttempts.includes(v) ? 'selected' : ''}`}
+            onClick={() => toggle(v)}
+          >
+            <div className="check-box"></div>{l}
+          </div>
+        ))}
+      </div>
       {mc && (
-        <div className="microcopy" style={{ whiteSpace: 'pre-line' }}>💬 {mc}</div>
+        <div className="quiz-microcopy" style={{ whiteSpace: 'pre-line' }}>💬 {mc}</div>
       )}
       {answers.pastAttempts.length > 0 && (
         <button className="cta-btn" onClick={onNext}>Continuar →</button>
@@ -117,16 +119,18 @@ export function StepImpact({ answers, toggle, onNext }) {
   ];
   return (
     <div className="step">
-      <h2>Como essa barriga tem afetado sua vida?</h2>
-      <p className="sub">Pode marcar várias:</p>
-      {opts.map(([v, l]) => (
-        <div key={v} className={`checkbox-row ${answers.emotionalImpact.includes(v) ? 'selected' : ''}`} onClick={() => toggle('emotionalImpact', v)}>
-          <div className="check-box"></div>{l}
-        </div>
-      ))}
+      <h2 className="quiz-title">Como essa barriga tem afetado sua vida?</h2>
+      <p className="quiz-subhead">Pode marcar várias:</p>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <div key={v} className={`checkbox-row ${answers.emotionalImpact.includes(v) ? 'selected' : ''}`} onClick={() => toggle('emotionalImpact', v)}>
+            <div className="check-box"></div>{l}
+          </div>
+        ))}
+      </div>
       {answers.emotionalImpact.length > 0 && (
         <>
-          <div className="microcopy">
+          <div className="quiz-microcopy">
             💬 Você não está sozinha.<br /><br />
             A maioria das mulheres que faz esse teste também marca mais de uma dessas opções. Isso não é frescura. Não é vaidade.<br /><br />
             É um corpo que mudou silenciosamente — mas isso não significa que seu corpo vai ficar assim para sempre.<br /><br />
