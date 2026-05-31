@@ -87,16 +87,18 @@ export function StepLimitations({ answers, toggle, onNext }) {
   ];
   return (
     <div className="step">
-      <h2>Você tem alguma dessas limitações?</h2>
-      <p className="sub">Pode marcar várias:</p>
-      {opts.map(([v, l]) => (
-        <div key={v} className={`checkbox-row ${answers.limitations.includes(v) ? 'selected' : ''}`} onClick={() => toggle('limitations', v)}>
-          <div className="check-box"></div>{l}
-        </div>
-      ))}
+      <h2 className="quiz-title">Você tem alguma dessas limitações?</h2>
+      <p className="quiz-subhead">Pode marcar várias:</p>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <div key={v} className={`checkbox-row ${answers.limitations.includes(v) ? 'selected' : ''}`} onClick={() => toggle('limitations', v)}>
+            <div className="check-box"></div>{l}
+          </div>
+        ))}
+      </div>
       {answers.limitations.length > 0 && (
         <>
-          <div className="microcopy">
+          <div className="quiz-microcopy">
             💬 Não se preocupe. Suas limitações foram registradas — seu protocolo vai ser personalizado pra respeitá-las.
             <br /><br />
             Você não vai ficar de fora.

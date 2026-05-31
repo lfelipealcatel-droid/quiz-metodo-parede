@@ -113,12 +113,16 @@ export function StepDiagnosis({ results, onNext }) {
         <div style={{ fontSize: '18px', lineHeight: 1.55 }}>{cfg.narrativa}</div>
       </div>
 
-      <div className="solution-box" style={{ background: '#F0FAF0', border: '1.5px solid #2E7D32', borderRadius: '10px', padding: '16px', margin: '16px 0', whiteSpace: 'pre-line' }}>
-        <strong style={{ color: '#2E7D32' }}>✨ A BOA NOTÍCIA:</strong>
-        <br /><br />
-        {boaNoticia}
-        <br /><br />
-        E é exatamente esse caminho que vamos preparar pra você nas próximas telas.
+      <div className="solution-box" style={{ background: '#F0FAF0', border: '1.5px solid #2E7D32', borderRadius: '10px', padding: '16px', margin: '16px 0' }}>
+        <p style={{ fontSize: '18px', fontWeight: 700, color: '#2E7D32', margin: '0 0 12px' }}>✨ A BOA NOTÍCIA:</p>
+        {boaNoticia.split('\n\n').map((para, i) => (
+          <p key={i} style={i === 0
+            ? { fontSize: '17px', fontWeight: 700, color: '#2E7D32', lineHeight: 1.55, margin: '0 0 12px' }
+            : { fontSize: '16px', color: '#1A1A1A', lineHeight: 1.55, margin: '0 0 12px' }}>
+            {para}
+          </p>
+        ))}
+        <p style={{ fontSize: '16px', color: '#1A1A1A', lineHeight: 1.55, margin: 0 }}>E é exatamente esse caminho que vamos preparar pra você nas próximas telas.</p>
       </div>
 
       <p style={{ textAlign: 'center', fontSize: '13px', color: '#666', margin: '16px 0 12px' }}>
@@ -174,15 +178,17 @@ export function StepRoutine({ update, onNext }) {
   const handle = (v) => { update('routine', v); setSelected(v); };
   return (
     <div className="step">
-      <h2>Como é seu dia a dia hoje?</h2>
-      {opts.map(([v, l]) => (
-        <button key={v} className={`option-btn ${selected === v ? 'selected' : ''}`} onClick={() => handle(v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <h2 className="quiz-title">Como é seu dia a dia hoje?</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className={`option-btn ${selected === v ? 'selected' : ''}`} onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
       {selected && (
         <>
-          <div className="microcopy">💬 Registrado. Seu protocolo vai encaixar naturalmente na sua rotina.</div>
+          <div className="quiz-microcopy">💬 Registrado. Seu protocolo vai encaixar naturalmente na sua rotina.</div>
           <button className="cta-btn" onClick={onNext}>Continuar →</button>
         </>
       )}
@@ -204,7 +210,7 @@ export function StepHeight({ answers, update, onNext }) {
 
   return (
     <div className="step">
-      <h2>Qual é a sua altura?</h2>
+      <h2 className="quiz-title">Qual é a sua altura?</h2>
       <p className="sub">Isso é importante para calcular seu IMC corrigido — uma das variáveis-chave para personalizar a intensidade do seu protocolo.</p>
       <div className="slider-container">
         <div className="slider-value">{displayValue}<span className="unit">{unit === 'cm' ? 'cm' : 'pol'}</span></div>
@@ -259,7 +265,7 @@ export function StepWeight({ answers, update, onNext }) {
 
   return (
     <div className="step">
-      <h2>E qual é o seu peso atual?</h2>
+      <h2 className="quiz-title">E qual é o seu peso atual?</h2>
       <p className="sub">Com altura e peso, vamos calcular seu IMC e ajustar a intensidade do protocolo exatamente para o seu caso.</p>
       <div className="slider-container">
         <div className="slider-value">{displayValue}<span className="unit">{unit}</span></div>
@@ -278,7 +284,7 @@ export function StepWeight({ answers, update, onNext }) {
         <div style={{ background: '#E0E0E0', borderRadius: '4px', height: '8px', position: 'relative', marginBottom: '12px' }}>
           <div style={{ background: imcCor, borderRadius: '4px', height: '8px', width: `${Math.min(100, Math.max(5, ((imc - 15) / 25) * 100))}%`, transition: 'width 0.3s' }} />
         </div>
-        <div className="microcopy" style={{ whiteSpace: 'pre-line', margin: 0 }}>💬 {micro}</div>
+        <div style={{ fontSize: '16px', lineHeight: 1.55, color: '#1A1A1A', whiteSpace: 'pre-line' }}>💬 {micro}</div>
       </div>
 
       <button className="cta-btn" onClick={onNext}>Continuar →</button>
@@ -324,15 +330,16 @@ export function StepAcceptance({ update, onNext }) {
   const handle = (v) => { update('acceptance', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <p className="proof-fire-title" style={{ marginBottom: '8px' }}>🔥 Antes de calcularmos sua projeção de resultado:</p>
-      <h2>Existe um protocolo desenvolvido pra mulher 40+ na sua fase exata — 8 minutos por dia, em pé, apoiada contra uma parede. Sem academia, sem dieta, sem caneta.</h2>
+      <p style={{ fontSize: '17px', fontWeight: 400, color: '#1A1A1A', lineHeight: 1.55, margin: '0 0 16px' }}>Existe um protocolo desenvolvido pra mulher 40+ na sua fase exata — 8 minutos por dia, em pé, apoiada contra uma parede. Sem academia, sem dieta, sem caneta.</p>
       <hr className="proof-hr" />
-      <p style={{ textAlign: 'center', fontWeight: 600, fontSize: '16px', margin: '12px 0' }}>Faz sentido pra você?</p>
-      {opts.map(([v, l]) => (
-        <button key={v} className="option-btn" onClick={() => handle(v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <p style={{ textAlign: 'center', fontWeight: 700, fontSize: '20px', margin: '12px 0', color: '#1A1A1A' }}>Faz sentido pra você?</p>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className="option-btn" onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -382,10 +389,10 @@ export function StepLoading2({ answers, setResults, onNext }) {
 
   return (
     <div className="loading-box">
-      <h3>Calculando sua projeção de resultado...</h3>
+      <h3 style={{ fontSize: '22px', fontWeight: 700, color: '#1A1A1A' }}>Calculando sua projeção de resultado...</h3>
       {LOADING2_LINES.map((text, i) => (
         <div key={i} style={{ marginBottom: '16px', opacity: i > lineIndex ? 0.25 : 1 }}>
-          <p style={{ fontSize: '13px', color: '#2E7D32', margin: '0 0 4px', textAlign: 'left' }}>{text}</p>
+          <p style={{ fontSize: '17px', fontWeight: 500, color: '#2E7D32', margin: '0 0 4px', textAlign: 'left' }}>{text}</p>
           <div className="loading-track">
             <div
               className="fill"
