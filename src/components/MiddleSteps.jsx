@@ -174,12 +174,14 @@ export function StepBelief({ answers, update, onNext }) {
   ];
   return (
     <div className="step">
-      <h2>Você acredita que pra perder a barriga depois dos 40 você precisa:</h2>
-      {opts.map(([v, l]) => (
-        <button key={v} className={`option-btn ${answers.belief === v ? 'selected' : ''}`} onClick={() => update('belief', v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <h2 className="quiz-title">Você acredita que pra perder a barriga depois dos 40 você precisa:</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className={`option-btn ${answers.belief === v ? 'selected' : ''}`} onClick={() => update('belief', v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
       {answers.belief && (
         <>
           <div className="educational-box">
@@ -191,11 +193,13 @@ export function StepBelief({ answers, update, onNext }) {
               </>
             ) : (
               <>
-                <strong style={{ color: '#D32F2F' }}>🔴 PARE. Isso é o que MAIS atrapalha mulheres 40+.</strong>
+                <strong style={{ color: '#D32F2F', fontSize: '18px' }}>🔴 PARE. Isso é o que MAIS atrapalha mulheres 40+.</strong>
                 <br /><br />
-                Cortar carboidrato ataca SÓ inflamação.<br />
-                Cardio intenso PIORA o cortisol.<br />
-                Caneta queima MÚSCULO.<br /><br />
+                <span style={{ fontSize: '17px', fontWeight: 500 }}>
+                  Cortar carboidrato ataca SÓ inflamação.<br />
+                  Cardio intenso PIORA o cortisol.<br />
+                  Caneta queima MÚSCULO.
+                </span><br /><br />
                 A única coisa que resolve é atacar as 3 ao mesmo tempo — com um caminho específico pra sua fase.<br /><br />
                 Seu diagnóstico está pronto.
               </>
@@ -218,13 +222,15 @@ export function StepFrustration({ update, onNext }) {
   const handle = (v) => { update('frustration', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <p className="proof-fire-title" style={{ marginBottom: '8px' }}>🔥 Última pergunta antes do seu diagnóstico:</p>
-      <h2>Você sente que mesmo se esforçando, seu corpo deixou de responder como antes?</h2>
-      {opts.map(([v, l]) => (
-        <button key={v} className="option-btn" onClick={() => handle(v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <p className="proof-fire-title" style={{ marginBottom: '8px', fontSize: '16px', fontWeight: 500 }}>🔥 Última pergunta antes do seu diagnóstico:</p>
+      <h2 className="quiz-title">Você sente que mesmo se esforçando, seu corpo deixou de responder como antes?</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className="option-btn" onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -266,10 +272,10 @@ export function StepLoading1({ onDone }) {
 
   return (
     <div className="loading-box">
-      <h3>Analisando seu perfil hormonal, metabólico e inflamatório...</h3>
+      <h3 style={{ fontSize: '22px', fontWeight: 700, color: '#1A1A1A' }}>Analisando seu perfil hormonal, metabólico e inflamatório...</h3>
       {LOADING1_LINES.map((text, i) => (
         <div key={i} style={{ marginBottom: '16px', opacity: i > lineIndex ? 0.25 : 1 }}>
-          <p style={{ fontSize: '13px', color: '#2E7D32', margin: '0 0 4px', textAlign: 'left' }}>
+          <p style={{ fontSize: '17px', fontWeight: 500, color: '#2E7D32', margin: '0 0 4px', textAlign: 'left' }}>
             {i < lineIndex ? text : i === lineIndex ? text : text}
           </p>
           <div className="loading-track">

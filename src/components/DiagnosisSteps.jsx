@@ -141,16 +141,18 @@ export function StepSymptoms({ answers, toggle, onNext }) {
   ];
   return (
     <div className="step">
-      <h2>Quais desses sintomas você sente HOJE?</h2>
-      <p className="sub">Marque todos que aplicam:</p>
-      {opts.map(([v, l]) => (
-        <div key={v} className={`checkbox-row ${answers.symptoms.includes(v) ? 'selected' : ''}`} onClick={() => toggle('symptoms', v)}>
-          <div className="check-box"></div>{l}
-        </div>
-      ))}
+      <h2 className="quiz-title">Quais desses sintomas você sente HOJE?</h2>
+      <p className="quiz-subhead">Marque todos que aplicam:</p>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <div key={v} className={`checkbox-row ${answers.symptoms.includes(v) ? 'selected' : ''}`} onClick={() => toggle('symptoms', v)}>
+            <div className="check-box"></div>{l}
+          </div>
+        ))}
+      </div>
       {answers.symptoms.length > 0 && (
         <>
-          <div className="microcopy">
+          <div className="quiz-microcopy">
             💬 Cada sintoma marcado refina seu diagnóstico. Estamos cruzando todos os dados agora.
           </div>
           <button className="cta-btn" onClick={onNext}>Continuar →</button>
