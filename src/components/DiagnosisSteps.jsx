@@ -35,9 +35,9 @@ export function StepDiagnosis({ results, onNext }) {
       ],
       narrativa: (
         <>
-          <p>Sua queda hormonal mudou silenciosamente três coisas ao mesmo tempo — seu corpo passou a estocar gordura na barriga, seu metabolismo desacelerou, e sua inflamação aumentou.</p>
-          <p>Tudo isso ao mesmo tempo. <br />Em silêncio. <br />Por meses.</p>
-          <p>Por isso você sentiu que do nada o corpo virou outro. <br />Não foi você. <br />Foi seu corpo se reorganizando numa nova fase.</p>
+          <p>Sua <strong style={{ color: '#D32F2F' }}>queda hormonal</strong> travou três coisas ao mesmo tempo — seu corpo passou a <strong style={{ color: '#D32F2F' }}>estocar gordura na barriga</strong>, seu metabolismo desacelerou, e sua inflamação aumentou.</p>
+          <p>Aconteceu <strong style={{ color: '#D32F2F' }}>em silêncio. Por meses.</strong></p>
+          <p><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo entrando em uma nova fase.</p>
         </>
       ),
     },
@@ -50,10 +50,10 @@ export function StepDiagnosis({ results, onNext }) {
       ],
       narrativa: (
         <>
-          <p>Seu cortisol está cronicamente alto — e isso colocou seu corpo em modo de defesa. Ele passou a guardar gordura na barriga como reserva de emergência, travou seu metabolismo, e bloqueou a queima da gordura abdominal.</p>
-          <p>Tudo isso ao mesmo tempo.<br />Em silêncio.<br />Por meses.</p>
-          <p>E aqui está o que ninguém te explicou: quando o corpo entra em modo de defesa, ele interpreta esforço como AMEAÇA. Treino pesado vira ameaça. Comer pouco vira ameaça. E quanto mais ameaça ele sente, mais ele se protege guardando gordura.</p>
-          <p>Não foi você.<br />Foi seu corpo entrando em modo sobrevivência sem você perceber.</p>
+          <p>Seu <strong style={{ color: '#D32F2F' }}>cortisol está cronicamente alto</strong> — e isso colocou seu corpo em <strong style={{ color: '#D32F2F' }}>modo de defesa</strong>.</p>
+          <p>Ele guarda gordura como reserva de emergência, trava seu metabolismo e bloqueia a queima abdominal.</p>
+          <p>E aqui está o que ninguém te explicou: em modo defesa, seu corpo lê <strong style={{ color: '#D32F2F' }}>esforço como AMEAÇA</strong>. Quanto mais você tenta, mais ele se protege.</p>
+          <p><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo em modo sobrevivência.</p>
         </>
       ),
     },
@@ -66,10 +66,10 @@ export function StepDiagnosis({ results, onNext }) {
       ],
       narrativa: (
         <>
-          <p>Boa parte da sua barriga não é gordura — é INFLAMAÇÃO. Seu corpo passou a reter líquido e gás na região abdominal, sua queima de gordura ficou bloqueada, e sua barriga começou a inchar e desinchar ao longo do dia.</p>
-          <p>Tudo isso ao mesmo tempo.<br />Em silêncio.<br />Por meses.</p>
-          <p>Por isso você acorda menor e dorme maior. Por isso cortou açúcar, cortou farinha — e a barriga continua.</p>
-          <p>Não foi você. <br />Foi seu corpo respondendo a uma inflamação que você nem sabia que existia.</p>
+          <p>Boa parte da sua barriga <strong style={{ color: '#D32F2F' }}>não é gordura — é INFLAMAÇÃO</strong>.</p>
+          <p>Seu corpo retém líquido e gás na região abdominal, a queima de gordura travou, e a barriga incha e desincha ao longo do dia.</p>
+          <p>Por isso você <strong style={{ color: '#D32F2F' }}>acorda menor e dorme maior</strong>. Por isso cortou açúcar, cortou farinha — e a barriga continua.</p>
+          <p><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi uma inflamação que estava trabalhando contra você o tempo todo.</p>
         </>
       ),
     },
@@ -82,28 +82,35 @@ export function StepDiagnosis({ results, onNext }) {
 
   return (
     <div className="step">
-      <div className="diagnosis-alert">🚨 SEU DIAGNÓSTICO ESTÁ PRONTO</div>
+      <p style={{ textAlign: 'center', fontSize: '22px', fontWeight: 700, color: '#1A1A1A', margin: '32px 0 24px' }}>🚨 SEU DIAGNÓSTICO ESTÁ PRONTO</p>
 
-      <p style={{ textAlign: 'center', fontSize: '13px', color: '#666', margin: '8px 0 4px' }}>Causa raiz identificada:</p>
-      <div style={{ background: '#FFF3F3', border: '1.5px solid #D32F2F', borderRadius: '10px', padding: '14px 16px', margin: '0 0 16px', whiteSpace: 'pre-line', fontWeight: 700, color: '#D32F2F', fontSize: '16px', textAlign: 'center' }}>
-        {cfg.causa}
+      <p style={{ textAlign: 'center', fontSize: '16px', color: '#444', margin: '0 0 16px' }}>Causa raiz identificada:</p>
+      <div style={{ background: '#FFF5F5', border: '1px solid #E63946', borderRadius: '12px', padding: '16px', margin: '0 0 32px', textAlign: 'center' }}>
+        {cfg.causa.split('\n').map((line, i) => (
+          <p key={i} style={i === 0
+            ? { fontSize: '20px', fontWeight: 700, color: '#D32F2F', margin: '0 0 4px' }
+            : { fontSize: '16px', fontWeight: 500, color: '#D32F2F', margin: 0 }}>
+            {line.trim()}
+          </p>
+        ))}
       </div>
 
-      <p style={{ textAlign: 'center', fontSize: '15px', color: '#333', margin: '0 0 16px' }}>
-        Respira fundo. <br />Tudo que você sente agora tem nome, tem causa — e tem caminho.
+      <p style={{ textAlign: 'center', lineHeight: 1.55, margin: '0 0 32px' }}>
+        <span style={{ fontSize: '18px', color: '#333' }}>Respira fundo.</span><br />
+        <span style={{ fontSize: '17px', color: '#333' }}>Tudo que você sente agora tem nome, tem causa — e tem caminho.</span>
       </p>
 
       <div className="diagnosis-body" style={{ background: '#F8F8F8', borderRadius: '10px', padding: '14px', margin: '0 0 16px' }}>
-        <strong>📊 SEU PAINEL HORMONAL:</strong>
-        <div style={{ marginTop: '12px' }}>{cfg.barras}</div>
+        <strong style={{ fontSize: '18px' }}>📊 SEU PAINEL HORMONAL:</strong>
+        <div style={{ marginTop: '16px' }}>{cfg.barras}</div>
         <p style={{ fontSize: '12px', color: '#888', margin: '8px 0 0', textAlign: 'center' }}>
           Inflamação: nível <strong>{nivel_inflamacao}</strong>
         </p>
       </div>
 
       <div className="diagnosis-body">
-        <p><strong>O que está acontecendo no seu corpo:</strong></p>
-        {cfg.narrativa}
+        <p style={{ fontSize: '20px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 16px' }}>O que está acontecendo no seu corpo:</p>
+        <div style={{ fontSize: '18px', lineHeight: 1.55 }}>{cfg.narrativa}</div>
       </div>
 
       <div className="solution-box" style={{ background: '#F0FAF0', border: '1.5px solid #2E7D32', borderRadius: '10px', padding: '16px', margin: '16px 0', whiteSpace: 'pre-line' }}>
@@ -125,18 +132,17 @@ export function StepDiagnosis({ results, onNext }) {
 // ─── E11 — Sintomas Hormonais ──────────────────────────────────────────────────
 export function StepSymptoms({ answers, toggle, onNext }) {
   const opts = [
-    ['calorao',        '🔥 Calorão / fogacho'],
-    ['cansaco',        '😴 Cansaço que não passa'],
-    ['insonia',        '🌙 Insônia ou acordar de madrugada'],
-    ['irritabilidade', '😡 Irritabilidade fora do comum'],
-    ['ressecamento',   '💧 Ressecamento / libido baixo'],
-    ['nevoa',          '🧠 Esquecimento / névoa mental'],
+    ['calorao_fogacho',    '🔥 Calorão / fogacho'],
+    ['cansaco',            '😴 Cansaço que não passa'],
+    ['insonia',            '🌙 Insônia ou acordar de madrugada'],
+    ['irritabilidade',     '😡 Irritabilidade fora do comum'],
+    ['ressecamento_libido','💧 Ressecamento / libido baixo'],
+    ['inchaco_retencao',   '🎈 Inchaço ou retenção de líquido'],
   ];
   return (
     <div className="step">
-      <p className="proof-fire-title" style={{ marginBottom: '8px' }}>🔥 Agora vamos personalizar seu protocolo.</p>
       <h2>Quais desses sintomas você sente HOJE?</h2>
-      <p className="sub">Marque todos que aplicam — quanto mais preciso, mais personalizado seu plano:</p>
+      <p className="sub">Marque todos que aplicam:</p>
       {opts.map(([v, l]) => (
         <div key={v} className={`checkbox-row ${answers.symptoms.includes(v) ? 'selected' : ''}`} onClick={() => toggle('symptoms', v)}>
           <div className="check-box"></div>{l}
@@ -145,8 +151,7 @@ export function StepSymptoms({ answers, toggle, onNext }) {
       {answers.symptoms.length > 0 && (
         <>
           <div className="microcopy">
-            💬 Cada sintoma marcado é mais uma confirmação do seu diagnóstico.<br /><br />
-            Seu protocolo já está sendo ajustado.
+            💬 Cada sintoma marcado refina seu diagnóstico. Estamos cruzando todos os dados agora.
           </div>
           <button className="cta-btn" onClick={onNext}>Continuar →</button>
         </>

@@ -2,13 +2,13 @@
 export const microcopies = {
   bellyLocation: {
     'alta':
-      'Barriga alta = sinal clássico de cortisol elevado + metabolismo travado.\n\nVocê não precisa de MAIS exercício. Precisa do OPOSTO — e vamos te mostrar o caminho.\n\nContinue para receber seu diagnóstico personalizado.',
+      'Barriga alta = sinal clássico de cortisol elevado + metabolismo travado.\n\nVocê não precisa de MAIS exercício. Precisa do OPOSTO — e vamos te mostrar o caminho.',
     'gravida':
-      'Esse é o formato mais específico de todos.\n\nÉ também o tipo que responde MAIS RÁPIDO ao caminho certo — porque a barriga reduz visivelmente em dias quando ataca a causa real.\n\nContinue para receber seu diagnóstico personalizado.',
+      'Esse é o formato mais específico de todos.\n\nÉ também o tipo que responde MAIS RÁPIDO ao caminho certo — porque a barriga reduz visivelmente em dias quando ataca a causa real.',
     'baixa':
-      'Padrão típico de queda de estrogênio + enfraquecimento do core profundo.\n\nComum após gestação ou depois dos 45. Existe um caminho específico que reativa essa região SEM impacto.\n\nContinue para receber seu diagnóstico personalizado.',
+      'Padrão típico de queda de estrogênio + enfraquecimento do core profundo.\n\nComum após gestação ou depois dos 45. Existe um caminho específico que reativa essa região SEM impacto.',
     'inchada':
-      'Barriga que varia ao longo do dia = INFLAMAÇÃO, não gordura.\n\nIsso muda tudo. Você vai sentir resultado em DIAS, não semanas — quando atacar a causa real.\n\nContinue para receber seu diagnóstico personalizado.',
+      'Barriga que varia ao longo do dia = INFLAMAÇÃO, não gordura.\n\nIsso muda tudo. Você vai sentir resultado em DIAS, não semanas — quando atacar a causa real.',
   },
 };
 
@@ -21,19 +21,21 @@ export function calculateScores(answers) {
   QMH += ageMap[answers.age] || 0;
   if (answers.bodyType === 'magra-engordou') QMH += 3;
   else if (answers.bodyType === 'curva-anormal') QMH += 2;
-  if (answers.frustration === 'sim-exatamente') QMH += 3;
-  if (answers.symptoms.includes('calorao')) QMH += 2;
-  if (answers.symptoms.includes('ressecamento')) QMH += 2;
-  if (answers.symptoms.includes('nevoa')) QMH += 1;
+  if (answers.tempo_mudanca === 'alguns_meses') QMH += 3;
+  if (answers.frustration === 'sim-exatamente') QMH += 2;
+  if (answers.symptoms.includes('calorao_fogacho')) QMH += 1;
+  if (answers.symptoms.includes('ressecamento_libido')) QMH += 1;
 
   // CE — Cortisol/Estresse
   if (
     answers.emotionalImpact.includes('isolamento') ||
     answers.emotionalImpact.includes('nao-reconheco')
   ) CE += 2;
-  if (answers.frustration === 'corpo-virou') CE += 2;
+  if (answers.tempo_mudanca === 'poucas_semanas') CE += 3;
+  else if (answers.tempo_mudanca === 'perdi_nocao') CE += 2;
   if (answers.pastAttempts.includes('musculacao')) CE += 2;
   if (answers.pastAttempts.includes('dieta')) CE += 1;
+  if (answers.frustration === 'corpo-virou') CE += 2;
   if (answers.symptoms.includes('insonia')) CE += 1;
   if (answers.symptoms.includes('irritabilidade')) CE += 1;
 
@@ -41,13 +43,28 @@ export function calculateScores(answers) {
   if (answers.bellyLocation === 'inchada') INF += 4;
   else if (answers.bellyLocation === 'alta') INF += 2;
   if (answers.pastAttempts.includes('acucar') && answers.bellyLocation === 'inchada') INF += 2;
+  if (answers.tempo_mudanca === 'mais_um_ano') INF += 3;
+  if (answers.symptoms.includes('inchaco_retencao')) INF += 1;
+  if (answers.symptoms.includes('cansaco')) INF += 1;
 
   // Variação de diagnóstico
   let variacao;
-  if (INF >= 4 && QMH < 6) variacao = 'C';
-  else if (QMH >= 8) variacao = 'A';
-  else if (CE >= 5 && QMH < 8) variacao = 'B';
-  else variacao = 'A';
+  if (INF >= 5 && answers.bellyLocation === 'inchada') {
+    variacao = 'C';
+  } else if (QMH >= 9 && (
+    answers.symptoms.includes('calorao_fogacho') ||
+    answers.symptoms.includes('ressecamento_libido')
+  )) {
+    variacao = 'A';
+  } else if (CE >= 6) {
+    variacao = 'B';
+  } else if (QMH >= 7) {
+    variacao = 'A';
+  } else {
+    if (CE > QMH && CE > INF) variacao = 'B';
+    else if (INF > QMH) variacao = 'C';
+    else variacao = 'A';
+  }
 
   // Valores derivados do painel hormonal
   let X_metabolismo;

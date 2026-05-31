@@ -139,6 +139,27 @@ export function StepImpact({ answers, toggle, onNext }) {
   );
 }
 
+// ─── E7.5 — Tempo de Mudança ───────────────────────────────────────────────────
+export function StepBodyChange({ update, onNext }) {
+  const opts = [
+    ['poucas_semanas', '⚡ Em poucas semanas — foi do nada, sem aviso'],
+    ['alguns_meses',   '📅 Em alguns meses — fui percebendo aos poucos'],
+    ['mais_um_ano',    '🕐 Há mais de um ano — tem se acumulado'],
+    ['perdi_nocao',    '🌀 Sinceramente, perdi a noção — parece que sempre foi assim'],
+  ];
+  const handle = (v) => { update('tempo_mudanca', v); setTimeout(onNext, 200); };
+  return (
+    <div className="step">
+      <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 600 }}>Em quanto tempo você sentiu que seu corpo mudou?</h2>
+      {opts.map(([v, l]) => (
+        <button key={v} className="option-btn" onClick={() => handle(v)}>
+          {l} <span className="check">✓</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 // ─── E8 — Quebra de Crença ─────────────────────────────────────────────────────
 export function StepBelief({ answers, update, onNext }) {
   const opts = [

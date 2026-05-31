@@ -224,9 +224,9 @@ html, body {
   line-height: 1.25;
 }
 
-.metric-block { margin: 20px 0; }
-.metric-block .label { font-size: 13px; color: #666; margin-bottom: 6px; }
-.metric-block .value { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; }
+.metric-block { margin: 24px 0; }
+.metric-block .label { font-size: 16px; font-weight: 500; color: #444; margin-bottom: 4px; }
+.metric-block .value { font-size: 20px; font-weight: 700; color: #D32F2F; margin-bottom: 10px; }
 .metric-bar-container { position: relative; padding-top: 28px; }
 
 .metric-bar {
@@ -259,7 +259,7 @@ html, body {
   border-top-color: #1a1a1a;
 }
 
-.metric-labels { display: flex; justify-content: space-between; font-size: 11px; color: #888; margin-top: 6px; }
+.metric-labels { display: flex; justify-content: space-between; font-size: 13px; color: #888; margin-top: 6px; }
 
 .diagnosis-body { font-size: 14px; line-height: 1.65; color: #333; margin: 18px 0; }
 .diagnosis-body p { margin: 0 0 14px; }
@@ -997,7 +997,7 @@ input[type=range]::-moz-range-thumb {
   padding: 13px 16px;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #A32D2D;
 }
@@ -1032,13 +1032,15 @@ input[type=range]::-moz-range-thumb {
   font-weight: 400;
   color: #333;
   line-height: 1.4;
+  text-align: center;
 }
 
 .proof-tri-name {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 800;
   color: #D32F2F;
   line-height: 1.2;
+  text-align: center;
 }
 
 /* Triângulo — lista */
@@ -1159,8 +1161,8 @@ input[type=range]::-moz-range-thumb {
 
 .wa-select-guide {
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   color: #F37021;
   text-transform: uppercase;
   letter-spacing: 1px;

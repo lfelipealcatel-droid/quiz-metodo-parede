@@ -1,17 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import { calculateScores } from './quiz-data.js';
 import { WelcomeAge, StepSocialProof, StepBodyType, StepBelly, StepProof } from './components/WelcomeSteps.jsx';
-import { StepPastAttempts, StepLimitations, StepImpact, StepBelief, StepFrustration, StepLoading1 } from './components/MiddleSteps.jsx';
+import { StepPastAttempts, StepLimitations, StepImpact, StepBelief, StepFrustration, StepLoading1, StepBodyChange } from './components/MiddleSteps.jsx';
 import { StepDiagnosis, StepSymptoms, StepRoutine, StepHeight, StepWeight, StepAge, StepAcceptance, StepLoading2 } from './components/DiagnosisSteps.jsx';
 import { StepProjection, StepName, StepEmail, StepFutureFear, StepCommitment, StepProfile, StepFinal } from './components/FinalSteps.jsx';
 
-// E1 (WelcomeAge) não conta na barra; steps 1-25 = E1.5 até E23
-const TOTAL_STEPS = 25;
+// E1 (WelcomeAge) não conta na barra; steps 1-26 = E1.5 até E23
+const TOTAL_STEPS = 26;
 
 const initialAnswers = {
   age: null, bodyType: null, bellyLocation: null,
   pastAttempts: [], limitations: [], emotionalImpact: [],
   belief: null, frustration: null, symptoms: [],
+  tempo_mudanca: null,
   routine: null, height: 165, weight: 70, idade: 47,
   acceptance: null, name: '', email: '',
   futureFear: null, commitment: null,
@@ -85,46 +86,48 @@ export default function Quiz() {
       {step === 4  && <StepProof onNext={next} />}
       {/* E5 */}
       {step === 5  && <StepPastAttempts answers={answers} toggle={togglePastAttempts} onNext={next} />}
-      {/* E6 */}
-      {step === 6  && <StepLimitations answers={answers} toggle={toggleMulti} onNext={next} />}
       {/* E7 */}
-      {step === 7  && <StepImpact answers={answers} toggle={toggleMulti} onNext={next} />}
+      {step === 6  && <StepImpact answers={answers} toggle={toggleMulti} onNext={next} />}
+      {/* E7.5 */}
+      {step === 7  && <StepBodyChange update={updateAnswer} onNext={next} />}
       {/* E8 */}
       {step === 8  && <StepBelief answers={answers} update={updateAnswer} onNext={next} />}
-      {/* E9 */}
-      {step === 9  && <StepFrustration update={updateAnswer} onNext={next} />}
+      {/* E9 — sintomas (era E11) */}
+      {step === 9  && <StepSymptoms answers={answers} toggle={toggleMulti} onNext={next} />}
+      {/* E9.5 — validação (era E9) */}
+      {step === 10 && <StepFrustration update={updateAnswer} onNext={next} />}
       {/* E10 */}
-      {step === 10 && <StepLoading1 onDone={computeAndAdvance} />}
+      {step === 11 && <StepLoading1 onDone={computeAndAdvance} />}
       {/* E10.1 */}
-      {step === 11 && <StepDiagnosis results={results} onNext={next} />}
-      {/* E11 */}
-      {step === 12 && <StepSymptoms answers={answers} toggle={toggleMulti} onNext={next} />}
+      {step === 12 && <StepDiagnosis results={results} onNext={next} />}
+      {/* E11 — limitações (era E6) */}
+      {step === 13 && <StepLimitations answers={answers} toggle={toggleMulti} onNext={next} />}
       {/* E12 */}
-      {step === 13 && <StepRoutine update={updateAnswer} onNext={next} />}
+      {step === 14 && <StepRoutine update={updateAnswer} onNext={next} />}
       {/* E13 — Altura */}
-      {step === 14 && <StepHeight answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 15 && <StepHeight answers={answers} update={updateAnswer} onNext={next} />}
       {/* E14 — Peso + IMC */}
-      {step === 15 && <StepWeight answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 16 && <StepWeight answers={answers} update={updateAnswer} onNext={next} />}
       {/* E15 — Idade Exata */}
-      {step === 16 && <StepAge answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 17 && <StepAge answers={answers} update={updateAnswer} onNext={next} />}
       {/* E16 */}
-      {step === 17 && <StepAcceptance update={updateAnswer} onNext={next} />}
+      {step === 18 && <StepAcceptance update={updateAnswer} onNext={next} />}
       {/* E17-loading */}
-      {step === 18 && <StepLoading2 answers={answers} setResults={setResults} onNext={next} />}
+      {step === 19 && <StepLoading2 answers={answers} setResults={setResults} onNext={next} />}
       {/* E17-projeção */}
-      {step === 19 && <StepProjection results={results} answers={answers} onNext={next} />}
+      {step === 20 && <StepProjection results={results} answers={answers} onNext={next} />}
       {/* E18 */}
-      {step === 20 && <StepName answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 21 && <StepName answers={answers} update={updateAnswer} onNext={next} />}
       {/* E19 */}
-      {step === 21 && <StepEmail answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 22 && <StepEmail answers={answers} update={updateAnswer} onNext={next} />}
       {/* E20 */}
-      {step === 22 && <StepFutureFear answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 23 && <StepFutureFear answers={answers} update={updateAnswer} onNext={next} />}
       {/* E21 */}
-      {step === 23 && <StepCommitment answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 24 && <StepCommitment answers={answers} update={updateAnswer} onNext={next} />}
       {/* E22 */}
-      {step === 24 && <StepProfile answers={answers} results={results} onNext={next} />}
+      {step === 25 && <StepProfile answers={answers} results={results} onNext={next} />}
       {/* E23 */}
-      {step === 25 && <StepFinal answers={answers} />}
+      {step === 26 && <StepFinal answers={answers} />}
     </div>
   );
 }

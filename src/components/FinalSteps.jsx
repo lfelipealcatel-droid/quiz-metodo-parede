@@ -151,6 +151,13 @@ function ProfileRow({ icon, label, value, highlight }) {
   );
 }
 
+const DYNAMIC_BENEFITS = [
+  { key: 'insonia',             text: 'Dormir melhor e acordar mais descansada' },
+  { key: 'irritabilidade',      text: 'Sentir mais equilíbrio emocional e bem-estar' },
+  { key: 'calorao_fogacho',     text: 'Atravessar os calorões com mais conforto' },
+  { key: 'ressecamento_libido', text: 'Recuperar sua vitalidade feminina' },
+];
+
 export function StepProfile({ answers, results, onNext }) {
   if (!results) return null;
   const name = answers.name || 'Você';
@@ -159,9 +166,19 @@ export function StepProfile({ answers, results, onNext }) {
     imc_valor, imc_classificacao, projectionMin, projectionMax,
   } = results;
 
+  const dynamicBenefits = DYNAMIC_BENEFITS
+    .filter(b => answers.symptoms.includes(b.key))
+    .slice(0, 2);
+
   return (
     <div className="step">
-      <h2 style={{ textAlign: 'center' }}>🔥 {name}, aqui está seu perfil completo:</h2>
+      <h2 style={{ textAlign: 'center', fontSize: '22px' }}>🎉 {name}, seu protocolo está pronto.</h2>
+
+      <div style={{ fontSize: '15px', lineHeight: 1.6, color: '#333', margin: '16px 0 20px' }}>
+        <p style={{ margin: '0 0 10px' }}>Sua análise foi concluída.</p>
+        <p style={{ margin: '0 0 10px' }}>Com base nas suas respostas, sua principal dificuldade não está na falta de esforço.</p>
+        <p style={{ margin: 0 }}>Está na forma como seu corpo passou a responder depois dos 40.</p>
+      </div>
 
       <div className="profile-card">
         <ProfileRow icon="🩸" label="Fase hormonal"   value={fase_hormonal} />
@@ -171,7 +188,7 @@ export function StepProfile({ answers, results, onNext }) {
         <ProfileRow icon="🔥" label="Inflamação"       value={`nível ${nivel_inflamacao}`} />
         <ProfileRow icon="📏" label="IMC"              value={`${imc_valor} (${imc_classificacao})`} />
         <ProfileRow icon="🦴" label="Limitações"       value={getLimitLabel(answers.limitations)} />
-        <ProfileRow icon="✨" label="Potencial"        value={`-${projectionMin} a -${projectionMax} cm em 21 dias`} />
+        <ProfileRow icon="✨" label="Potencial"        value={`-${projectionMin} a -${projectionMax} cm em 21 dias`} highlight />
       </div>
 
       <div style={{ background: '#FFF8E1', border: '2px solid #C9A227', borderRadius: '12px', padding: '18px 16px', margin: '20px 0', textAlign: 'center' }}>
@@ -180,25 +197,47 @@ export function StepProfile({ answers, results, onNext }) {
         <p style={{ fontSize: '15px', fontWeight: 700, color: '#333', margin: 0 }}>O Protocolo Hormonal Personalizado da Barriga 40+</p>
         <hr style={{ border: 'none', borderTop: '1px solid #DDD', margin: '12px 0' }} />
         <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>⏱️ <strong>8 minutos por dia</strong></p>
-        <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>📍 Na sua casa, apoiada contra uma parede</p>
-        <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>🚫 Sem academia · sem dieta · sem impacto</p>
+        <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>📍 Em casa, contra uma parede</p>
+        <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>🚫 Sem cardio · sem dieta · sem caneta</p>
       </div>
 
-      <div className="instructor-quote">
+      <div style={{ background: '#F0FAF0', border: '1.5px solid #A7D7A0', borderRadius: '12px', padding: '18px 16px', margin: '20px 0' }}>
+        <p style={{ fontSize: '14px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>🎯 O que seu protocolo foi ajustado para fazer:</p>
+        <p style={{ fontSize: '15px', color: '#1A1A1A', margin: '0 0 8px', fontWeight: 700 }}>
+          ✅ Reduzir {projectionMin} a {projectionMax} cm de cintura em 21 dias
+        </p>
+        <p style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ Desinchar e voltar a vestir suas roupas com mais conforto</p>
+        <p style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ Recuperar energia e disposição</p>
+        {dynamicBenefits.map(b => (
+          <p key={b.key} style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ {b.text}</p>
+        ))}
+      </div>
+
+      <div className="instructor-quote" style={{ textAlign: 'left' }}>
         <img
           src="/imagem/instrutora.jpg"
           alt="Instrutora do Método Parede"
-          style={{ width: '70px', height: '70px', borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 10px' }}
+          style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 12px' }}
           onError={e => { e.target.style.display = 'none'; }}
         />
-        <em>
-          "Esse é EXATAMENTE o tipo de caso para o qual desenvolvi o Método Parede.{' '}
-          {name}, você está no perfil ideal para resultado rápido."
+        <p style={{ fontSize: '14px', fontWeight: 700, color: '#1A1A1A', textAlign: 'center', margin: '0 0 2px' }}>Criado por Instrutora, 47 anos</p>
+        <p style={{ fontSize: '13px', color: '#666', textAlign: 'center', margin: '0 0 14px' }}>Especialista em emagrecimento feminino na menopausa e criadora do Método Parede 40+.</p>
+        <em style={{ fontSize: '14px', lineHeight: 1.6, color: '#444', display: 'block' }}>
+          "Há mais de 12 anos ajudo mulheres acima dos 40 a recuperarem a confiança no próprio corpo.<br /><br />
+          Ao longo desse tempo, percebi que muitas estavam tentando emagrecer com estratégias que não respeitavam a fase hormonal que estavam vivendo.<br /><br />
+          Foi por isso que criei o Método Parede 40+: um protocolo simples, adaptado para mulheres 40+, que ajuda o corpo a voltar a responder sem depender de exercícios intensos ou dietas extremas."
         </em>
-        <span className="instructor-name">— Instrutora, 47 anos · Especialista em treino hormonal feminino</span>
       </div>
 
-      <button className="cta-btn" style={{ marginTop: '20px' }} onClick={onNext}>
+      <p style={{ fontSize: '15px', lineHeight: 1.6, color: '#333', margin: '24px 0 20px', textAlign: 'center' }}>
+        Na próxima página você vai ver como o Método Parede 40+ funciona e por que ele foi recomendado para o seu perfil.
+      </p>
+
+      <button
+        className="cta-btn"
+        style={{ marginTop: '4px', background: '#16A34A' }}
+        onClick={onNext}
+      >
         🔓 LIBERAR MEU MÉTODO PAREDE 40+ →
       </button>
     </div>

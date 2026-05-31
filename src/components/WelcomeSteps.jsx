@@ -128,7 +128,7 @@ export function StepBodyType({ update, onNext }) {
   const handle = (v) => { update('bodyType', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <h2>Como está seu corpo agora?</h2>
+      <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 600 }}>Como está seu corpo agora?</h2>
       {opts.map(([v, l]) => (
         <button key={v} className="option-btn" onClick={() => handle(v)}>
           {l} <span className="check">✓</span>
@@ -148,7 +148,7 @@ export function StepBelly({ answers, update, onNext }) {
   ];
   return (
     <div className="step">
-      <h2>Sua barriga está concentrada onde?</h2>
+      <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 600 }}>Sua barriga está concentrada onde?</h2>
       {opts.map(([v, l, img]) => (
         <button
           key={v}
