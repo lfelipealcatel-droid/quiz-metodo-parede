@@ -239,12 +239,16 @@ export function StepProfile({ answers, results, onNext }) {
         </em>
       </div>
 
+      <p style={{ fontSize: '15px', color: '#555555', textAlign: 'center', lineHeight: 1.5, margin: '24px 0 16px' }}>
+        👇 Veja os próximos passos para começar<br />a reduzir sua barriga de forma personalizada.
+      </p>
+
       <button
         className="cta-btn"
-        style={{ marginTop: '24px', background: '#16A34A' }}
+        style={{ marginTop: 0, background: '#16A34A' }}
         onClick={onNext}
       >
-        🔓 LIBERAR MEU MÉTODO PAREDE 40+ →
+        🔓 LIBERAR MEU PROTOCOLO COMPLETO →
       </button>
     </div>
   );
