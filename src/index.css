@@ -458,17 +458,19 @@ input[type=range]::-moz-range-thumb {
   margin: 16px 0;
 }
 
+.nome-destaque { color: #F77F00; font-weight: 700; }
+
 .profile-row {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 0.5px solid #f0f0f0;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .profile-row:last-child { border-bottom: 0; }
-.profile-row .key { color: #666; }
-.profile-row .val { color: #1a1a1a; font-weight: 600; text-align: right; max-width: 60%; }
+.profile-row .key { color: #444; font-weight: 500; }
+.profile-row .val { color: #1a1a1a; font-weight: 500; text-align: right; max-width: 60%; }
 
 .instructor-quote {
   background: #FFF8F3;

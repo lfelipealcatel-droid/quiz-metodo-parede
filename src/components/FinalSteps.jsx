@@ -176,9 +176,9 @@ export function StepProfile({ answers, results, onNext }) {
 
   return (
     <div className="step">
-      <h2 style={{ textAlign: 'center', fontSize: '22px' }}>🎉 {name}, seu protocolo está pronto.</h2>
+      <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 700, color: '#1A1A1A' }}>🎉 <strong className="nome-destaque">{name}</strong>, seu protocolo está pronto.</h2>
 
-      <div style={{ fontSize: '15px', lineHeight: 1.6, color: '#333', margin: '16px 0 20px' }}>
+      <div style={{ fontSize: '17px', lineHeight: 1.55, color: '#1A1A1A', margin: '16px 0 20px' }}>
         <p style={{ margin: '0 0 10px' }}>Sua análise foi concluída.</p>
         <p style={{ margin: 0 }}>Identificamos o principal fator que está dificultando a redução da sua barriga depois dos 40 — e a boa notícia é que ele tem solução.</p>
       </div>
@@ -195,31 +195,31 @@ export function StepProfile({ answers, results, onNext }) {
       </div>
 
       <div style={{ background: '#FFF8E1', border: '2px solid #C9A227', borderRadius: '12px', padding: '18px 16px', margin: '20px 0', textAlign: 'center' }}>
-        <p style={{ fontSize: '13px', color: '#7B5800', margin: '0 0 8px' }}>🎯 Método indicado para o seu caso:</p>
-        <p style={{ fontSize: '20px', fontWeight: 900, color: '#D32F2F', margin: '0 0 4px', lineHeight: 1.2 }}>🔥 <strong>MÉTODO PAREDE 40+</strong></p>
-        <p style={{ fontSize: '15px', fontWeight: 700, color: '#333', margin: 0 }}>O Protocolo Hormonal Personalizado da Barriga 40+</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', margin: '0 0 8px' }}>🎯 Método indicado para o seu caso:</p>
+        <p style={{ fontSize: '22px', fontWeight: 700, color: '#D32F2F', margin: '0 0 4px', lineHeight: 1.2 }}>🔥 <strong>MÉTODO PAREDE 40+</strong></p>
+        <p style={{ fontSize: '14px', fontWeight: 500, color: '#666666', margin: 0 }}>O Protocolo Hormonal Personalizado da Barriga 40+</p>
       </div>
 
-      <div style={{ fontSize: '16px', lineHeight: 1.6, color: '#333', margin: '0 0 20px' }}>
-        <p style={{ margin: '0 0 8px' }}>{name}, <strong>seu corpo não precisa de mais esforço.</strong></p>
+      <div style={{ fontSize: '17px', lineHeight: 1.55, color: '#1A1A1A', margin: '0 0 20px' }}>
+        <p style={{ margin: '0 0 8px' }}><strong className="nome-destaque">{name}</strong>, <strong>seu corpo não precisa de mais esforço.</strong></p>
         <p style={{ margin: 0 }}>Precisa do caminho certo pra fase em que você está.</p>
       </div>
 
-      <div style={{ fontSize: '14px', color: '#333', margin: '0 0 24px', lineHeight: 1.8 }}>
+      <div style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', margin: '0 0 24px', lineHeight: 1.8 }}>
         <p style={{ margin: '4px 0' }}>⏱️ <strong>8 minutos por dia</strong></p>
         <p style={{ margin: '4px 0' }}>📍 Em casa, contra uma parede</p>
         <p style={{ margin: '4px 0' }}>🚫 Sem cardio · sem dieta · sem caneta</p>
       </div>
 
       <div style={{ background: '#FAF7F2', border: '1px solid #E8DCC4', borderRadius: '12px', padding: '20px', margin: '0 0 24px' }}>
-        <p style={{ fontSize: '14px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>🎯 Seu protocolo foi ajustado para:</p>
-        <p style={{ fontSize: '15px', color: '#1A1A1A', margin: '0 0 8px' }}>
+        <p style={{ fontSize: '17px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>🎯 Seu protocolo foi ajustado para:</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>
           ✅ <strong>Reduzir {projectionMin} a {projectionMax} cm de cintura em 21 dias</strong>
         </p>
-        <p style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ Desinchar e voltar a vestir suas roupas com mais conforto</p>
-        <p style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ Recuperar energia e disposição</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Desinchar e voltar a vestir suas roupas com mais conforto</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Recuperar energia e disposição</p>
         {dynamicBenefits.map(b => (
-          <p key={b.key} style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ {b.text}</p>
+          <p key={b.key} style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ {b.text}</p>
         ))}
       </div>
 
@@ -230,9 +230,9 @@ export function StepProfile({ answers, results, onNext }) {
           style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 12px' }}
           onError={e => { e.target.style.display = 'none'; }}
         />
-        <p style={{ fontSize: '14px', fontWeight: 700, color: '#1A1A1A', textAlign: 'center', margin: '0 0 2px' }}>Criado por Instrutora, 47 anos</p>
-        <p style={{ fontSize: '13px', color: '#666', textAlign: 'center', margin: '0 0 14px' }}>Especialista em emagrecimento feminino na menopausa · Criadora do Método Parede 40+</p>
-        <em style={{ fontSize: '14px', lineHeight: 1.6, color: '#444', display: 'block' }}>
+        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', textAlign: 'center', margin: '0 0 4px' }}>Criado por Instrutora, 47 anos</p>
+        <p style={{ fontSize: '14px', fontWeight: 500, color: '#666666', textAlign: 'center', margin: '0 0 14px' }}>Especialista em emagrecimento feminino na menopausa · Criadora do Método Parede 40+</p>
+        <em style={{ fontSize: '16px', lineHeight: 1.55, color: '#1A1A1A', display: 'block' }}>
           "Há <strong>12 anos</strong> ajudo mulheres 40+ a reduzirem a barriga, voltarem a vestir suas roupas com confiança e recuperarem a sensação de que o próprio corpo responde novamente.
           <br /><br />
           Foi por isso que criei o Método Parede 40+ — um caminho pensado para essa fase da mulher, feito para trabalhar <strong>a seu favor, e não contra você</strong>."
