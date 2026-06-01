@@ -156,12 +156,14 @@ export function StepBodyChange({ update, onNext }) {
   const handle = (v) => { update('tempo_mudanca', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <h2 style={{ textAlign: 'center', fontSize: '22px', fontWeight: 600 }}>Em quanto tempo você sentiu que seu corpo mudou?</h2>
-      {opts.map(([v, l]) => (
-        <button key={v} className="option-btn" onClick={() => handle(v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <h2 className="quiz-title">Em quanto tempo você sentiu que seu corpo mudou?</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className="option-btn" onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

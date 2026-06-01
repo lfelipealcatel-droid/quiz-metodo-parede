@@ -330,7 +330,7 @@ export function StepAcceptance({ update, onNext }) {
   const handle = (v) => { update('acceptance', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <p style={{ fontSize: '17px', fontWeight: 400, color: '#1A1A1A', lineHeight: 1.55, margin: '0 0 16px' }}>Existe um protocolo desenvolvido pra mulher 40+ na sua fase exata — 8 minutos por dia, em pé, apoiada contra uma parede. Sem academia, sem dieta, sem caneta.</p>
+      <p style={{ fontSize: '17px', fontWeight: 700, color: '#1A1A1A', lineHeight: 1.55, margin: '0 0 16px', textAlign: 'center' }}>Existe um protocolo desenvolvido pra mulher 40+ na sua fase exata — 8 minutos por dia, em pé, apoiada contra uma parede. Sem academia, sem dieta, sem caneta.</p>
       <hr className="proof-hr" />
       <p style={{ textAlign: 'center', fontWeight: 700, fontSize: '20px', margin: '12px 0', color: '#1A1A1A' }}>Faz sentido pra você?</p>
       <div className="quiz-options">

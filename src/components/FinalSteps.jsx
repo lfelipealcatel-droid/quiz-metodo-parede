@@ -11,11 +11,11 @@ export function StepProjection({ results, answers, onNext }) {
         🎉 SUA PROJEÇÃO DE RESULTADO
       </div>
 
-      <p style={{ fontSize: '14px', lineHeight: 1.6, color: '#333', margin: '12px 0' }}>
+      <p style={{ fontSize: '17px', lineHeight: 1.55, color: '#1A1A1A', margin: '12px 0' }}>
         Com base no seu perfil exato, ao seguir o método recomendado para você:
       </p>
 
-      <ul style={{ fontSize: '14px', lineHeight: 1.8, color: '#333', paddingLeft: '20px', margin: '0 0 16px' }}>
+      <ul style={{ fontSize: '17px', fontWeight: 500, lineHeight: 1.5, color: '#1A1A1A', paddingLeft: '20px', margin: '0 0 16px' }}>
         <li>✅ Reduzir <strong>{projectionMin} a {projectionMax} cm de cintura em 21 dias</strong></li>
         <li>✅ Sentir o corpo respondendo já na primeira semana</li>
         <li>✅ Barriga menos inchada e visualmente mais firme em 3-5 dias</li>
@@ -35,7 +35,7 @@ export function StepProjection({ results, answers, onNext }) {
         </div>
       </div>
 
-      <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '20px 0 12px' }}>
+      <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1A1A1A', margin: '32px 0 12px' }}>
         🔥 Resultados reais de mulheres com perfil parecido com o seu:
       </h3>
 
@@ -43,16 +43,16 @@ export function StepProjection({ results, answers, onNext }) {
         <div className="ba-card">
           <img src="/imagem/antes-depois-lucia.jpg" alt="Antes e depois Lúcia" className="ba-img" onError={e => { e.target.style.display = 'none'; }} />
           <strong>-9 cm</strong>
-          <small>Lúcia, 51 — perdeu 9 cm em 21 dias</small>
+          <small style={{ fontSize: '14px', fontWeight: 500, color: '#444' }}>Lúcia, 51 — perdeu 9 cm em 21 dias</small>
         </div>
         <div className="ba-card">
           <img src="/imagem/antes-depois-beatriz.jpg" alt="Antes e depois Beatriz" className="ba-img" onError={e => { e.target.style.display = 'none'; }} />
           <strong>-7 cm</strong>
-          <small>Beatriz, 47 — perdeu 7 cm com hérnia de disco</small>
+          <small style={{ fontSize: '14px', fontWeight: 500, color: '#444' }}>Beatriz, 47 — perdeu 7 cm com hérnia de disco</small>
         </div>
       </div>
 
-      <p className="urgency-question" style={{ margin: '24px 0 8px' }}>
+      <p className="urgency-question" style={{ margin: '32px 0 8px', fontSize: '18px', fontWeight: 700, color: '#1A1A1A', textAlign: 'center' }}>
         🚨 VOCÊ QUER ATIVAR ESSE RESULTADO EM 21 DIAS?
       </p>
       <button className="cta-btn" onClick={onNext}>→ SIM, EU PRECISO MUITO ←</button>
@@ -111,12 +111,14 @@ export function StepFutureFear({ answers, update, onNext }) {
   const handle = (v) => { update('futureFear', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <h2>{name}, se nada mudar nos próximos 6 meses, como você imagina que vai estar?</h2>
-      {opts.map(([v, l]) => (
-        <button key={v} className="option-btn" onClick={() => handle(v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <h2 className="quiz-title">{name}, se nada mudar nos próximos 6 meses, como você imagina que vai estar?</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className="option-btn" onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -131,12 +133,14 @@ export function StepCommitment({ answers, update, onNext }) {
   const handle = (v) => { update('commitment', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <h2>{name}, você está disposta a dedicar apenas 8 minutos por dia nos próximos 21 dias para reverter isso?</h2>
-      {opts.map(([v, l]) => (
-        <button key={v} className="option-btn" onClick={() => handle(v)}>
-          {l} <span className="check">✓</span>
-        </button>
-      ))}
+      <h2 className="quiz-title">{name}, você está disposta a dedicar apenas 8 minutos por dia nos próximos 21 dias para reverter isso?</h2>
+      <div className="quiz-options">
+        {opts.map(([v, l]) => (
+          <button key={v} className="option-btn" onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
