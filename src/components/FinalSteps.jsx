@@ -180,8 +180,7 @@ export function StepProfile({ answers, results, onNext }) {
 
       <div style={{ fontSize: '15px', lineHeight: 1.6, color: '#333', margin: '16px 0 20px' }}>
         <p style={{ margin: '0 0 10px' }}>Sua análise foi concluída.</p>
-        <p style={{ margin: '0 0 10px' }}>Com base nas suas respostas, sua principal dificuldade não está na falta de esforço.</p>
-        <p style={{ margin: 0 }}>Está na forma como seu corpo passou a responder depois dos 40.</p>
+        <p style={{ margin: 0 }}>Identificamos o principal fator que está dificultando a redução da sua barriga depois dos 40 — e a boa notícia é que ele tem solução.</p>
       </div>
 
       <div className="profile-card">
@@ -196,19 +195,26 @@ export function StepProfile({ answers, results, onNext }) {
       </div>
 
       <div style={{ background: '#FFF8E1', border: '2px solid #C9A227', borderRadius: '12px', padding: '18px 16px', margin: '20px 0', textAlign: 'center' }}>
-        <p style={{ fontSize: '13px', color: '#7B5800', margin: '0 0 8px' }}>🎯 Método personalizado para você:</p>
-        <p style={{ fontSize: '20px', fontWeight: 900, color: '#D32F2F', margin: '0 0 4px', lineHeight: 1.2 }}>🔥 MÉTODO PAREDE 40+</p>
+        <p style={{ fontSize: '13px', color: '#7B5800', margin: '0 0 8px' }}>🎯 Método indicado para o seu caso:</p>
+        <p style={{ fontSize: '20px', fontWeight: 900, color: '#D32F2F', margin: '0 0 4px', lineHeight: 1.2 }}>🔥 <strong>MÉTODO PAREDE 40+</strong></p>
         <p style={{ fontSize: '15px', fontWeight: 700, color: '#333', margin: 0 }}>O Protocolo Hormonal Personalizado da Barriga 40+</p>
-        <hr style={{ border: 'none', borderTop: '1px solid #DDD', margin: '12px 0' }} />
-        <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>⏱️ <strong>8 minutos por dia</strong></p>
-        <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>📍 Em casa, contra uma parede</p>
-        <p style={{ fontSize: '13px', color: '#333', margin: '4px 0' }}>🚫 Sem cardio · sem dieta · sem caneta</p>
       </div>
 
-      <div style={{ background: '#F0FAF0', border: '1.5px solid #A7D7A0', borderRadius: '12px', padding: '18px 16px', margin: '20px 0' }}>
-        <p style={{ fontSize: '14px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>🎯 O que seu protocolo foi ajustado para fazer:</p>
-        <p style={{ fontSize: '15px', color: '#1A1A1A', margin: '0 0 8px', fontWeight: 700 }}>
-          ✅ Reduzir {projectionMin} a {projectionMax} cm de cintura em 21 dias
+      <div style={{ fontSize: '16px', lineHeight: 1.6, color: '#333', margin: '0 0 20px' }}>
+        <p style={{ margin: '0 0 8px' }}>{name}, <strong>seu corpo não precisa de mais esforço.</strong></p>
+        <p style={{ margin: 0 }}>Precisa do caminho certo pra fase em que você está.</p>
+      </div>
+
+      <div style={{ fontSize: '14px', color: '#333', margin: '0 0 24px', lineHeight: 1.8 }}>
+        <p style={{ margin: '4px 0' }}>⏱️ <strong>8 minutos por dia</strong></p>
+        <p style={{ margin: '4px 0' }}>📍 Em casa, contra uma parede</p>
+        <p style={{ margin: '4px 0' }}>🚫 Sem cardio · sem dieta · sem caneta</p>
+      </div>
+
+      <div style={{ background: '#FAF7F2', border: '1px solid #E8DCC4', borderRadius: '12px', padding: '20px', margin: '0 0 24px' }}>
+        <p style={{ fontSize: '14px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>🎯 Seu protocolo foi ajustado para:</p>
+        <p style={{ fontSize: '15px', color: '#1A1A1A', margin: '0 0 8px' }}>
+          ✅ <strong>Reduzir {projectionMin} a {projectionMax} cm de cintura em 21 dias</strong>
         </p>
         <p style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ Desinchar e voltar a vestir suas roupas com mais conforto</p>
         <p style={{ fontSize: '14px', color: '#333', margin: '0 0 8px' }}>✅ Recuperar energia e disposição</p>
@@ -221,25 +227,21 @@ export function StepProfile({ answers, results, onNext }) {
         <img
           src="/imagem/instrutora.jpg"
           alt="Instrutora do Método Parede"
-          style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 12px' }}
+          style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 12px' }}
           onError={e => { e.target.style.display = 'none'; }}
         />
         <p style={{ fontSize: '14px', fontWeight: 700, color: '#1A1A1A', textAlign: 'center', margin: '0 0 2px' }}>Criado por Instrutora, 47 anos</p>
-        <p style={{ fontSize: '13px', color: '#666', textAlign: 'center', margin: '0 0 14px' }}>Especialista em emagrecimento feminino na menopausa e criadora do Método Parede 40+.</p>
+        <p style={{ fontSize: '13px', color: '#666', textAlign: 'center', margin: '0 0 14px' }}>Especialista em emagrecimento feminino na menopausa · Criadora do Método Parede 40+</p>
         <em style={{ fontSize: '14px', lineHeight: 1.6, color: '#444', display: 'block' }}>
-          "Há mais de 12 anos ajudo mulheres acima dos 40 a recuperarem a confiança no próprio corpo.<br /><br />
-          Ao longo desse tempo, percebi que muitas estavam tentando emagrecer com estratégias que não respeitavam a fase hormonal que estavam vivendo.<br /><br />
-          Foi por isso que criei o Método Parede 40+: um protocolo simples, adaptado para mulheres 40+, que ajuda o corpo a voltar a responder sem depender de exercícios intensos ou dietas extremas."
+          "Há <strong>12 anos</strong> ajudo mulheres 40+ a reduzirem a barriga, voltarem a vestir suas roupas com confiança e recuperarem a sensação de que o próprio corpo responde novamente.
+          <br /><br />
+          Foi por isso que criei o Método Parede 40+ — um caminho pensado para essa fase da mulher, feito para trabalhar <strong>a seu favor, e não contra você</strong>."
         </em>
       </div>
 
-      <p style={{ fontSize: '15px', lineHeight: 1.6, color: '#333', margin: '24px 0 20px', textAlign: 'center' }}>
-        Na próxima página você vai ver como o Método Parede 40+ funciona e por que ele foi recomendado para o seu perfil.
-      </p>
-
       <button
         className="cta-btn"
-        style={{ marginTop: '4px', background: '#16A34A' }}
+        style={{ marginTop: '24px', background: '#16A34A' }}
         onClick={onNext}
       >
         🔓 LIBERAR MEU MÉTODO PAREDE 40+ →
