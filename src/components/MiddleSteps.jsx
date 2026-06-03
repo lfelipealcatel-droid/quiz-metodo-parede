@@ -32,7 +32,7 @@ function getMicroE5(selected) {
     .map(v => `→ ${linhaCombo[v]}`)
     .join('\n\n');
   const closing = selected.length >= 3
-    ? 'Cada uma sozinha já piora o quadro. Juntas explicam por que seu corpo travou.\n\nNão foi você. Foi estratégia errada pra sua fase.'
+    ? 'Não foi você. Foi estratégia errada pra sua fase.'
     : 'Você atacou só pedaços do problema. Não foi você. Foi estratégia errada pra sua fase.';
   return `${headline}\n\n${lines}\n\n${closing}`;
 }
@@ -134,9 +134,10 @@ export function StepImpact({ answers, toggle, onNext }) {
         <>
           <div className="quiz-microcopy">
             💬 Você não está sozinha.<br /><br />
-            A maioria das mulheres que faz esse teste também marca mais de uma dessas opções. Isso não é frescura. Não é vaidade.<br /><br />
-            É um corpo que mudou silenciosamente — mas isso não significa que seu corpo vai ficar assim para sempre.<br /><br />
-            Existe um caminho certo para essa fase — e é isso que vamos identificar agora no seu diagnóstico.
+            A maioria das mulheres que faz esse teste também marca mais de uma dessas opções.<br /><br />
+            Isso não é frescura. Nem vaidade.<br /><br />
+            Seu corpo mudou — mas isso não significa que ele vai ficar assim para sempre.<br /><br />
+            Existe um caminho certo para essa fase — e é isso que vamos identificar no seu diagnóstico.
           </div>
           <button className="cta-btn" onClick={onNext}>Continuar →</button>
         </>
@@ -204,12 +205,11 @@ export function StepBelief({ answers, update, onNext }) {
                   Cardio intenso PIORA o cortisol.<br />
                   Caneta queima MÚSCULO.
                 </span><br /><br />
-                A única coisa que resolve é atacar as 3 ao mesmo tempo — com um caminho específico pra sua fase.<br /><br />
-                Seu diagnóstico está pronto.
+                A única coisa que resolve é atacar as 3 ao mesmo tempo — com um caminho específico pra sua fase.
               </>
             )}
           </div>
-          <button className="cta-btn" onClick={onNext}>VER MEU DIAGNÓSTICO →</button>
+          <button className="cta-btn" onClick={onNext}>CONTINUAR →</button>
         </>
       )}
     </div>
