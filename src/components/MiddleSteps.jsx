@@ -3,11 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 // ─── E5 — O que Já Tentou ──────────────────────────────────────────────────────
 
 const singleMicro = {
-  dieta: `Dieta restritiva em mulher 40+ desregula ainda mais os hormônios e desacelera o metabolismo.\n\nPor isso o peso volta multiplicado. Não é sua falta de disciplina — é o corpo se defendendo. Você precisa de outro caminho, não de menos comida.`,
-  musculacao: `Agora faz sentido por que não funcionou.\n\nMusculação intensa SOBE cortisol — e cortisol alto trava justamente a queima de gordura abdominal em mulher 40+. Você estava atacando o problema com o que PIORA o problema. Não foi você. Foi estratégia errada pra sua fase.`,
-  caminhada: `Caminhada é ótima pra saúde — mas não toca em nenhuma das 3 pontas do triângulo hormonal.\n\nNão reativa o metabolismo, não baixa cortisol, não reduz inflamação na medida certa. Por isso ela isoladamente nunca resolve a barriga depois dos 40.`,
-  acucar: `Cortar açúcar e farinha ajuda — mas não resolve sozinho.\n\nA inflamação até reduz, mas seu metabolismo e seus hormônios continuam travados. E enquanto eles continuarem assim, a barriga não cede — não importa o que você tire do prato.`,
-  caneta: `Caneta queima MÚSCULO — e mulher 40+ já está perdendo músculo naturalmente (sarcopenia). Resultado: metabolismo cai ainda mais, e quando você para, a barriga volta dobrada.\n\nÉ a solução que ataca o sintoma e piora a causa.`,
+  dieta: `Dieta restritiva em mulher 40+ desregula ainda mais os hormônios e desacelera o metabolismo.\n\nPor isso o peso volta multiplicado. Não é sua falta de disciplina — é o corpo se defendendo.`,
+  musculacao: `Agora faz sentido por que não funcionou.\n\nMusculação intensa SOBE cortisol — e cortisol alto trava justamente a queima de gordura abdominal em mulher 40+.\n\nNão foi você. Foi estratégia errada pra sua fase.`,
+  caminhada: `Caminhada é ótima pra saúde — mas não toca em nenhuma das 3 pontas do triângulo hormonal.\n\nNão reativa o metabolismo, não baixa cortisol, não reduz inflamação na medida certa.`,
+  acucar: `Cortar açúcar e farinha ajuda — mas não resolve sozinho.\n\nA inflamação até reduz, mas seu metabolismo e seus hormônios continuam travados. E enquanto eles continuarem assim, a barriga não cede.`,
+  caneta: `Caneta queima MÚSCULO — e mulher 40+ já está perdendo músculo naturalmente (sarcopenia). Resultado: metabolismo cai ainda mais, e quando você para, a barriga volta dobrada.`,
   nenhuma: `Boa — você não desperdiçou energia na estratégia errada. Seu resultado tende a ser ainda mais rápido com o caminho certo.`,
 };
 
