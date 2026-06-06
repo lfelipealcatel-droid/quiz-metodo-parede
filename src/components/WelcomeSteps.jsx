@@ -71,9 +71,9 @@ export function WelcomeAge({ update, onNext }) {
 // ─── E1.5 — Prova Social + Microcopy por Faixa ────────────────────────────────
 const socialProofCopy = {
   '40-44': 'Você está na faixa mais estratégica pra agir — o corpo ainda responde rápido quando o caminho é certo.\n\nContinue pra receber seu diagnóstico personalizado.',
-  '45-49': 'É a faixa onde a barriga "do nada" mais aparece — e onde mais escutamos: "eu não me reconheço mais".\n\nNão é você. É bioquímica. E tem como reverter.\n\nContinue pra receber seu diagnóstico personalizado.',
-  '50-54': 'Nessa faixa, o corpo opera com REGRAS DIFERENTES.\n\nNão é falta de disciplina. É outro corpo, outra fase — e por isso pede outro caminho. Um que funciona exatamente pra essa fase.\n\nContinue pra descobrir qual é o seu.',
-  '55+':   'Mulheres acima de 55 têm os resultados MAIS CONSISTENTES quando o caminho é adaptado à fase certa.\n\nNão é "depois dos 55 não tem o que fazer". É outro caminho — e a gente vai te mostrar qual.\n\nContinue pra receber seu diagnóstico personalizado.',
+  '45-49': 'A fase que você selecionou é justamente onde a barriga "do nada" mais aparece — e onde mais escutamos: "eu não me reconheço mais".\n\nNão é você. É bioquímica. E tem como reverter.\n\nContinue pra receber seu diagnóstico personalizado.',
+  '50-54': 'Na fase que você selecionou, o corpo já opera com REGRAS DIFERENTES.\n\nNão é falta de disciplina. É outro corpo, outra fase — e por isso pede outro caminho. Um que funciona exatamente pra essa fase.\n\nContinue pra descobrir qual é o seu.',
+  '55+':   'No seu caso, mulheres acima de 55 têm os resultados MAIS CONSISTENTES quando o caminho é adaptado à fase certa.\n\nNão é "depois dos 55 não tem o que fazer". É outro caminho — e a gente vai te mostrar qual.\n\nContinue pra receber seu diagnóstico personalizado.',
 };
 
 export function StepSocialProof({ answers, onNext }) {
