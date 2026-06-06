@@ -99,7 +99,7 @@ export function StepSocialProof({ answers, onNext }) {
         <p className="ssp-number">🌿 +23.847 🌿</p>
         <p className="ssp-social-text">
           mulheres acima de 40 já descobriram<br />
-          <span className="ssp-highlight">A CAUSA REAL</span> da barriga depois dos 40
+          <span className="ssp-highlight">A CAUSA REAL</span> da barriga que não vai embora
         </p>
         <p className="ssp-stars">⭐⭐⭐⭐⭐ <span className="ssp-rating">4.9/5</span></p>
         <p className="ssp-reviews">baseado em 8.213 avaliações</p>
