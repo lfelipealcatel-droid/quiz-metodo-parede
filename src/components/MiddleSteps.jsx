@@ -3,38 +3,20 @@ import { useState, useEffect, useRef } from 'react';
 // ─── E5 — O que Já Tentou ──────────────────────────────────────────────────────
 
 const singleMicro = {
-  dieta: `Dieta restritiva em mulher 40+ desregula ainda mais os hormônios e desacelera o metabolismo.\n\nPor isso o peso volta multiplicado. Não é sua falta de disciplina — é o corpo se defendendo.`,
-  musculacao: `Agora faz sentido por que não funcionou.\n\nMusculação intensa SOBE cortisol — e cortisol alto trava justamente a queima de gordura abdominal em mulher 40+.\n\nNão foi você. Foi estratégia errada pra sua fase.`,
-  caminhada: `Caminhada é ótima pra saúde — mas não toca em nenhuma das 3 pontas do triângulo hormonal.\n\nNão reativa o metabolismo, não baixa cortisol, não reduz inflamação na medida certa.`,
-  acucar: `Cortar açúcar e farinha ajuda — mas não resolve sozinho.\n\nA inflamação até reduz, mas seu metabolismo e seus hormônios continuam travados. E enquanto eles continuarem assim, a barriga não cede.`,
-  caneta: `Caneta queima MÚSCULO — e mulher 40+ já está perdendo músculo naturalmente (sarcopenia). Resultado: metabolismo cai ainda mais, e quando você para, a barriga volta dobrada.`,
-  nenhuma: `Boa — você não desperdiçou energia na estratégia errada. Seu resultado tende a ser ainda mais rápido com o caminho certo.`,
+  dieta: `Dieta restritiva desregula hormônio e trava metabolismo — duas das três pontas do triângulo. Por isso a barriga voltou. Não foi você.`,
+  musculacao: `Musculação intensa sobe cortisol — e cortisol alto é o que bloqueia a queima abdominal depois dos 40. Não foi você.`,
+  caminhada: `Caminhada não toca em nenhuma das três pontas do triângulo. Boa pra saúde — mas invisível pra barriga hormonal. Não foi você.`,
+  acucar: `Cortar açúcar ataca só a inflamação. Hormônio e metabolismo continuam travados. Com duas pontas abertas, a barriga não cede. Não foi você.`,
+  caneta: `Caneta queima músculo — que você já está perdendo naturalmente depois dos 40. Quando para, a barriga volta dobrada. Não foi você.`,
+  nenhuma: `Você não desperdiçou energia na estratégia errada. Seu resultado tende a ser mais rápido com o caminho certo.`,
 };
 
-const linhaCombo = {
-  dieta:      'Dieta restritiva desregulou ainda mais seus hormônios e travou seu metabolismo.',
-  musculacao: 'Musculação intensa subiu seu cortisol — e cortisol alto trava a queima de gordura abdominal.',
-  caminhada:  'Caminhada é boa pra saúde, mas sozinha não reativa o metabolismo nem baixa o cortisol.',
-  acucar:     'Cortar açúcar e farinha reduziu parte da inflamação — mas sozinho não ataca hormônio nem metabolismo.',
-  caneta:     'Caneta queimou músculo (que você já estava perdendo naturalmente) e quando parou, a barriga voltou dobrada.',
-};
 
 function getMicroE5(selected) {
   if (selected.length === 0) return null;
   if (selected.includes('nenhuma')) return singleMicro.nenhuma;
   if (selected.length === 1) return singleMicro[selected[0]] ?? null;
-
-  const headline = selected.length >= 3
-    ? 'Agora faz sentido por que nada funcionou.'
-    : 'Agora faz sentido por que não funcionou.';
-  const lines = selected
-    .filter(v => linhaCombo[v])
-    .map(v => `→ ${linhaCombo[v]}`)
-    .join('\n\n');
-  const closing = selected.length >= 3
-    ? 'Não foi você. Foi estratégia errada pra sua fase.'
-    : 'Você atacou só pedaços do problema. Não foi você. Foi estratégia errada pra sua fase.';
-  return `${headline}\n\n${lines}\n\n${closing}`;
+  return `Você tentou mais de uma vez. Colocou esforço de verdade. E mesmo assim a barriga ficou. Não foi falta de disciplina — foi que nenhuma dessas estratégias foi feita para o seu corpo nessa fase. Não foi você.`;
 }
 
 export function StepPastAttempts({ answers, toggle, onNext }) {
@@ -111,7 +93,7 @@ export function StepLimitations({ answers, toggle, onNext }) {
 }
 
 // ─── E7 — Impacto Emocional ────────────────────────────────────────────────────
-export function StepImpact({ answers, toggle, onNext }) {
+export function StepImpact({ toggle, onNext }) {
   const opts = [
     ['fotos',        '😔 Estou evitando aparecer em fotos'],
     ['roupas',       '👗 Tem roupas que não fecham mais'],
@@ -119,29 +101,17 @@ export function StepImpact({ answers, toggle, onNext }) {
     ['nao-reconheco','💔 Não me reconheço mais no espelho'],
     ['isolamento',   '😩 Estou me isolando socialmente'],
   ];
+  const handle = (v) => { toggle('emotionalImpact', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
       <h2 className="quiz-title">Como essa barriga tem afetado sua vida?</h2>
-      <p className="quiz-subhead">Pode marcar várias:</p>
       <div className="quiz-options">
         {opts.map(([v, l]) => (
-          <div key={v} className={`checkbox-row ${answers.emotionalImpact.includes(v) ? 'selected' : ''}`} onClick={() => toggle('emotionalImpact', v)}>
-            <div className="check-box"></div>{l}
-          </div>
+          <button key={v} className="option-btn" onClick={() => handle(v)}>
+            {l} <span className="check">✓</span>
+          </button>
         ))}
       </div>
-      {answers.emotionalImpact.length > 0 && (
-        <>
-          <div className="quiz-microcopy">
-            💬 Você não está sozinha.<br /><br />
-            A maioria das mulheres que faz esse teste também marca mais de uma dessas opções.<br /><br />
-            Isso não é frescura. Nem vaidade.<br /><br />
-            Seu corpo mudou — mas isso não significa que ele vai ficar assim para sempre.<br /><br />
-            Existe um caminho certo para essa fase — e é isso que vamos identificar no seu diagnóstico.
-          </div>
-          <button className="cta-btn" onClick={onNext}>Continuar →</button>
-        </>
-      )}
     </div>
   );
 }
