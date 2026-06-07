@@ -16,7 +16,7 @@ function getMicroE5(selected) {
   if (selected.length === 0) return null;
   if (selected.includes('nenhuma')) return singleMicro.nenhuma;
   if (selected.length === 1) return singleMicro[selected[0]] ?? null;
-  return `Você tentou mais de uma vez. Colocou esforço de verdade. E mesmo assim a barriga ficou. Não foi falta de disciplina — foi que nenhuma dessas estratégias foi feita para o seu corpo nessa fase.`;
+  return `Você tentou de tudo. Colocou esforço de verdade. E mesmo assim a barriga ficou. Não foi falta de disciplina — foi que nenhuma dessas estratégias foi feita para o seu corpo nessa fase.`;
 }
 
 export function StepPastAttempts({ answers, toggle, onNext }) {
