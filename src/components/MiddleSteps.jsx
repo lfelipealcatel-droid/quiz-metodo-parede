@@ -116,6 +116,70 @@ export function StepImpact({ toggle, onNext }) {
   );
 }
 
+// ─── E7.2 — Ponte Emocional (sem pergunta, sem variável) ──────────────────────
+export function StepEmotionalBridge({ onNext }) {
+  const [showBtn, setShowBtn] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setShowBtn(true), 3000);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    <div className="step">
+
+      {/* Topo */}
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <div style={{ fontSize: '32px', marginBottom: '12px' }}>💛</div>
+        <img
+          src="/imagem/mulher-espelho-sorrindo.jpg"
+          alt="Mulher sorrindo no espelho"
+          style={{ width: '100%', height: '200px', borderRadius: '16px', objectFit: 'cover' }}
+        />
+      </div>
+
+      {/* Meio */}
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+        <p style={{ fontSize: '22px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>
+          Você não está sozinha.
+        </p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 16px' }}>
+          A maioria das mulheres que chega até aqui marca mais de uma dessas opções.
+        </p>
+        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 8px' }}>
+          Isso não é frescura. Nem vaidade.
+        </p>
+        <p style={{ fontSize: '16px', color: '#555555', margin: 0 }}>
+          É o seu corpo pedindo um caminho diferente.
+        </p>
+      </div>
+
+      {/* Base */}
+      <div style={{
+        background: '#F0FAF0',
+        border: '1px solid #2E7D32',
+        borderRadius: '12px',
+        padding: '20px',
+        marginBottom: '24px',
+      }}>
+        <p style={{ fontWeight: 700, color: '#2E7D32', margin: '0 0 12px' }}>✨ A boa notícia:</p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 10px' }}>
+          Seu corpo mudou — mas isso não significa que ele vai ficar assim para sempre.
+        </p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 10px' }}>
+          Cada resposta que você deu até aqui está construindo o seu diagnóstico.
+        </p>
+        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: 0 }}>
+          Sua análise está quase pronta.
+        </p>
+      </div>
+
+      {showBtn && (
+        <button className="cta-btn" onClick={onNext}>CONTINUAR →</button>
+      )}
+    </div>
+  );
+}
+
 // ─── E7.5 — Tempo de Mudança ───────────────────────────────────────────────────
 export function StepBodyChange({ update, onNext }) {
   const opts = [
