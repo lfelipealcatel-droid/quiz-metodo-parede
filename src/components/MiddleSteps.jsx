@@ -3,11 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 // ─── E5 — O que Já Tentou ──────────────────────────────────────────────────────
 
 const singleMicro = {
-  dieta: `Dieta restritiva desregula hormônio e trava metabolismo — duas das três pontas do triângulo. Por isso a barriga voltou. Não foi você.`,
-  musculacao: `Musculação intensa sobe cortisol — e cortisol alto é o que bloqueia a queima abdominal depois dos 40. Não foi você.`,
-  caminhada: `Caminhada não toca em nenhuma das três pontas do triângulo. Boa pra saúde — mas invisível pra barriga hormonal. Não foi você.`,
-  acucar: `Cortar açúcar ataca só a inflamação. Hormônio e metabolismo continuam travados. Com duas pontas abertas, a barriga não cede. Não foi você.`,
-  caneta: `Caneta queima músculo — que você já está perdendo naturalmente depois dos 40. Quando para, a barriga volta dobrada. Não foi você.`,
+  dieta: `Dieta restritiva desregula hormônio e trava metabolismo — duas das três pontas do triângulo. Por isso a barriga voltou.`,
+  musculacao: `Musculação intensa sobe cortisol — e cortisol alto é o que bloqueia a queima abdominal depois dos 40.`,
+  caminhada: `Caminhada não toca em nenhuma das três pontas do triângulo. Boa pra saúde — mas invisível pra barriga hormonal.`,
+  acucar: `Cortar açúcar ataca só a inflamação. Hormônio e metabolismo continuam travados. Com duas pontas abertas, a barriga não cede.`,
+  caneta: `Caneta queima músculo — que você já está perdendo naturalmente depois dos 40. Quando para, a barriga volta dobrada.`,
   nenhuma: `Você não desperdiçou energia na estratégia errada. Seu resultado tende a ser mais rápido com o caminho certo.`,
 };
 
@@ -16,7 +16,7 @@ function getMicroE5(selected) {
   if (selected.length === 0) return null;
   if (selected.includes('nenhuma')) return singleMicro.nenhuma;
   if (selected.length === 1) return singleMicro[selected[0]] ?? null;
-  return `Você tentou mais de uma vez. Colocou esforço de verdade. E mesmo assim a barriga ficou. Não foi falta de disciplina — foi que nenhuma dessas estratégias foi feita para o seu corpo nessa fase. Não foi você.`;
+  return `Você tentou mais de uma vez. Colocou esforço de verdade. E mesmo assim a barriga ficou. Não foi falta de disciplina — foi que nenhuma dessas estratégias foi feita para o seu corpo nessa fase.`;
 }
 
 export function StepPastAttempts({ answers, toggle, onNext }) {
