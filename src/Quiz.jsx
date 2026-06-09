@@ -7,52 +7,73 @@ import { StepProjection, StepName, StepEmail, StepFutureFear, StepCommitment, St
 
 // ─── Barra de Progresso Segmentada ────────────────────────────────────────────
 const SEGS = [
-  { label: 'SEU CORPO',    start: 1,  end: 4 },
+  { label: 'SEU CORPO',    start: 2,  end: 4 },
   { label: 'SUA HISTÓRIA', start: 5,  end: 11 },
   { label: 'SEU PERFIL',   start: 12, end: 21 },
   { label: 'SEU PLANO',    start: 22, end: 27 },
 ];
 
 function SegmentedProgress({ step }) {
-  const ORANGE = '#F77F00';
+  const ORANGE = '#E8601C';
   let active = -1;
   for (let i = 0; i < SEGS.length; i++) {
     if (step >= SEGS[i].start && step <= SEGS[i].end) { active = i; break; }
   }
-  if (active === -1 && step >= 1) active = SEGS.length - 1;
+  if (active === -1 && step >= 2) active = SEGS.length - 1;
 
   return (
-    <div style={{ padding: '8px 16px 4px', background: '#fff' }}>
+    <div style={{
+      height: '64px',
+      padding: '0 20px',
+      background: '#fff',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+      marginBottom: '8px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      gap: '6px',
+    }}>
+      {/* Dots + lines */}
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {SEGS.flatMap((_, i) => {
           const done = i < active;
-          const curr = i === active;
+          const future = i > active;
+          const size = future ? 10 : 12;
           const items = [
             <div key={`d${i}`} style={{
-              width: 11, height: 11, borderRadius: '50%', flexShrink: 0,
-              background: curr ? ORANGE : done ? 'rgba(247,127,0,0.45)' : '#D0D0D0',
-            }} />,
+              width: size, height: size,
+              borderRadius: '50%',
+              flexShrink: 0,
+              background: !future ? ORANGE : '#D1D5DB',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              {done && (
+                <svg width="7" height="6" viewBox="0 0 7 6" fill="none">
+                  <path d="M1 3L2.8 5L6 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              )}
+            </div>,
           ];
           if (i < SEGS.length - 1) items.push(
             <div key={`l${i}`} style={{
               flex: 1, height: 2,
-              background: done ? 'rgba(247,127,0,0.45)' : '#D0D0D0',
+              background: i < active ? ORANGE : '#D1D5DB',
             }} />
           );
           return items;
         })}
       </div>
-      <div style={{ display: 'flex', marginTop: 4 }}>
+
+      {/* Labels */}
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {SEGS.map((seg, i) => {
           const done = i < active;
           const curr = i === active;
           return (
             <span key={i} style={{
-              fontSize: '9px',
-              fontWeight: curr ? 700 : 400,
-              color: curr ? ORANGE : done ? 'rgba(247,127,0,0.7)' : '#BBBBBB',
-              flex: 1,
-              textAlign: i === 0 ? 'left' : i === SEGS.length - 1 ? 'right' : 'center',
+              fontSize: '10px',
+              fontWeight: 600,
+              color: curr ? ORANGE : done ? 'rgba(232,96,28,0.7)' : '#9CA3AF',
             }}>{seg.label}</span>
           );
         })}
@@ -129,7 +150,7 @@ export default function Quiz() {
           <div className="progress-fill" style={{ width: `${Math.min(100, (step / TOTAL_STEPS) * 100)}%` }} />
         )}
       </div>
-      {showProgress && <SegmentedProgress step={step} />}
+      {step >= 2 && <SegmentedProgress step={step} />}
 
       {/* E1 */}
       {step === 0  && <WelcomeAge update={updateAnswer} onNext={next} />}
