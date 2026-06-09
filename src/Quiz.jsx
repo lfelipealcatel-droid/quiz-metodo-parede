@@ -39,14 +39,26 @@ function QuizProgress({ step }) {
         letterSpacing: '0.02em',
       }}>{BLOCKS[active].label}</p>
       <div style={{ display: 'flex', gap: '5px' }}>
-        {BLOCKS.map((_, i) => (
-          <div key={i} style={{
-            flex: 1,
-            height: '4px',
-            borderRadius: '2px',
-            background: i <= active ? ORANGE : '#E5E7EB',
-          }} />
-        ))}
+        {BLOCKS.map((block, i) => {
+          const fill = i < active ? 1
+            : i === active ? (step - block.start + 1) / (block.end - block.start + 1)
+            : 0;
+          return (
+            <div key={i} style={{
+              flex: 1, height: '4px', borderRadius: '2px',
+              background: '#E5E7EB', overflow: 'hidden', position: 'relative',
+            }}>
+              {fill > 0 && (
+                <div style={{
+                  position: 'absolute', left: 0, top: 0, bottom: 0,
+                  width: `${fill * 100}%`,
+                  background: ORANGE,
+                  transition: 'width 0.3s ease',
+                }} />
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
