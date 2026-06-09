@@ -1,4 +1,74 @@
+import { useState, useEffect } from 'react';
 import { getBellyLabel, getLimitLabel } from '../quiz-data.js';
+
+// ─── Gráfico de projeção animado ──────────────────────────────────────────────
+function ProjectionChart({ projectionMin, projectionMax }) {
+  const [animated, setAnimated] = useState(false);
+  const [fillVisible, setFillVisible] = useState(false);
+
+  useEffect(() => {
+    requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)));
+    const t = setTimeout(() => setFillVisible(true), 750);
+    return () => clearTimeout(t);
+  }, []);
+
+  const pts = [[24, 86], [112, 62], [210, 34], [296, 14]];
+  const labels = ['Hoje', 'Semana 1', 'Semana 2', 'Semana 3'];
+  const DASH = 1000;
+
+  const linePath =
+    `M ${pts[0][0]},${pts[0][1]} ` +
+    `C ${pts[0][0]+26},${pts[0][1]} ${pts[1][0]-26},${pts[1][1]} ${pts[1][0]},${pts[1][1]} ` +
+    `C ${pts[1][0]+26},${pts[1][1]} ${pts[2][0]-26},${pts[2][1]} ${pts[2][0]},${pts[2][1]} ` +
+    `C ${pts[2][0]+26},${pts[2][1]} ${pts[3][0]-26},${pts[3][1]} ${pts[3][0]},${pts[3][1]}`;
+
+  const fillPath = `${linePath} L ${pts[3][0]},90 L ${pts[0][0]},90 Z`;
+
+  return (
+    <div style={{ margin: '12px 0 4px', background: '#fff', borderRadius: '8px' }}>
+      <svg viewBox="0 0 320 115" style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <path
+          d={fillPath}
+          fill="#F37021"
+          opacity={fillVisible ? 0.10 : 0}
+          style={{ transition: 'opacity 0.4s ease' }}
+        />
+        <path
+          d={linePath}
+          fill="none"
+          stroke="#F37021"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray={DASH}
+          strokeDashoffset={animated ? 0 : DASH}
+          style={{ transition: animated ? 'stroke-dashoffset 0.7s ease-out' : 'none' }}
+        />
+        {pts.map(([x, y], i) => (
+          <circle
+            key={i}
+            cx={x} cy={y} r="5"
+            fill="#F37021" stroke="white" strokeWidth="2"
+            opacity={animated ? 1 : 0}
+            style={{ transition: `opacity 0.2s ease ${0.1 + i * 0.15}s` }}
+          />
+        ))}
+        {pts.map(([x], i) => (
+          <text
+            key={i}
+            x={x} y={110}
+            textAnchor="middle"
+            fontSize="10"
+            fill="#AAAAAA"
+            fontFamily="system-ui, sans-serif"
+          >
+            {labels[i]}
+          </text>
+        ))}
+      </svg>
+    </div>
+  );
+}
 
 // ─── E17-projeção — Resultado ──────────────────────────────────────────────────
 export function StepProjection({ results, answers, onNext }) {
@@ -26,13 +96,7 @@ export function StepProjection({ results, answers, onNext }) {
         <div className="est-value">{projectionMin} a {projectionMax} cm</div>
         <div style={{ fontSize: '14px', color: '#444', fontWeight: 600, margin: '2px 0 0' }}>de cintura</div>
         <div style={{ fontSize: '14px', color: '#2E7D32', fontWeight: 700, margin: '2px 0 14px' }}>em 21 dias</div>
-        <div style={{ position: 'relative', background: '#E0E0E0', borderRadius: '6px', height: '8px' }}>
-          <div style={{ background: 'linear-gradient(to right, #F37021, #FFA040)', borderRadius: '6px', height: '8px', width: '70%' }} />
-          <div style={{ position: 'absolute', left: '30%', top: '-7px', fontSize: '15px', transform: 'translateX(-50%)' }}>📍</div>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#aaa', marginTop: '6px' }}>
-          <span>{projectionMin}cm</span><span>{projectionMax}cm</span>
-        </div>
+        <ProjectionChart projectionMin={projectionMin} projectionMax={projectionMax} />
       </div>
 
       <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1A1A1A', margin: '32px 0 12px' }}>

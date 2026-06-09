@@ -4,7 +4,7 @@ import { calculateScores } from '../quiz-data.js';
 // ─── Barra de métrica animada ──────────────────────────────────────────────────
 function MetricBar({ label, perc, sufixo, left, right }) {
   return (
-    <div className="metric-block">
+    <div className="metric-block" style={{ marginBottom: '28px' }}>
       <div className="label">{label}</div>
       <div className="value">{Math.round(perc)}{sufixo}</div>
       <div className="metric-bar-container">
@@ -37,9 +37,9 @@ export function StepDiagnosis({ results, onNext }) {
         <>
           <p>Sua <strong style={{ color: '#D32F2F' }}>queda hormonal</strong> travou três coisas ao mesmo tempo — seu corpo passou a <strong style={{ color: '#D32F2F' }}>estocar gordura na barriga</strong>, seu metabolismo desacelerou, e sua inflamação aumentou.</p>
           <p>Aconteceu <strong style={{ color: '#D32F2F' }}>em silêncio. Por meses.</strong></p>
-          <p><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo entrando em uma nova fase.</p>
         </>
       ),
+      naoFoiVoce: (<><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo entrando em uma nova fase.</>),
     },
     B: {
       causa: '🔥 CORTISOL CRÔNICO ELEVADO\n   sabotando seu corpo por dentro',
@@ -53,9 +53,9 @@ export function StepDiagnosis({ results, onNext }) {
           <p>Seu <strong style={{ color: '#D32F2F' }}>cortisol está cronicamente alto</strong> — e isso colocou seu corpo em <strong style={{ color: '#D32F2F' }}>modo de defesa</strong>.</p>
           <p>Ele guarda gordura como reserva de emergência, trava seu metabolismo e bloqueia a queima abdominal.</p>
           <p>E aqui está o que ninguém te explicou: em modo defesa, seu corpo lê <strong style={{ color: '#D32F2F' }}>esforço como AMEAÇA</strong>. Quanto mais você tenta, mais ele se protege.</p>
-          <p><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo em modo sobrevivência.</p>
         </>
       ),
+      naoFoiVoce: (<><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo em modo sobrevivência.</>),
     },
     C: {
       causa: '🔥 INFLAMAÇÃO CRÔNICA SILENCIOSA\n   inchando seu corpo há meses',
@@ -69,9 +69,9 @@ export function StepDiagnosis({ results, onNext }) {
           <p>Boa parte da sua barriga <strong style={{ color: '#D32F2F' }}>não é gordura — é INFLAMAÇÃO</strong>.</p>
           <p>Seu corpo retém líquido e gás na região abdominal, a queima de gordura travou, e a barriga incha e desincha ao longo do dia.</p>
           <p>Por isso você <strong style={{ color: '#D32F2F' }}>acorda menor e dorme maior</strong>. Por isso cortou açúcar, cortou farinha — e a barriga continua.</p>
-          <p><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi uma inflamação que estava trabalhando contra você o tempo todo.</p>
         </>
       ),
+      naoFoiVoce: (<><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi uma inflamação que estava trabalhando contra você o tempo todo.</>),
     },
   };
 
@@ -111,6 +111,20 @@ export function StepDiagnosis({ results, onNext }) {
       <div className="diagnosis-body">
         <p style={{ fontSize: '20px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 16px' }}>O que está acontecendo no seu corpo:</p>
         <div style={{ fontSize: '18px', lineHeight: 1.55 }}>{cfg.narrativa}</div>
+      </div>
+
+      <div style={{
+        background: '#EAF8EE',
+        border: '1px solid #B8E5C2',
+        borderRadius: '16px',
+        padding: '20px',
+        margin: '16px 0',
+        fontSize: '17px',
+        fontWeight: 500,
+        lineHeight: 1.55,
+        color: '#1A1A1A',
+      }}>
+        {cfg.naoFoiVoce}
       </div>
 
       <div className="solution-box" style={{ background: '#F0FAF0', border: '1.5px solid #2E7D32', borderRadius: '10px', padding: '16px', margin: '16px 0' }}>

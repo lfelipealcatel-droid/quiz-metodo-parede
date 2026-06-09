@@ -5,6 +5,62 @@ import { StepPastAttempts, StepLimitations, StepImpact, StepEmotionalBridge, Ste
 import { StepDiagnosis, StepSymptoms, StepRoutine, StepHeight, StepWeight, StepAge, StepAcceptance, StepLoading2 } from './components/DiagnosisSteps.jsx';
 import { StepProjection, StepName, StepEmail, StepFutureFear, StepCommitment, StepProfile, StepFinal } from './components/FinalSteps.jsx';
 
+// ─── Barra de Progresso Segmentada ────────────────────────────────────────────
+const SEGS = [
+  { label: 'SEU CORPO',    start: 1,  end: 4 },
+  { label: 'SUA HISTÓRIA', start: 5,  end: 11 },
+  { label: 'SEU PERFIL',   start: 12, end: 21 },
+  { label: 'SEU PLANO',    start: 22, end: 27 },
+];
+
+function SegmentedProgress({ step }) {
+  const ORANGE = '#F77F00';
+  let active = -1;
+  for (let i = 0; i < SEGS.length; i++) {
+    if (step >= SEGS[i].start && step <= SEGS[i].end) { active = i; break; }
+  }
+  if (active === -1 && step >= 1) active = SEGS.length - 1;
+
+  return (
+    <div style={{ padding: '8px 16px 4px', background: '#fff' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        {SEGS.flatMap((_, i) => {
+          const done = i < active;
+          const curr = i === active;
+          const items = [
+            <div key={`d${i}`} style={{
+              width: 11, height: 11, borderRadius: '50%', flexShrink: 0,
+              background: curr ? ORANGE : done ? 'rgba(247,127,0,0.45)' : '#D0D0D0',
+            }} />,
+          ];
+          if (i < SEGS.length - 1) items.push(
+            <div key={`l${i}`} style={{
+              flex: 1, height: 2,
+              background: done ? 'rgba(247,127,0,0.45)' : '#D0D0D0',
+            }} />
+          );
+          return items;
+        })}
+      </div>
+      <div style={{ display: 'flex', marginTop: 4 }}>
+        {SEGS.map((seg, i) => {
+          const done = i < active;
+          const curr = i === active;
+          return (
+            <span key={i} style={{
+              fontSize: '9px',
+              fontWeight: curr ? 700 : 400,
+              color: curr ? ORANGE : done ? 'rgba(247,127,0,0.7)' : '#BBBBBB',
+              flex: 1,
+              textAlign: i === 0 ? 'left' : i === SEGS.length - 1 ? 'right' : 'center',
+            }}>{seg.label}</span>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // E1 (WelcomeAge) não conta na barra; steps 1-26 = E1.5 até E23
 const TOTAL_STEPS = 27;
 
@@ -73,6 +129,7 @@ export default function Quiz() {
           <div className="progress-fill" style={{ width: `${Math.min(100, (step / TOTAL_STEPS) * 100)}%` }} />
         )}
       </div>
+      {showProgress && <SegmentedProgress step={step} />}
 
       {/* E1 */}
       {step === 0  && <WelcomeAge update={updateAnswer} onNext={next} />}
