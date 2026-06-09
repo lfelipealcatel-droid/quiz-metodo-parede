@@ -209,26 +209,31 @@ export function StepCommitment({ answers, update, onNext }) {
   );
 }
 
-// ─── E21.5 — Loading com depoimentos ──────────────────────────────────────────
-const TESTIMONIALS = [
+// ─── E21.5 — Loading personalizado por idade ──────────────────────────────────
+const TESTIMONIALS_BY_AGE = [
   {
-    text: '"Achei que minha barriga era só idade. Em 3 semanas minhas roupas já estavam mais folgadas e voltei a me sentir confortável comigo mesma."',
-    name: 'Marina, 44 anos',
-    min: 0, max: 33,
+    minAge: 40, maxAge: 44,
+    text: '"Eu achava que precisava fechar mais a boca e treinar mais. Descobrir que existia uma forma mais inteligente de lidar com essa barriga depois dos 40 mudou minha visão completamente."',
+    name: 'Mariana, 43 anos',
   },
   {
-    text: '"O que mais me surpreendeu foi perceber que eu não precisava fazer mais esforço. Quando entendi o que estava acontecendo com meu corpo, tudo começou a mudar."',
+    minAge: 45, maxAge: 49,
+    text: '"Eu já não me reconhecia mais nas minhas roupas. O que me ajudou foi perceber que meu corpo não precisava de mais cobrança — precisava da estratégia certa para essa fase."',
     name: 'Renata, 47 anos',
-    min: 34, max: 66,
   },
   {
-    text: '"Depois dos 50 eu já tinha perdido a esperança. Hoje me sinto mais leve, menos inchada e voltei a vestir roupas que estavam guardadas há anos."',
-    name: 'Patrícia, 54 anos',
-    min: 67, max: 100,
+    minAge: 50, maxAge: 54,
+    text: '"Depois dos 50 eu já tinha tentado de tudo. Pela primeira vez encontrei uma abordagem que parecia ter sido pensada para mulheres como eu."',
+    name: 'Patrícia, 52 anos',
+  },
+  {
+    minAge: 55, maxAge: 99,
+    text: '"Eu acreditava que era tarde demais para mudar. Descobrir que ainda existia um caminho possível para a minha fase foi o que mais me deu esperança."',
+    name: 'Sandra, 57 anos',
   },
 ];
 
-export function StepFinalLoading({ onNext }) {
+export function StepFinalLoading({ answers, onNext }) {
   const [progress, setProgress] = useState(0);
   const doneRef = useRef(false);
   const onNextRef = useRef(onNext);
@@ -237,7 +242,7 @@ export function StepFinalLoading({ onNext }) {
   useEffect(() => {
     const id = setInterval(() => {
       setProgress(p => Math.min(p + 1, 100));
-    }, 60);
+    }, 55); // 55ms × 100 = 5,5s
     return () => clearInterval(id);
   }, []);
 
@@ -249,8 +254,9 @@ export function StepFinalLoading({ onNext }) {
     }
   }, [progress]);
 
-  const testimonial = TESTIMONIALS.find(t => progress >= t.min && progress <= t.max)
-    ?? TESTIMONIALS[2];
+  const idade = answers?.idade ?? 47;
+  const testimonial = TESTIMONIALS_BY_AGE.find(t => idade >= t.minAge && idade <= t.maxAge)
+    ?? TESTIMONIALS_BY_AGE[1];
 
   const R = 52;
   const circ = 2 * Math.PI * R;
@@ -259,8 +265,16 @@ export function StepFinalLoading({ onNext }) {
   return (
     <div className="step" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
+      {/* Textos de contexto */}
+      <p style={{ fontSize: '17px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 8px' }}>
+        Estamos preparando seu protocolo personalizado...
+      </p>
+      <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.55, margin: '0 0 24px' }}>
+        Analisando suas respostas e ajustando os detalhes finais para o seu caso.
+      </p>
+
       {/* Circular loader */}
-      <svg width="136" height="136" viewBox="0 0 136 136" style={{ margin: '8px 0 28px' }}>
+      <svg width="136" height="136" viewBox="0 0 136 136" style={{ margin: '0 0 28px' }}>
         <circle cx="68" cy="68" r={R} fill="none" stroke="#E5E7EB" strokeWidth="8" />
         <circle
           cx="68" cy="68" r={R}
@@ -271,7 +285,7 @@ export function StepFinalLoading({ onNext }) {
           strokeDasharray={circ}
           strokeDashoffset={offset}
           transform="rotate(-90 68 68)"
-          style={{ transition: 'stroke-dashoffset 0.06s linear' }}
+          style={{ transition: 'stroke-dashoffset 0.055s linear' }}
         />
         <text
           x="68" y="68"
@@ -286,7 +300,7 @@ export function StepFinalLoading({ onNext }) {
         </text>
       </svg>
 
-      {/* Depoimento */}
+      {/* Depoimento por idade */}
       <div style={{ width: '100%' }}>
         <p style={{ fontSize: '15px', margin: '0 0 14px' }}>⭐⭐⭐⭐⭐</p>
         <p style={{ fontSize: '15px', lineHeight: 1.6, color: '#1A1A1A', margin: '0 0 10px', fontStyle: 'italic' }}>
@@ -304,7 +318,7 @@ export function StepFinalLoading({ onNext }) {
         }} />
       </div>
 
-      {/* Rodapé */}
+      {/* Prova social */}
       <p style={{ fontSize: '14px', color: '#666', margin: '32px 0 0' }}>
         👩‍🦰 Mais de 23.847 mulheres já concluíram esta análise.
       </p>

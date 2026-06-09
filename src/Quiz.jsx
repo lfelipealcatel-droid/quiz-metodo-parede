@@ -180,7 +180,7 @@ export default function Quiz() {
       {/* E21 */}
       {step === 25 && <StepCommitment answers={answers} update={updateAnswer} onNext={next} />}
       {/* E21.5 */}
-      {step === 26 && <StepFinalLoading onNext={next} />}
+      {step === 26 && <StepFinalLoading answers={answers} onNext={next} />}
       {/* E22 */}
       {step === 27 && <StepProfile answers={answers} results={results} onNext={next} />}
       {/* E23 */}
