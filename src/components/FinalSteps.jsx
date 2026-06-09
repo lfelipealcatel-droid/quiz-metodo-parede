@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { getBellyLabel, getLimitLabel } from '../quiz-data.js';
 
 // ─── Gráfico de projeção animado ──────────────────────────────────────────────
@@ -255,8 +255,11 @@ export function StepFinalLoading({ answers, onNext }) {
   }, [progress]);
 
   const idade = answers?.idade ?? 47;
-  const testimonial = TESTIMONIALS_BY_AGE.find(t => idade >= t.minAge && idade <= t.maxAge)
-    ?? TESTIMONIALS_BY_AGE[1];
+  const testimonial = useMemo(() =>
+    TESTIMONIALS_BY_AGE.find(t => idade >= t.minAge && idade <= t.maxAge)
+    ?? TESTIMONIALS_BY_AGE[1],
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  []);
 
   const R = 52;
   const circ = 2 * Math.PI * R;
@@ -304,7 +307,7 @@ export function StepFinalLoading({ answers, onNext }) {
       <div style={{ width: '100%' }}>
         <p style={{ fontSize: '15px', margin: '0 0 14px' }}>⭐⭐⭐⭐⭐</p>
         <p style={{ fontSize: '15px', lineHeight: 1.6, color: '#1A1A1A', margin: '0 0 10px', fontStyle: 'italic' }}>
-          {testimonial.text}
+          <strong>{testimonial.text}</strong>
         </p>
         <p style={{ fontSize: '14px', fontWeight: 600, color: '#555', margin: '0 0 16px' }}>
           {testimonial.name}
@@ -320,7 +323,7 @@ export function StepFinalLoading({ answers, onNext }) {
 
       {/* Prova social */}
       <p style={{ fontSize: '14px', color: '#666', margin: '32px 0 0' }}>
-        👩‍🦰 Mais de 23.847 mulheres já concluíram esta análise.
+        👩‍🦰 Mais de 23.847 mulheres 40+ já passaram por esta análise personalizada.
       </p>
     </div>
   );
