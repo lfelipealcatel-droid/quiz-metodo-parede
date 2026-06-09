@@ -3,14 +3,14 @@ import { calculateScores } from './quiz-data.js';
 import { WelcomeAge, StepSocialProof, StepBodyType, StepBelly, StepProof } from './components/WelcomeSteps.jsx';
 import { StepPastAttempts, StepLimitations, StepImpact, StepEmotionalBridge, StepBelief, StepFrustration, StepLoading1, StepBodyChange } from './components/MiddleSteps.jsx';
 import { StepDiagnosis, StepSymptoms, StepRoutine, StepHeight, StepWeight, StepAge, StepAcceptance, StepLoading2 } from './components/DiagnosisSteps.jsx';
-import { StepProjection, StepName, StepEmail, StepFutureFear, StepCommitment, StepProfile, StepFinal } from './components/FinalSteps.jsx';
+import { StepProjection, StepName, StepEmail, StepFutureFear, StepCommitment, StepFinalLoading, StepProfile, StepFinal } from './components/FinalSteps.jsx';
 
 // ─── Barra de Progresso (estilo BetterMe) ─────────────────────────────────────
 const BLOCKS = [
   { label: 'Seu corpo',  start: 2,  end: 4 },
   { label: 'Sua causa',  start: 5,  end: 11 },
   { label: 'Seu perfil', start: 12, end: 21 },
-  { label: 'Seu plano',  start: 22, end: 27 },
+  { label: 'Seu plano',  start: 22, end: 28 },
 ];
 
 function QuizProgress({ step }) {
@@ -65,7 +65,7 @@ function QuizProgress({ step }) {
 }
 
 // E1 (WelcomeAge) não conta na barra; steps 1-26 = E1.5 até E23
-const TOTAL_STEPS = 27;
+const TOTAL_STEPS = 28;
 
 const initialAnswers = {
   age: null, bodyType: null, bellyLocation: null,
@@ -179,10 +179,12 @@ export default function Quiz() {
       {step === 24 && <StepFutureFear answers={answers} update={updateAnswer} onNext={next} />}
       {/* E21 */}
       {step === 25 && <StepCommitment answers={answers} update={updateAnswer} onNext={next} />}
+      {/* E21.5 */}
+      {step === 26 && <StepFinalLoading onNext={next} />}
       {/* E22 */}
-      {step === 26 && <StepProfile answers={answers} results={results} onNext={next} />}
+      {step === 27 && <StepProfile answers={answers} results={results} onNext={next} />}
       {/* E23 */}
-      {step === 27 && <StepFinal answers={answers} />}
+      {step === 28 && <StepFinal answers={answers} />}
     </div>
   );
 }

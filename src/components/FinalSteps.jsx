@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getBellyLabel, getLimitLabel } from '../quiz-data.js';
 
 // ─── Gráfico de projeção animado ──────────────────────────────────────────────
@@ -205,6 +205,109 @@ export function StepCommitment({ answers, update, onNext }) {
           </button>
         ))}
       </div>
+    </div>
+  );
+}
+
+// ─── E21.5 — Loading com depoimentos ──────────────────────────────────────────
+const TESTIMONIALS = [
+  {
+    text: '"Achei que minha barriga era só idade. Em 3 semanas minhas roupas já estavam mais folgadas e voltei a me sentir confortável comigo mesma."',
+    name: 'Marina, 44 anos',
+    min: 0, max: 33,
+  },
+  {
+    text: '"O que mais me surpreendeu foi perceber que eu não precisava fazer mais esforço. Quando entendi o que estava acontecendo com meu corpo, tudo começou a mudar."',
+    name: 'Renata, 47 anos',
+    min: 34, max: 66,
+  },
+  {
+    text: '"Depois dos 50 eu já tinha perdido a esperança. Hoje me sinto mais leve, menos inchada e voltei a vestir roupas que estavam guardadas há anos."',
+    name: 'Patrícia, 54 anos',
+    min: 67, max: 100,
+  },
+];
+
+export function StepFinalLoading({ onNext }) {
+  const [progress, setProgress] = useState(0);
+  const doneRef = useRef(false);
+  const onNextRef = useRef(onNext);
+  useEffect(() => { onNextRef.current = onNext; });
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setProgress(p => Math.min(p + 1, 100));
+    }, 60);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    if (progress >= 100 && !doneRef.current) {
+      doneRef.current = true;
+      const t = setTimeout(() => onNextRef.current(), 500);
+      return () => clearTimeout(t);
+    }
+  }, [progress]);
+
+  const testimonial = TESTIMONIALS.find(t => progress >= t.min && progress <= t.max)
+    ?? TESTIMONIALS[2];
+
+  const R = 52;
+  const circ = 2 * Math.PI * R;
+  const offset = circ * (1 - progress / 100);
+
+  return (
+    <div className="step" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+      {/* Circular loader */}
+      <svg width="136" height="136" viewBox="0 0 136 136" style={{ margin: '8px 0 28px' }}>
+        <circle cx="68" cy="68" r={R} fill="none" stroke="#E5E7EB" strokeWidth="8" />
+        <circle
+          cx="68" cy="68" r={R}
+          fill="none"
+          stroke="#F37021"
+          strokeWidth="8"
+          strokeLinecap="round"
+          strokeDasharray={circ}
+          strokeDashoffset={offset}
+          transform="rotate(-90 68 68)"
+          style={{ transition: 'stroke-dashoffset 0.06s linear' }}
+        />
+        <text
+          x="68" y="68"
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontSize="22"
+          fontWeight="700"
+          fill="#1A1A1A"
+          fontFamily="system-ui, sans-serif"
+        >
+          {progress}%
+        </text>
+      </svg>
+
+      {/* Depoimento */}
+      <div style={{ width: '100%' }}>
+        <p style={{ fontSize: '15px', margin: '0 0 14px' }}>⭐⭐⭐⭐⭐</p>
+        <p style={{ fontSize: '15px', lineHeight: 1.6, color: '#1A1A1A', margin: '0 0 10px', fontStyle: 'italic' }}>
+          {testimonial.text}
+        </p>
+        <p style={{ fontSize: '14px', fontWeight: 600, color: '#555', margin: '0 0 16px' }}>
+          {testimonial.name}
+        </p>
+        <div style={{
+          width: '80px', height: '80px',
+          background: '#fff',
+          border: '1px solid #E5E7EB',
+          borderRadius: '12px',
+          margin: '0 auto',
+        }} />
+      </div>
+
+      {/* Rodapé */}
+      <p style={{ fontSize: '14px', color: '#666', margin: '32px 0 0' }}>
+        👩‍🦰 Mais de 23.847 mulheres já concluíram esta análise.
+      </p>
     </div>
   );
 }
