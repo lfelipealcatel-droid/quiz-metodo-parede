@@ -143,10 +143,10 @@ export function StepBodyType({ update, onNext }) {
 // ─── E3 — Tipo de Barriga ──────────────────────────────────────────────────────
 export function StepBelly({ answers, update, onNext }) {
   const opts = [
-    ['alta',    '🎈 Alta, perto do peito ("pansa que apareceu")',   '/belly-alta.svg'],
-    ['gravida', '🤰 Frente, parece que estou grávida',              '/belly-gravida.svg'],
-    ['baixa',   '🫃 Baixa, "popozinho na frente"',                  '/belly-baixa.svg'],
-    ['inchada', '🌪️ Tudo inchado, varia durante o dia',             '/belly-inchada.svg'],
+    ['alta',    '🎈 Alta, perto do peito ("pansa que apareceu")',   '/imagem/barriga-alta.png'],
+    ['gravida', '🤰 Frente, parece que estou grávida',              '/imagem/barriga-frente.png'],
+    ['baixa',   '🫃 Baixa, "popozinho na frente"',                  '/imagem/barriga-baixa.png'],
+    ['inchada', '🌪️ Tudo inchado, varia durante o dia',             '/imagem/barriga-inchada.png'],
   ];
   return (
     <div className="step">

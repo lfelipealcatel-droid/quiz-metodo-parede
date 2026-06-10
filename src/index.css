@@ -123,14 +123,20 @@ html, body {
 .belly-btn.selected .belly-btn-text { font-weight: 600; }
 
 .belly-btn-img {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 92px;
   object-fit: cover;
-  object-position: center top;
-  border-radius: 8px;
+  object-position: center center;
+  border-radius: 10px;
   flex-shrink: 0;
   pointer-events: none;
-  background: #f5f5f5;
+}
+
+@media (min-width: 640px) {
+  .belly-btn-img {
+    width: 84px;
+    height: 108px;
+  }
 }
 
 .belly-btn .check {
