@@ -60,21 +60,23 @@ export function StepPastAttempts({ answers, toggle, onNext }) {
 // ─── E6 — Limitações Físicas ───────────────────────────────────────────────────
 export function StepLimitations({ answers, toggle, onNext }) {
   const opts = [
-    ['joelho',   'Joelho com dor ou artrose'],
-    ['lombar',   'Dor lombar ou coluna sensível'],
-    ['bursite',  'Bursite no quadril'],
-    ['diastase', 'Diástase abdominal'],
-    ['pes',      'Dor nos pés ou tornozelos'],
-    ['nenhuma',  'Nenhuma'],
+    ['joelho',   'Joelho com dor ou artrose',       '/imagem/limitacao-joelho.png'],
+    ['lombar',   'Dor lombar ou coluna sensível',   '/imagem/limitacao-lombar.png'],
+    ['bursite',  'Bursite no quadril',               '/imagem/limitacao-quadril.png'],
+    ['diastase', 'Diástase abdominal',               '/imagem/limitacao-diastase.png'],
+    ['pes',      'Dor nos pés ou tornozelos',        '/imagem/limitacao-pes.png'],
+    ['nenhuma',  'Nenhuma',                          '/imagem/limitacao-nenhuma.png'],
   ];
   return (
     <div className="step">
       <h2 className="quiz-title">Você tem alguma dessas limitações?</h2>
       <p className="quiz-subhead">Pode marcar várias:</p>
       <div className="quiz-options">
-        {opts.map(([v, l]) => (
+        {opts.map(([v, l, img]) => (
           <div key={v} className={`checkbox-row ${answers.limitations.includes(v) ? 'selected' : ''}`} onClick={() => toggle('limitations', v)}>
-            <div className="check-box"></div>{l}
+            <div className="check-box"></div>
+            <span style={{ flex: 1 }}>{l}</span>
+            <img src={img} alt="" className="limit-img" />
           </div>
         ))}
       </div>

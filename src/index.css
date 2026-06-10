@@ -570,6 +570,21 @@ input[type=range]::-moz-range-thumb {
 .checkbox-row.selected .check-box { background: #F37021; border-color: #F37021; }
 .checkbox-row.selected .check-box::after { content: "\2713"; font-size: 14px; }
 
+.limit-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .limit-img {
+    width: 68px;
+    height: 68px;
+  }
+}
+
 .vsl-placeholder {
   background: #1a1a1a;
   color: #fff;
