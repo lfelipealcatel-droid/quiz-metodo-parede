@@ -480,7 +480,7 @@ input[type=range]::-moz-range-thumb {
 
 .instructor-quote {
   background: #FFF8F3;
-  padding: 16px;
+  padding: 20px;
   border-radius: 10px;
   margin: 16px 0;
   font-size: 14px;
@@ -488,6 +488,22 @@ input[type=range]::-moz-range-thumb {
   color: #5a3818;
   font-style: italic;
   border-left: 3px solid #F37021;
+}
+
+.expert-photo {
+  width: 140px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 16px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .expert-photo {
+    width: 160px;
+    height: 220px;
+  }
 }
 
 .instructor-name {

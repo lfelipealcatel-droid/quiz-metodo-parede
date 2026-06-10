@@ -407,15 +407,19 @@ export function StepProfile({ answers, results, onNext }) {
         ))}
       </div>
 
-      <div className="instructor-quote" style={{ textAlign: 'left' }}>
-        <img
-          src="/imagem/instrutora.jpg"
-          alt="Instrutora do Método Parede"
-          style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', display: 'block', margin: '0 auto 12px' }}
-          onError={e => { e.target.style.display = 'none'; }}
-        />
-        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', textAlign: 'center', margin: '0 0 4px' }}>Criado por Instrutora, 47 anos</p>
-        <p style={{ fontSize: '14px', fontWeight: 500, color: '#666666', textAlign: 'center', margin: '0 0 14px' }}>Especialista em emagrecimento feminino na menopausa · Criadora do Método Parede 40+</p>
+      <div className="instructor-quote">
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start', flexWrap: 'wrap', marginBottom: '16px' }}>
+          <img
+            src="/imagem/especialista-renata-vasconcelos.png"
+            alt="Renata Vasconcelos"
+            className="expert-photo"
+          />
+          <div style={{ flex: 1, minWidth: '140px' }}>
+            <p style={{ fontSize: '22px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 6px', lineHeight: 1.2 }}>Renata Vasconcelos, 47 anos</p>
+            <p style={{ fontSize: '15px', fontWeight: 500, color: '#666666', margin: '0 0 8px', lineHeight: 1.4 }}>Especialista em emagrecimento feminino na menopausa</p>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#F37021', margin: 0 }}>Criadora do Método Parede 40+</p>
+          </div>
+        </div>
         <em style={{ fontSize: '16px', lineHeight: 1.55, color: '#1A1A1A', display: 'block' }}>
           "Há <strong>12 anos</strong> ajudo mulheres 40+ a reduzirem a barriga, voltarem a vestir suas roupas com confiança e recuperarem a sensação de que o próprio corpo responde novamente.
           <br /><br />
