@@ -72,9 +72,9 @@ function ProjectionChart({ projectionMin, projectionMax }) {
 
 // ─── Carrossel de depoimentos visuais ────────────────────────────────────────
 const CAROUSEL_SLIDES = [
-  { img: '/imagem/Andreia Cavalcanti, 43 anos.jpg', name: 'Andreia Cavalcanti, 43 anos', cm: '7 cm',  days: '21 dias' },
-  { img: '/imagem/Cláudia Martins, 45 anos.jpg',    name: 'Cláudia Martins, 45 anos',    cm: '11 cm', days: '42 dias' },
-  { img: '/imagem/Márcia Carvalho, 50 anos.jpg',    name: 'Márcia Carvalho, 50 anos',    cm: '13 cm', days: '45 dias' },
+  { img: '/imagem/Andreia Cavalcanti , 43 anos.png', name: 'Andreia Cavalcanti, 43 anos', cm: '7 cm',  days: '21 dias' },
+  { img: '/imagem/Cláudia Martins, 45 anos.png',     name: 'Cláudia Martins, 45 anos',    cm: '11 cm', days: '42 dias' },
+  { img: '/imagem/Márcia Carvalho, 50 anos.png',     name: 'Márcia Carvalho, 50 anos',    cm: '13 cm', days: '45 dias' },
 ];
 
 function TestimonialsCarousel() {
@@ -88,14 +88,19 @@ function TestimonialsCarousel() {
         setIdx(i => (i + 1) % CAROUSEL_SLIDES.length);
         setVisible(true);
       }, 350);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(id);
   }, []);
 
   const slide = CAROUSEL_SLIDES[idx];
   return (
     <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.35s ease' }}>
-      <img src={slide.img} alt={slide.name} className="carousel-img" />
+      <img
+        src={slide.img}
+        alt=""
+        className="carousel-img"
+        onError={e => { console.error('Carousel image not found:', slide.img); e.target.style.display = 'none'; }}
+      />
       <div style={{ textAlign: 'center', marginTop: '10px' }}>
         <p style={{ fontWeight: 700, fontSize: '15px', color: '#1A1A1A', margin: '0 0 4px' }}>{slide.name}</p>
         <p style={{ fontWeight: 800, fontSize: '16px', color: '#1A1A1A', margin: 0 }}>
