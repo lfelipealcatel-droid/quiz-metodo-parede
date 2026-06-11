@@ -127,21 +127,20 @@ export function StepEmotionalBridge({ onNext }) {
   }, []);
 
   return (
-    <div className="step">
+    <div className="step" style={{ background: '#F7F4EF' }}>
 
       {/* Topo */}
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <div style={{ fontSize: '32px', marginBottom: '12px' }}>💛</div>
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
         <img
-          src="/imagem/mulher-espelho-sorrindo.jpg"
-          alt="Mulher sorrindo no espelho"
-          style={{ width: '100%', height: '200px', borderRadius: '16px', objectFit: 'cover' }}
+          src="/imagem/mulheres-nao-esta-sozinha.jpg"
+          alt=""
+          className="emotional-bridge-img"
         />
       </div>
 
       {/* Meio */}
       <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-        <p style={{ fontSize: '22px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>
+        <p style={{ fontSize: '22px', fontWeight: 800, color: '#123C35', margin: '0 0 12px' }}>
           Você não está sozinha.
         </p>
         <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 16px' }}>

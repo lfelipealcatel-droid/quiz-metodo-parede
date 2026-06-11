@@ -594,6 +594,23 @@ input[type=range]::-moz-range-thumb {
   pointer-events: none;
 }
 
+.emotional-bridge-img {
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .emotional-bridge-img {
+    max-width: 430px;
+    border-radius: 18px;
+  }
+}
+
 @media (min-width: 640px) {
   .limit-img {
     width: 68px;
