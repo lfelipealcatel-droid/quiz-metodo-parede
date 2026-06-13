@@ -484,7 +484,7 @@ export function StepProfile({ answers, results, onNext }) {
       <div style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', margin: '0 0 24px', lineHeight: 1.8 }}>
         <p style={{ margin: '4px 0' }}>⏱️ <strong>8 minutos por dia</strong></p>
         <p style={{ margin: '4px 0' }}>📍 Em casa, contra uma parede</p>
-        <p style={{ margin: '4px 0' }}>🚫 Sem cardio · sem dieta · sem caneta</p>
+        <p style={{ margin: '4px 0' }}>🚫 Sem cardio · sem dietas restritivas · sem contar calorias</p>
       </div>
 
       <div style={{ background: '#FAF7F2', border: '1px solid #E8DCC4', borderRadius: '12px', padding: '20px', margin: '0 0 24px' }}>
