@@ -103,13 +103,23 @@ export function calculateScores(answers) {
   else if (idade <= 52) fase_hormonal = 'Perimenopausa';
   else fase_hormonal = 'Pós-menopausa';
 
-  // Projeção de resultado
+  // Projeção de resultado — base por IMC
   let projectionMin, projectionMax;
-  if (QMH >= 8 && CE >= 5) { projectionMin = 4; projectionMax = 6; }
-  else if (QMH >= 6 && CE >= 3) { projectionMin = 5; projectionMax = 7; }
-  else if (INF >= 4) { projectionMin = 5; projectionMax = 8; }
-  else { projectionMin = 6; projectionMax = 9; }
-  if (imc_valor >= 30) { projectionMin += 2; projectionMax += 3; }
+  if (imc_valor < 25)      { projectionMin = 3; projectionMax = 5; }
+  else if (imc_valor < 30) { projectionMin = 5; projectionMax = 7; }
+  else if (imc_valor < 35) { projectionMin = 6; projectionMax = 9; }
+  else                     { projectionMin = 7; projectionMax = 10; }
+
+  // Ajuste por barriga inchada/inflamada
+  const tipo_barriga = answers.bellyLocation;
+  if (tipo_barriga === 'inchada' || INF >= 5) {
+    projectionMax = Math.min(projectionMax + 1, 10);
+  }
+
+  // Travas de segurança
+  projectionMin = Math.max(projectionMin, 3);
+  projectionMax = Math.min(projectionMax, 10);
+  if (projectionMax < projectionMin) projectionMax = projectionMin + 1;
 
   return {
     variacao,

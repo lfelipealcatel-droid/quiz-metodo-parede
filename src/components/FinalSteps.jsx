@@ -189,7 +189,7 @@ export function StepProjection({ results, answers, onNext }) {
       </p>
 
       <ul style={{ fontSize: '17px', fontWeight: 500, lineHeight: 1.5, color: '#1A1A1A', paddingLeft: '20px', margin: '0 0 16px' }}>
-        <li>✅ Reduzir <strong>{projectionMin} a {projectionMax} cm de cintura em 21 dias</strong></li>
+        <li>✅ Reduzir <strong>{projectionMin} a {projectionMax} cm de barriga em 21 dias</strong></li>
         <li>✅ Sentir o corpo respondendo já na primeira semana</li>
         <li>✅ Barriga menos inchada e visualmente mais firme em 3-5 dias</li>
       </ul>
@@ -197,7 +197,7 @@ export function StepProjection({ results, answers, onNext }) {
       <div className="estimate-box">
         <div className="est-label">SUA ESTIMATIVA PERSONALIZADA</div>
         <div className="est-value">{projectionMin} a {projectionMax} cm</div>
-        <div style={{ fontSize: '14px', color: '#444', fontWeight: 600, margin: '2px 0 0' }}>de cintura</div>
+        <div style={{ fontSize: '14px', color: '#444', fontWeight: 600, margin: '2px 0 0' }}>de barriga</div>
         <div style={{ fontSize: '14px', color: '#2E7D32', fontWeight: 700, margin: '2px 0 14px' }}>em 21 dias</div>
         <ProjectionChart projectionMin={projectionMin} projectionMax={projectionMax} />
       </div>
@@ -490,7 +490,7 @@ export function StepProfile({ answers, results, onNext }) {
       <div style={{ background: '#FAF7F2', border: '1px solid #E8DCC4', borderRadius: '12px', padding: '20px', margin: '0 0 24px' }}>
         <p style={{ fontSize: '17px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 12px' }}>🎯 Seu protocolo foi ajustado para:</p>
         <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>
-          ✅ <strong>Reduzir {projectionMin} a {projectionMax} cm de cintura em 21 dias</strong>
+          ✅ <strong>Reduzir {projectionMin} a {projectionMax} cm de barriga em 21 dias</strong>
         </p>
         <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Desinchar e voltar a vestir suas roupas com mais conforto</p>
         <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Recuperar energia e disposição</p>
