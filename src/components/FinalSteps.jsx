@@ -72,7 +72,7 @@ function ProjectionChart({ projectionMin, projectionMax }) {
 
 // ─── Carrossel manual de depoimentos ─────────────────────────────────────────
 const CAROUSEL_SLIDES = [
-  { img: '/imagem/andreia-cavalcanti-42-2.png', name: 'Andreia Cavalcanti, 43 anos', cm: '7 cm',  days: '21 dias' },
+  { img: '/imagem/andreia-cavalcanti-42-2.png', name: 'Andreia Cavalcanti, 43 anos', cm: '9 cm',  days: '28 dias' },
   { img: '/imagem/claudia-martins-45-2.png',    name: 'Cláudia Martins, 45 anos',    cm: '11 cm', days: '42 dias' },
   { img: '/imagem/marcia-carvalho-50-2.png',    name: 'Márcia Carvalho, 52 anos',    cm: '13 cm', days: '45 dias' },
   { img: '/imagem/vanessa-lima-46-2.png',        name: 'Vanessa Lima, 46 anos',        cm: '9 cm',  days: '35 dias' },
