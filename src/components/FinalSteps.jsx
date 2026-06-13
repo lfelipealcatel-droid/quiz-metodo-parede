@@ -70,42 +70,104 @@ function ProjectionChart({ projectionMin, projectionMax }) {
   );
 }
 
-// ─── Carrossel de depoimentos visuais ────────────────────────────────────────
+// ─── Carrossel manual de depoimentos ─────────────────────────────────────────
 const CAROUSEL_SLIDES = [
-  { img: '/imagem/andreia-cavalcanti-43.png', name: 'Andreia Cavalcanti, 43 anos', cm: '7 cm',  days: '21 dias' },
-  { img: '/imagem/claudia-martins-45.png',    name: 'Cláudia Martins, 45 anos',    cm: '11 cm', days: '42 dias' },
-  { img: '/imagem/marcia-carvalho-50.png',    name: 'Márcia Carvalho, 50 anos',    cm: '13 cm', days: '45 dias' },
+  { img: '/imagem/andreia-cavalcanti-42-2.png', name: 'Andreia Cavalcanti, 43 anos', cm: '7 cm',  days: '21 dias' },
+  { img: '/imagem/claudia-martins-45-2.png',    name: 'Cláudia Martins, 45 anos',    cm: '11 cm', days: '42 dias' },
+  { img: '/imagem/marcia-carvalho-50-2.png',    name: 'Márcia Carvalho, 52 anos',    cm: '13 cm', days: '45 dias' },
+  { img: '/imagem/vanessa-lima-46-2.png',        name: 'Vanessa Lima, 46 anos',        cm: '9 cm',  days: '35 dias' },
 ];
+
+const ORANGE = '#F37021';
+const GAP = 12;
+const SLIDE_RATIO = 0.88;
 
 function TestimonialsCarousel() {
   const [idx, setIdx] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [slideWidth, setSlideWidth] = useState(0);
+  const containerRef = useRef(null);
+  const startXRef = useRef(0);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setIdx(i => (i + 1) % CAROUSEL_SLIDES.length);
-        setVisible(true);
-      }, 350);
-    }, 5000);
-    return () => clearInterval(id);
+    const measure = () => {
+      if (containerRef.current) {
+        setSlideWidth(containerRef.current.offsetWidth * SLIDE_RATIO);
+      }
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
   }, []);
 
-  const slide = CAROUSEL_SLIDES[idx];
+  const goTo = (newIdx) => {
+    // Forward wraps to first; backward clamps at 0
+    const clamped = newIdx >= CAROUSEL_SLIDES.length ? 0 : Math.max(0, newIdx);
+    setIdx(clamped);
+  };
+
+  const onStart = (x) => { setIsDragging(true); startXRef.current = x; setDragOffset(0); };
+  const onMove  = (x) => { if (isDragging) setDragOffset(x - startXRef.current); };
+  const onEnd   = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (dragOffset < -50) goTo(idx + 1);
+    else if (dragOffset > 50) goTo(idx - 1);
+    setDragOffset(0);
+  };
+
+  const trackX = slideWidth > 0 ? -(idx * (slideWidth + GAP)) + dragOffset : 0;
+
   return (
-    <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.35s ease' }}>
-      <img
-        src={slide.img}
-        alt=""
-        className="carousel-img"
-        onError={e => { console.error('Carousel image not found:', slide.img); e.target.style.display = 'none'; }}
-      />
-      <div style={{ textAlign: 'center', marginTop: '10px' }}>
-        <p style={{ fontWeight: 700, fontSize: '15px', color: '#1A1A1A', margin: '0 0 4px' }}>{slide.name}</p>
-        <p style={{ fontWeight: 800, fontSize: '16px', color: '#1A1A1A', margin: 0 }}>
-          🔥 Reduziu <span style={{ color: '#F37021' }}>{slide.cm}</span> de barriga em <span style={{ color: '#F37021' }}>{slide.days}</span>
-        </p>
+    <div>
+      <p style={{ fontSize: '11px', color: '#777', textAlign: 'center', margin: '0 0 6px' }}>
+        ✓ Imagens autorizadas para divulgação
+      </p>
+      <div
+        ref={containerRef}
+        style={{ overflow: 'hidden', touchAction: 'pan-y', cursor: isDragging ? 'grabbing' : 'grab' }}
+        onTouchStart={e => onStart(e.touches[0].clientX)}
+        onTouchMove={e => onMove(e.touches[0].clientX)}
+        onTouchEnd={onEnd}
+        onMouseDown={e => { e.preventDefault(); onStart(e.clientX); }}
+        onMouseMove={e => onMove(e.clientX)}
+        onMouseUp={onEnd}
+        onMouseLeave={onEnd}
+      >
+        <div style={{
+          display: 'flex',
+          gap: `${GAP}px`,
+          transform: `translateX(${trackX}px)`,
+          transition: isDragging ? 'none' : 'transform 0.3s ease',
+          willChange: 'transform',
+          userSelect: 'none',
+        }}>
+          {CAROUSEL_SLIDES.map((slide, i) => (
+            <div key={i} style={{ flexShrink: 0, width: slideWidth > 0 ? `${slideWidth}px` : '88%' }}>
+              <img
+                src={slide.img}
+                alt=""
+                draggable={false}
+                onError={e => { console.error('Carousel image not found:', slide.img); e.target.style.display = 'none'; }}
+                style={{
+                  width: '100%',
+                  aspectRatio: '9 / 10',
+                  objectFit: 'cover',
+                  borderRadius: '14px',
+                  display: 'block',
+                  pointerEvents: 'none',
+                }}
+              />
+              <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                <p style={{ fontWeight: 700, fontSize: '13px', color: '#1A1A1A', margin: '0 0 4px' }}>{slide.name}</p>
+                <p style={{ fontWeight: 800, fontSize: '14px', color: '#1A1A1A', margin: 0 }}>
+                  🔥 Reduziu <span style={{ color: ORANGE }}>{slide.cm}</span> de barriga em <span style={{ color: ORANGE }}>{slide.days}</span>
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
