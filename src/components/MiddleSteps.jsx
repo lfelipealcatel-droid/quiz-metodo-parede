@@ -73,7 +73,7 @@ export function StepLimitations({ answers, toggle, onNext }) {
       <p className="quiz-subhead">Pode marcar várias:</p>
       <div className="quiz-options">
         {opts.map(([v, l, img]) => (
-          <div key={v} className={`checkbox-row ${answers.limitations.includes(v) ? 'selected' : ''}`} onClick={() => toggle('limitations', v)}>
+          <div key={v} className={`checkbox-row ${answers.limitations.includes(v) ? 'selected' : ''}`} onClick={() => toggle(v)}>
             <div className="check-box"></div>
             <span style={{ flex: 1 }}>{l}</span>
             <img src={img} alt="" className="limit-img" />
