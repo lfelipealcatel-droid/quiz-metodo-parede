@@ -6,7 +6,7 @@ export const microcopies = {
     'gravida':
       'Esse é o formato mais específico de todos.\n\nÉ também o tipo que responde MAIS RÁPIDO ao caminho certo — porque a barriga reduz visivelmente em dias quando ataca a causa real.',
     'baixa':
-      'Padrão típico de queda de estrogênio + enfraquecimento do core profundo.\n\nComum após gestação ou depois dos 45. Existe um caminho específico que reativa essa região SEM impacto.',
+      'Padrão típico de queda de estrogênio + enfraquecimento da musculatura que sustenta a barriga.\n\nComum após gestação ou depois dos 45. Existe um caminho específico que reativa essa região SEM impacto.',
     'inchada':
       'Barriga que varia ao longo do dia = INFLAMAÇÃO, não gordura.\n\nIsso muda tudo. Você vai sentir resultado em DIAS, não semanas — quando atacar a causa real.',
   },
