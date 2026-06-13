@@ -120,12 +120,6 @@ export function StepImpact({ toggle, onNext }) {
 
 // ─── E7.2 — Ponte Emocional (sem pergunta, sem variável) ──────────────────────
 export function StepEmotionalBridge({ onNext }) {
-  const [showBtn, setShowBtn] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setShowBtn(true), 3000);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <div className="step" style={{ background: '#F7F4EF' }}>
 
@@ -174,9 +168,7 @@ export function StepEmotionalBridge({ onNext }) {
         </p>
       </div>
 
-      {showBtn && (
-        <button className="cta-btn" onClick={onNext}>CONTINUAR →</button>
-      )}
+      <button className="cta-btn" onClick={onNext}>CONTINUAR →</button>
     </div>
   );
 }
