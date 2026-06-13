@@ -116,6 +116,23 @@ export default function Quiz() {
     });
   };
 
+  // Etapa 11 — "Nenhuma" desmarca todas; qualquer outra desmarca "Nenhuma"
+  const toggleLimitations = (value) => {
+    setAnswers(prev => {
+      const current = prev.limitations;
+      let newArr;
+      if (value === 'nenhuma') {
+        newArr = current.includes('nenhuma') ? [] : ['nenhuma'];
+      } else {
+        const semNenhuma = current.filter(v => v !== 'nenhuma');
+        newArr = semNenhuma.includes(value)
+          ? semNenhuma.filter(v => v !== value)
+          : [...semNenhuma, value];
+      }
+      return { ...prev, limitations: newArr };
+    });
+  };
+
   // Chamado ao fim do Loading 1 (E10) — calcula diagnóstico inicial
   const computeAndAdvance = () => {
     const r = calculateScores(answers);
@@ -156,7 +173,7 @@ export default function Quiz() {
       {/* E10.1 */}
       {step === 13 && <StepDiagnosis results={results} onNext={next} />}
       {/* E11 — limitações (era E6) */}
-      {step === 14 && <StepLimitations answers={answers} toggle={toggleMulti} onNext={next} />}
+      {step === 14 && <StepLimitations answers={answers} toggle={toggleLimitations} onNext={next} />}
       {/* E12 */}
       {step === 15 && <StepRoutine update={updateAnswer} onNext={next} />}
       {/* E13 — Altura */}
