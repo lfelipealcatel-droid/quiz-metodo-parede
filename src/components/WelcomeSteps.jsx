@@ -198,7 +198,7 @@ export function StepProof({ onNext }) {
       <div className="proof-tri-list">
         <div className="proof-tri-row">
           <span className="proof-tri-num">1️⃣</span>
-          <span>Queda hormonal <em>(estradiol despenca)</em></span>
+          <span>Queda hormonal <em>(estrogênio despenca)</em></span>
         </div>
         <div className="proof-tri-row">
           <span className="proof-tri-num">2️⃣</span>
