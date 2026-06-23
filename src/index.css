@@ -1184,7 +1184,8 @@ input[type=range]::-moz-range-thumb {
 
 .proof-img {
   width: 100%;
-  max-width: 285px;
+  max-width: 420px;
+  max-height: 390px;
   height: auto;
   display: block;
   border-radius: 12px;

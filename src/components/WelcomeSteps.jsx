@@ -214,7 +214,7 @@ export function StepProof({ onNext }) {
 
       <div className="proof-img-wrap">
         <img
-          src="/imagem/triangulo-hormonal.png"
+          src="/imagem/triangulo-hormonal-2.png"
           alt="Triângulo Hormonal 40+: queda hormonal, metabolismo travado e inflamação silenciosa"
           className="proof-img"
           loading="eager"
