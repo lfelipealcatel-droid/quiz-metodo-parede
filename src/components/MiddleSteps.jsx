@@ -153,8 +153,8 @@ export function StepEmotionalBridge({ onNext }) {
       }}>
         <p style={{ fontWeight: 700, fontSize: '16px', color: '#2E7D32', margin: '0 0 14px' }}>✨ A boa notícia:</p>
         <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 14px', lineHeight: 1.7 }}>
-          Imagina daqui a algumas semanas: <strong>a barriga menor, a roupa guardada voltando a fechar</strong>, e o prazer de se olhar e gostar do que vê. Cada resposta sua deixa seu diagnóstico mais preciso — e é nele que vamos montar{' '}
-          <strong>uma solução feita sob medida pra você</strong>. Fica tranquila. Falta pouco.
+          Imagina daqui a algumas semanas: <strong>a barriga menor, a roupa guardada voltando a fechar</strong>, e o prazer de se olhar e gostar do que vê. Cada resposta sua deixa seu diagnóstico mais preciso — e é a partir dele que você vai ter{' '}
+          <strong>um caminho feito sob medida pro seu corpo</strong>. Fica tranquila. Falta pouco.
         </p>
         <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: 0 }}>
           Sua análise está quase pronta.
