@@ -244,8 +244,19 @@ export function StepFrustration({ update, onNext }) {
   const handle = (v) => { update('frustration', v); setTimeout(onNext, 200); };
   return (
     <div className="step">
-      <p className="proof-fire-title" style={{ marginBottom: '8px', fontSize: '16px', fontWeight: 500 }}>🔥 Última pergunta antes do seu diagnóstico:</p>
-      <h2 className="quiz-title">Você sente que mesmo se esforçando, seu corpo deixou de responder como antes?</h2>
+      <div style={{ marginBottom: '14px' }}>
+        <span style={{
+          display: 'inline-block',
+          background: '#F37021',
+          color: '#fff',
+          fontSize: '12px',
+          fontWeight: 600,
+          letterSpacing: '0.04em',
+          padding: '4px 12px',
+          borderRadius: '20px',
+        }}>🔥 Última pergunta antes do seu diagnóstico:</span>
+      </div>
+      <h2 style={{ fontSize: '22px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.35, margin: '0 0 20px' }}>Você sente que mesmo se esforçando, seu corpo deixou de responder como antes?</h2>
       <div className="quiz-options">
         {opts.map(([v, l]) => (
           <button key={v} className="option-btn" onClick={() => handle(v)}>
