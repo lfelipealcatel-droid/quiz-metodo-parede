@@ -247,12 +247,12 @@ export function StepFrustration({ update, onNext }) {
       <div style={{ marginBottom: '14px' }}>
         <span style={{
           display: 'inline-block',
-          background: '#F37021',
-          color: '#fff',
-          fontSize: '12px',
+          background: '#FFF0E6',
+          color: '#D84A00',
+          fontSize: '13px',
           fontWeight: 600,
-          letterSpacing: '0.04em',
-          padding: '4px 12px',
+          letterSpacing: '0.02em',
+          padding: '5px 14px',
           borderRadius: '20px',
         }}>🔥 Última pergunta antes do seu diagnóstico:</span>
       </div>
