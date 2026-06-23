@@ -137,11 +137,9 @@ export function StepEmotionalBridge({ onNext }) {
         <p style={{ fontSize: '22px', fontWeight: 800, color: '#123C35', margin: '0 0 16px', lineHeight: 1.3 }}>
           💛 Você não está sozinha nisso.
         </p>
-        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 16px', lineHeight: 1.6 }}>
-          Quase todas as mulheres que chegam até aqui marcam mais de uma dessas opções — e quase todas dizem a mesma frase: <strong>"eu não me reconheço mais."</strong>
-        </p>
-        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: 0, lineHeight: 1.6 }}>
-          Isso não é frescura. Não é vaidade. E não é falta de disciplina. <strong>Você não fez nada de errado</strong> — seu corpo entrou numa fase nova e <strong>ninguém te explicou as regras</strong>.
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: 0, lineHeight: 1.7 }}>
+          Milhares de mulheres acima dos 40 estão exatamente onde você está agora — e quase todas passaram anos achando que o problema era elas. Não era.{' '}
+          <strong>Você não fez nada de errado.</strong> Seu corpo entrou numa fase nova e ninguém te deu o caminho certo pra ela.
         </p>
       </div>
 
@@ -154,11 +152,12 @@ export function StepEmotionalBridge({ onNext }) {
         marginBottom: '28px',
       }}>
         <p style={{ fontWeight: 700, fontSize: '16px', color: '#2E7D32', margin: '0 0 14px' }}>✨ A boa notícia:</p>
-        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 12px', lineHeight: 1.6 }}>
-          Corpo que mudou por causa hormonal <strong>volta a responder</strong> quando recebe o cuidado certo. <strong>Você não vai ficar assim. Fica tranquila, tem caminho.</strong>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 14px', lineHeight: 1.7 }}>
+          Imagina daqui a algumas semanas: <strong>a barriga menor, a roupa guardada voltando a fechar</strong>, e o prazer de se olhar e gostar do que vê. Cada resposta sua deixa seu diagnóstico mais preciso — e é nele que vamos montar{' '}
+          <strong>uma solução feita sob medida pra você</strong>. Fica tranquila. Falta pouco.
         </p>
-        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: 0, lineHeight: 1.6 }}>
-          Cada resposta que você deu até aqui está construindo o seu diagnóstico. <strong>Sua análise está quase pronta.</strong>
+        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: 0 }}>
+          Sua análise está quase pronta.
         </p>
       </div>
 
