@@ -213,8 +213,6 @@ export function StepBelief({ answers, update, onNext }) {
             {answers.belief === 'nenhuma' ? (
               <>
                 🟢 Exato. O problema não é cortar mais comida, fazer mais cardio ou buscar soluções extremas. A barriga depois dos 40 responde a um caminho completamente diferente — específico para a fase hormonal da mulher 40+.
-                <br /><br />
-                Seu diagnóstico está pronto.
               </>
             ) : (
               <>
