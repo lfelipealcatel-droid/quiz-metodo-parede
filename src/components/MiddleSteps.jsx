@@ -133,38 +133,32 @@ export function StepEmotionalBridge({ onNext }) {
       </div>
 
       {/* Meio */}
-      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-        <p style={{ fontSize: '22px', fontWeight: 800, color: '#123C35', margin: '0 0 12px' }}>
-          Você não está sozinha.
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <p style={{ fontSize: '22px', fontWeight: 800, color: '#123C35', margin: '0 0 16px', lineHeight: 1.3 }}>
+          💛 Você não está sozinha nisso.
         </p>
-        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 16px' }}>
-          A maioria das mulheres que chega até aqui marca mais de uma dessas opções.
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 16px', lineHeight: 1.6 }}>
+          Quase todas as mulheres que chegam até aqui marcam mais de uma dessas opções — e quase todas dizem a mesma frase: <strong>"eu não me reconheço mais."</strong>
         </p>
-        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 8px' }}>
-          Isso não é frescura. Nem vaidade.
-        </p>
-        <p style={{ fontSize: '16px', color: '#555555', margin: 0 }}>
-          É o seu corpo pedindo um caminho diferente.
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: 0, lineHeight: 1.6 }}>
+          Isso não é frescura. Não é vaidade. E não é falta de disciplina. <strong>Você não fez nada de errado</strong> — seu corpo entrou numa fase nova e <strong>ninguém te explicou as regras</strong>.
         </p>
       </div>
 
-      {/* Base */}
+      {/* Caixa boa notícia */}
       <div style={{
         background: '#F0FAF0',
-        border: '1px solid #2E7D32',
-        borderRadius: '12px',
-        padding: '20px',
-        marginBottom: '24px',
+        border: '1.5px solid #2E7D32',
+        borderRadius: '16px',
+        padding: '24px 20px',
+        marginBottom: '28px',
       }}>
-        <p style={{ fontWeight: 700, color: '#2E7D32', margin: '0 0 12px' }}>✨ A boa notícia:</p>
-        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 10px' }}>
-          Seu corpo mudou — mas isso não significa que ele vai ficar assim para sempre.
+        <p style={{ fontWeight: 700, fontSize: '16px', color: '#2E7D32', margin: '0 0 14px' }}>✨ A boa notícia:</p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 12px', lineHeight: 1.6 }}>
+          Corpo que mudou por causa hormonal <strong>volta a responder</strong> quando recebe o cuidado certo. <strong>Você não vai ficar assim. Fica tranquila, tem caminho.</strong>
         </p>
-        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: '0 0 10px' }}>
-          Cada resposta que você deu até aqui está construindo o seu diagnóstico.
-        </p>
-        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: 0 }}>
-          Sua análise está quase pronta.
+        <p style={{ fontSize: '16px', color: '#1A1A1A', margin: 0, lineHeight: 1.6 }}>
+          Cada resposta que você deu até aqui está construindo o seu diagnóstico. <strong>Sua análise está quase pronta.</strong>
         </p>
       </div>
 
