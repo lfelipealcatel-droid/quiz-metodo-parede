@@ -222,29 +222,54 @@ export function StepProof({ onNext }) {
         />
       </div>
 
-      <hr className="proof-hr" />
-
-      <p className="proof-fire-title">🔥 E aqui está o problema:</p>
-      <p className="proof-body"><strong>As 3 se alimentam uma da outra.</strong></p>
-      <p className="proof-cycle">
-        Hormônio cai → metabolismo trava →<br />
-        inflamação sobe → hormônio cai ainda mais.
-      </p>
-      <p className="proof-body">
-        É um ciclo. Por isso a barriga continua mesmo quando você se esforça.
-      </p>
-
-      <hr className="proof-hr" />
-
-      <div className="proof-good-box">
-        <p className="proof-good-title">✨ A boa notícia:</p>
-        <p className="proof-good-body">
-          Esse ciclo se quebra — quando você ataca as 3 pontas ao mesmo tempo,
-          do jeito certo pra sua fase.
+      {/* BLOCO 1 */}
+      <div style={{ margin: '16px 0' }}>
+        <p className="proof-fire-title">🧬 O que ninguém te explicou:</p>
+        <p className="proof-body">
+          Não é que você comeu demais. Não é preguiça. Depois dos 40, o estrogênio cai e seu corpo faz{' '}
+          <strong>o contrário do que sempre fez</strong>: em vez de queimar gordura, ele guarda tudo na barriga.
+          Essa gordura inflama e dispara o cortisol, o hormônio que segura a gordura presa. É o mesmo corpo de sempre,{' '}
+          <strong>jogando com regras novas</strong>.
         </p>
+      </div>
+
+      <hr className="proof-hr" />
+
+      {/* BLOCO 2 */}
+      <div style={{ margin: '16px 0' }}>
+        <p className="proof-fire-title">🔥 E aqui está o problema:</p>
+        <p className="proof-body"><strong>As 3 se alimentam uma da outra.</strong></p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', alignItems: 'center', justifyContent: 'center', margin: '12px 0' }}>
+          {['Hormônio cai', 'metabolismo trava', 'inflamação sobe', 'hormônio cai ainda mais'].flatMap((s, i, arr) => [
+            <span key={`s${i}`} style={{ background: '#FFF0E6', color: '#D84A00', padding: '5px 10px', borderRadius: '20px', fontWeight: 600, fontSize: '13px', whiteSpace: 'nowrap' }}>{s}</span>,
+            i < arr.length - 1 && <span key={`a${i}`} style={{ color: '#F37021', fontWeight: 700, fontSize: '15px' }}>→</span>,
+          ]).filter(Boolean)}
+        </div>
+        <p className="proof-body">
+          É um ciclo — por isso <strong>a barriga não vai embora nem com esforço</strong>.
+        </p>
+      </div>
+
+      <hr className="proof-hr" />
+
+      {/* BLOCO 3 */}
+      <div style={{ margin: '16px 0' }}>
+        <p className="proof-fire-title">💡 Por isso nada deu certo:</p>
+        <p className="proof-body">
+          Você cortou comida, puxou treino, fez tudo que um dia funcionou. E a barriga ficou. Porque dieta dura e treino pesado sobem o cortisol — e{' '}
+          <strong>quanto mais você forçava, mais o corpo travava</strong>.{' '}
+          <strong>Não foi você que falhou. Foi o caminho</strong>, feito pra uma fase que não é a sua.
+        </p>
+      </div>
+
+      <hr className="proof-hr" />
+
+      {/* BLOCO 4 */}
+      <div className="proof-good-box">
+        <p className="proof-good-title">🌱 Mas tem uma saída — e ela muda tudo:</p>
         <p className="proof-good-body">
-          E é exatamente isso que vamos descobrir nas próximas perguntas:
-          qual das 3 está mais ativa em você agora.
+          <strong>O que tem causa, tem volta</strong>. A barriga que apareceu do nada pode sair do mesmo jeito — não fazendo mais, e sim atacando as 3 pontas juntas, do jeito certo pra sua fase. As próximas perguntas revelam{' '}
+          <strong>qual das 3 está travando você agora</strong>.
         </p>
       </div>
 
