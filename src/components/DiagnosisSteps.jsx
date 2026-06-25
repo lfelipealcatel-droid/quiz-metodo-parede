@@ -231,8 +231,8 @@ export function StepHeight({ answers, update, onNext }) {
   return (
     <div className="step">
       <div style={{
-        borderLeft: '4px solid #F37021',
-        background: '#FDF8F3',
+        borderLeft: '5px solid #E05A00',
+        background: '#FFE8D6',
         borderRadius: '10px',
         padding: '14px 16px',
         margin: '0 0 24px',
@@ -240,7 +240,7 @@ export function StepHeight({ answers, update, onNext }) {
         lineHeight: 1.55,
         color: '#444',
       }}>
-        📋 Agora vamos calibrar seu protocolo com precisão — cada detalhe abaixo define como o seu método vai funcionar especificamente para o seu corpo.
+        🎯 A partir daqui, cada resposta personaliza seu protocolo para a sua fase hormonal exata.
       </div>
       <h2 className="quiz-title">Qual é a sua altura?</h2>
       <p className="sub">Isso é importante para calcular seu IMC corrigido — uma das variáveis-chave para personalizar a intensidade do seu protocolo.</p>
