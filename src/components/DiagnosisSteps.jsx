@@ -2,17 +2,28 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { calculateScores } from '../quiz-data.js';
 
 // ─── Barra de métrica animada ──────────────────────────────────────────────────
-function MetricBar({ label, perc, sufixo, left, right }) {
+function MetricBar({ label, perc, sufixo, valueText, left, right }) {
   return (
-    <div className="metric-block" style={{ marginBottom: '28px' }}>
-      <div className="label">{label}</div>
-      <div className="value">{Math.round(perc)}{sufixo}</div>
-      <div className="metric-bar-container">
-        <div className="metric-bar">
-          <div className="metric-pointer" style={{ left: `${Math.min(95, Math.max(5, perc))}%` }}>📍</div>
-        </div>
+    <div style={{ marginBottom: '22px' }}>
+      <p style={{ fontSize: '16px', color: '#555', margin: '0 0 2px', lineHeight: 1.4 }}>{label}</p>
+      <p style={{ fontSize: '20px', fontWeight: 700, color: '#D32F2F', margin: '0 0 8px' }}>
+        {valueText ?? `${Math.round(perc)}${sufixo}`}
+      </p>
+      <div style={{ position: 'relative', height: '10px', borderRadius: '5px', background: 'linear-gradient(to right, #4CAF50, #FFC107, #D32F2F)', marginBottom: '6px' }}>
+        <span style={{
+          position: 'absolute',
+          top: '50%',
+          left: `${Math.min(92, Math.max(4, perc))}%`,
+          transform: 'translate(-50%, -50%)',
+          fontSize: '15px',
+          color: '#fff',
+          textShadow: '0 0 3px rgba(0,0,0,0.8)',
+          lineHeight: 1,
+        }}>●</span>
       </div>
-      <div className="metric-labels"><span>{left}</span><span>{right}</span></div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#888' }}>
+        <span>{left}</span><span>{right}</span>
+      </div>
     </div>
   );
 }
@@ -25,124 +36,122 @@ export function StepDiagnosis({ results, onNext }) {
   const { variacao, X_metabolismo, Y_cortisol, nivel_inflamacao } = results;
   const infPerc = infPercMap[nivel_inflamacao] ?? 40;
 
+  const RED = '#D32F2F';
+  const bodyStyle = { fontSize: '16px', lineHeight: 1.55, color: '#1A1A1A', margin: '0 0 12px' };
+  const subheadStyle = { fontSize: '18px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 14px' };
+
+  const barraA = [
+    <MetricBar key="m" label="🔻 Metabolismo: operando em apenas" perc={X_metabolismo} sufixo="% da capacidade" left="Lento" right="Acelerado" />,
+    <MetricBar key="c" label="🔺 Cortisol:" perc={Y_cortisol} sufixo="% acima do ideal" left="Equilibrado" right="Crítico" />,
+    <MetricBar key="i" label="⚠️ Inflamação: nível" perc={infPerc} valueText={nivel_inflamacao} left="Leve" right="Crítico" />,
+  ];
+  const barraB = [
+    <MetricBar key="c" label="🔺 Cortisol:" perc={Y_cortisol} sufixo="% acima do ideal" left="Equilibrado" right="Crítico" />,
+    <MetricBar key="m" label="🔻 Metabolismo: operando em apenas" perc={X_metabolismo} sufixo="% da capacidade" left="Lento" right="Acelerado" />,
+    <MetricBar key="i" label="⚠️ Inflamação: nível" perc={infPerc} valueText={nivel_inflamacao} left="Leve" right="Crítico" />,
+  ];
+  const barraC = [
+    <MetricBar key="i" label="⚠️ Inflamação: nível" perc={infPerc} valueText={nivel_inflamacao} left="Leve" right="Crítico" />,
+    <MetricBar key="m" label="🔻 Metabolismo: operando em apenas" perc={X_metabolismo} sufixo="% da capacidade" left="Lento" right="Acelerado" />,
+    <MetricBar key="c" label="🔺 Cortisol:" perc={Y_cortisol} sufixo="% acima do ideal" left="Equilibrado" right="Crítico" />,
+  ];
+
   const configs = {
     A: {
-      causa: '🔥 QUEDA HORMONAL ACELERADA\n   travando seu corpo',
-      barras: [
-        <MetricBar key="m" label="🔻 Metabolismo: funcionando em apenas" perc={X_metabolismo} sufixo="% da capacidade ideal" left="Lento" right="Acelerado" />,
-        <MetricBar key="c" label="🔺 Cortisol:" perc={Y_cortisol} sufixo="% acima do ideal" left="Equilibrado" right="Crítico" />,
-        <MetricBar key="i" label="⚠️ Inflamação: nível" perc={infPerc} sufixo="%" left="Leve" right="Crítico" />,
-      ],
-      narrativa: (
+      causaTitulo: '🔥 QUEDA HORMONAL',
+      causaTexto: <>Não são as três no mesmo nível. No seu caso, é a queda hormonal que <strong style={{ color: RED }}>está no comando</strong> — e é por ela que tudo tem que começar.</>,
+      barras: barraA,
+      panelTexto: <>Seu corpo entrou em <strong style={{ color: RED }}>modo de economia</strong>: ele queima cada vez menos e <strong style={{ color: RED }}>guarda gordura na barriga</strong> em vez de gastar. Você faz a mesma coisa de sempre e, ainda assim, a barriga só cresce. Mas segura aí — tem o outro lado.</>,
+      significa: (
         <>
-          <p>Sua <strong style={{ color: '#D32F2F' }}>queda hormonal</strong> travou três coisas ao mesmo tempo — seu corpo passou a <strong style={{ color: '#D32F2F' }}>estocar gordura na barriga</strong>, seu metabolismo desacelerou, e sua inflamação aumentou.</p>
-          <p>Aconteceu <strong style={{ color: '#D32F2F' }}>em silêncio. Por meses.</strong></p>
+          <p style={bodyStyle}>Quando a queda hormonal é a raiz, mexer só na comida ou só no treino não chega nem perto — porque o problema nasce mais fundo. Antes de qualquer dieta funcionar, <strong style={{ color: RED }}>o seu corpo precisa ser religado</strong>: voltar a queimar gordura como fazia antes, em vez de guardar tudo na barriga.</p>
+          <p style={{ ...bodyStyle, margin: 0 }}>E aqui está o que muda tudo: quando você acerta a causa principal, <strong style={{ color: RED }}>as outras duas caem junto</strong>. Resolver a queda hormonal primeiro já alivia o cortisol e baixa a inflamação — em vez de você brigar com as três ao mesmo tempo.</p>
         </>
       ),
-      naoFoiVoce: (<><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo entrando em uma nova fase.</>),
+      poucas: (
+        <>
+          <p style={bodyStyle}>Saber qual é a sua causa principal é o que separa quem tenta no escuro de quem finalmente acerta.</p>
+          <p style={{ ...bodyStyle, margin: 0 }}><strong style={{ color: RED }}>Você já tem essa resposta</strong> — agora falta a parte que traz o resultado.</p>
+        </>
+      ),
     },
     B: {
-      causa: '🔥 CORTISOL CRÔNICO ELEVADO\n   sabotando seu corpo por dentro',
-      barras: [
-        <MetricBar key="c" label="🔺 Cortisol:" perc={Y_cortisol} sufixo="% acima do ideal" left="Equilibrado" right="Crítico" />,
-        <MetricBar key="m" label="🔻 Metabolismo: funcionando em apenas" perc={X_metabolismo} sufixo="% da capacidade ideal" left="Lento" right="Acelerado" />,
-        <MetricBar key="i" label="⚠️ Inflamação: nível" perc={infPerc} sufixo="%" left="Leve" right="Crítico" />,
-      ],
-      narrativa: (
+      causaTitulo: '🔥 CORTISOL ELEVADO',
+      causaTexto: <>Não são as três no mesmo nível. No seu caso, é o cortisol que <strong style={{ color: RED }}>está no comando</strong> — e ele funciona de um jeito que muda toda a sua estratégia.</>,
+      barras: barraB,
+      panelTexto: <>Com o cortisol alto, seu corpo vive em <strong style={{ color: RED }}>estado de alerta</strong> e <strong style={{ color: RED }}>guarda gordura na barriga</strong> como se fosse uma reserva de emergência. Parece exagero, mas segura aí — tem o outro lado.</>,
+      significa: (
+        <p style={{ ...bodyStyle, margin: 0 }}>Aqui está a armadilha: com o cortisol no comando, <strong style={{ color: RED }}>quanto mais você se cobra, pior fica</strong>. Dieta apertada e treino pesado fazem o cortisol subir ainda mais — e o corpo responde travando a gordura da barriga com mais força. Por isso o seu caminho é o contrário: <strong style={{ color: RED }}>primeiro acalmar o cortisol</strong>. E quando ele baixa, as outras duas causas afrouxam junto.</p>
+      ),
+      poucas: (
         <>
-          <p>Seu <strong style={{ color: '#D32F2F' }}>cortisol está cronicamente alto</strong> — e isso colocou seu corpo em <strong style={{ color: '#D32F2F' }}>modo de defesa</strong>.</p>
-          <p>Ele guarda gordura como reserva de emergência, trava seu metabolismo e bloqueia a queima abdominal.</p>
-          <p>E aqui está o que ninguém te explicou: em modo defesa, seu corpo lê <strong style={{ color: '#D32F2F' }}>esforço como AMEAÇA</strong>. Quanto mais você tenta, mais ele se protege.</p>
+          <p style={bodyStyle}>Quando o corpo entende que pode parar de se defender, ele reage rápido — e o seu perfil é justamente um dos que mais surpreende nos primeiros dias.</p>
+          <p style={{ ...bodyStyle, margin: 0 }}><strong style={{ color: RED }}>Você já tem a sua resposta</strong> — agora falta a parte que vira o jogo.</p>
         </>
       ),
-      naoFoiVoce: (<><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi seu corpo em modo sobrevivência.</>),
     },
     C: {
-      causa: '🔥 INFLAMAÇÃO CRÔNICA SILENCIOSA\n   inchando seu corpo há meses',
-      barras: [
-        <MetricBar key="i" label="⚠️ Inflamação: nível" perc={infPerc} sufixo="%" left="Leve" right="Crítico" />,
-        <MetricBar key="m" label="🔻 Metabolismo: funcionando em apenas" perc={X_metabolismo} sufixo="% da capacidade ideal" left="Lento" right="Acelerado" />,
-        <MetricBar key="c" label="🔺 Cortisol:" perc={Y_cortisol} sufixo="% acima do ideal" left="Equilibrado" right="Crítico" />,
-      ],
-      narrativa: (
+      causaTitulo: '🔥 INFLAMAÇÃO SILENCIOSA',
+      causaTexto: <>Não são as três no mesmo nível. No seu caso, é a inflamação que <strong style={{ color: RED }}>está no comando</strong> — e ela é a razão de <strong style={{ color: RED }}>a gordura da sua barriga não sair</strong>, por mais que você tente.</>,
+      barras: barraC,
+      panelTexto: <>A inflamação faz seu corpo reter líquido e travar a queima — então <strong style={{ color: RED }}>a gordura fica presa na barriga</strong>, sem conseguir sair. É por isso que a barriga muda de tamanho ao longo do dia. Mas segura aí — tem o outro lado.</>,
+      significa: (
         <>
-          <p>Boa parte da sua barriga <strong style={{ color: '#D32F2F' }}>não é gordura — é INFLAMAÇÃO</strong>.</p>
-          <p>Seu corpo retém líquido e gás na região abdominal, a queima de gordura travou, e a barriga incha e desincha ao longo do dia.</p>
-          <p>Por isso você <strong style={{ color: '#D32F2F' }}>acorda menor e dorme maior</strong>. Por isso cortou açúcar, cortou farinha — e a barriga continua.</p>
+          <p style={bodyStyle}>Aqui está por que cortar açúcar e farinha nunca foi suficiente: você atacou um pedaço, não a raiz. Com a inflamação no comando, o corpo precisa desinflamar primeiro — porque é a inflamação que está <strong style={{ color: RED }}>segurando a gordura no lugar</strong>.</p>
+          <p style={{ ...bodyStyle, margin: 0 }}>E essa é a boa notícia do seu perfil: quando a inflamação baixa, as outras duas afrouxam junto — o cortisol alivia e o metabolismo destrava. Aí <strong style={{ color: RED }}>a gordura, que estava presa, finalmente volta a sair</strong>.</p>
         </>
       ),
-      naoFoiVoce: (<><strong style={{ color: '#D32F2F' }}>Não foi você.</strong><br />Foi uma inflamação que estava trabalhando contra você o tempo todo.</>),
+      poucas: (
+        <>
+          <p style={bodyStyle}>De todos os perfis, o seu costuma mostrar <strong style={{ color: RED }}>resultado visível mais cedo</strong> — porque assim que a inflamação cede, a barriga já começa a responder.</p>
+          <p style={{ ...bodyStyle, margin: 0 }}><strong style={{ color: RED }}>Você já tem a sua resposta</strong> — agora falta a parte que destrava o resto.</p>
+        </>
+      ),
     },
   };
 
   const cfg = configs[variacao] || configs.A;
-  const boaNoticia = variacao === 'C'
-    ? 'Isso é REVERSÍVEL — e responde rápido.\n\nNão com mais esforço. Não cortando mais comida. Não treinando mais pesado.\n\nCom o caminho certo — que desinflama o corpo de dentro pra fora. Desenvolvido para a mulher 40+ nessa fase exata em que você está.'
-    : 'Isso é REVERSÍVEL.\n\nNão com mais esforço. Não cortando mais comida. Não treinando mais pesado.\n\nCom o caminho certo — desenvolvido para o corpo da mulher 40+ nessa fase exata em que você está.';
 
   return (
     <div className="step">
-      <p style={{ textAlign: 'center', fontSize: '22px', fontWeight: 700, color: '#1A1A1A', margin: '32px 0 24px' }}>🚨 SEU DIAGNÓSTICO ESTÁ PRONTO</p>
-
-      <p style={{ textAlign: 'center', fontSize: '16px', color: '#444', margin: '0 0 16px' }}>Causa raiz identificada:</p>
-      <div style={{ background: '#FFF5F5', border: '1px solid #E63946', borderRadius: '12px', padding: '16px', margin: '0 0 32px', textAlign: 'center' }}>
-        {cfg.causa.split('\n').map((line, i) => (
-          <p key={i} style={i === 0
-            ? { fontSize: '20px', fontWeight: 700, color: '#D32F2F', margin: '0 0 4px' }
-            : { fontSize: '16px', fontWeight: 500, color: '#D32F2F', margin: 0 }}>
-            {line.trim()}
-          </p>
-        ))}
-      </div>
-
-      <p style={{ textAlign: 'center', lineHeight: 1.55, margin: '0 0 32px' }}>
-        <span style={{ fontSize: '18px', color: '#333' }}>Respira fundo.</span><br />
-        <span style={{ fontSize: '17px', color: '#333' }}>Tudo que você sente agora tem nome, tem causa — e tem caminho.</span>
+      <p style={{ textAlign: 'center', fontSize: '22px', fontWeight: 700, color: '#1A1A1A', margin: '24px 0 16px' }}>
+        🚨 SEU DIAGNÓSTICO ESTÁ PRONTO
       </p>
 
-      <div className="diagnosis-body" style={{ background: '#F8F8F8', borderRadius: '10px', padding: '14px', margin: '0 0 16px' }}>
-        <strong style={{ fontSize: '18px' }}>📊 SEU PAINEL HORMONAL:</strong>
-        <div style={{ marginTop: '16px' }}>{cfg.barras}</div>
-        <p style={{ fontSize: '12px', color: '#888', margin: '8px 0 0', textAlign: 'center' }}>
-          Inflamação: nível <strong>{nivel_inflamacao}</strong>
+      <p style={{ textAlign: 'center', fontSize: '16px', color: '#444', lineHeight: 1.55, margin: '0 0 20px' }}>
+        Cruzamos suas respostas com mais de 23 mil perfis. E uma das três causas do seu Triângulo Hormonal apareceu muito mais forte que as outras duas:
+      </p>
+
+      <div style={{ background: '#FFF5F5', border: '1px solid #E63946', borderRadius: '12px', padding: '20px', margin: '0 0 28px', textAlign: 'center' }}>
+        <p style={{ fontSize: '22px', fontWeight: 700, color: RED, margin: '0 0 4px' }}>{cfg.causaTitulo}</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: RED, margin: '0 0 14px' }}>esta é a sua causa dominante</p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', lineHeight: 1.55, margin: 0, textAlign: 'left' }}>{cfg.causaTexto}</p>
+      </div>
+
+      <div style={{ background: '#F8F8F8', borderRadius: '12px', padding: '20px', margin: '0 0 24px' }}>
+        <p style={subheadStyle}>📊 O retrato do seu corpo hoje:</p>
+        {cfg.barras}
+        <p style={{ fontSize: '16px', fontStyle: 'italic', color: '#555', lineHeight: 1.55, margin: 0 }}>
+          {cfg.panelTexto}
         </p>
       </div>
 
-      <div className="diagnosis-body">
-        <p style={{ fontSize: '20px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 16px' }}>O que está acontecendo no seu corpo:</p>
-        <div style={{ fontSize: '18px', lineHeight: 1.55 }}>{cfg.narrativa}</div>
+      <div style={{ margin: '0 0 24px' }}>
+        <p style={subheadStyle}>🎯 O que isso significa PRA VOCÊ:</p>
+        {cfg.significa}
       </div>
 
-      <div style={{
-        background: '#EAF8EE',
-        border: '1px solid #B8E5C2',
-        borderRadius: '16px',
-        padding: '20px',
-        margin: '16px 0',
-        fontSize: '17px',
-        fontWeight: 500,
-        lineHeight: 1.55,
-        color: '#1A1A1A',
-      }}>
-        {cfg.naoFoiVoce}
+      <div style={{ background: '#F0FAF0', border: '1.5px solid #2E7D32', borderRadius: '12px', padding: '20px', margin: '0 0 28px' }}>
+        <p style={{ fontSize: '18px', fontWeight: 700, color: '#2E7D32', margin: '0 0 12px' }}>🌟 A parte que poucas sabem:</p>
+        {cfg.poucas}
       </div>
 
-      <div className="solution-box" style={{ background: '#F0FAF0', border: '1.5px solid #2E7D32', borderRadius: '10px', padding: '16px', margin: '16px 0' }}>
-        <p style={{ fontSize: '18px', fontWeight: 700, color: '#2E7D32', margin: '0 0 12px' }}>✨ A BOA NOTÍCIA:</p>
-        {boaNoticia.split('\n\n').map((para, i) => (
-          <p key={i} style={i === 0
-            ? { fontSize: '17px', fontWeight: 700, color: '#2E7D32', lineHeight: 1.55, margin: '0 0 12px' }
-            : { fontSize: '16px', color: '#1A1A1A', lineHeight: 1.55, margin: '0 0 12px' }}>
-            {para}
-          </p>
-        ))}
-        <p style={{ fontSize: '16px', color: '#1A1A1A', lineHeight: 1.55, margin: 0 }}>E é exatamente esse caminho que vamos preparar pra você nas próximas telas.</p>
+      <div style={{ textAlign: 'center', margin: '0 0 16px' }}>
+        <p style={{ fontSize: '16px', color: '#444', margin: '0 0 8px' }}>👇 É isso que as próximas telas vão montar pra você.</p>
+        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: 0 }}>AGORA VAMOS PERSONALIZAR SUA SOLUÇÃO</p>
       </div>
 
-      <p style={{ textAlign: 'center', fontSize: '13px', color: '#666', margin: '16px 0 12px' }}>
-        AGORA VAMOS PERSONALIZAR SUA SOLUÇÃO 👇
-      </p>
-      <button className="cta-btn" onClick={onNext}>CONTINUAR PARA MINHA SOLUÇÃO →</button>
+      <button className="cta-btn proof-cta-pulse" onClick={onNext}>👇 CONTINUAR PARA MINHA SOLUÇÃO →</button>
     </div>
   );
 }
