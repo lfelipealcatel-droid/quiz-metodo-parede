@@ -230,6 +230,18 @@ export function StepHeight({ answers, update, onNext }) {
 
   return (
     <div className="step">
+      <div style={{
+        borderLeft: '4px solid #F37021',
+        background: '#FDF8F3',
+        borderRadius: '10px',
+        padding: '14px 16px',
+        margin: '0 0 24px',
+        fontSize: '15px',
+        lineHeight: 1.55,
+        color: '#444',
+      }}>
+        📋 Agora vamos calibrar seu protocolo com precisão — cada detalhe abaixo define como o seu método vai funcionar especificamente para o seu corpo.
+      </div>
       <h2 className="quiz-title">Qual é a sua altura?</h2>
       <p className="sub">Isso é importante para calcular seu IMC corrigido — uma das variáveis-chave para personalizar a intensidade do seu protocolo.</p>
       <div className="slider-container">
@@ -322,7 +334,7 @@ export function StepAge({ answers, update, onNext }) {
 
   return (
     <div className="step">
-      <h2>Por último — qual é a sua idade exata?</h2>
+      <h2>Qual é a sua idade exata?</h2>
       <p className="sub">Sua idade exata permite calibrar o protocolo pra fase hormonal ESPECÍFICA em que você está.</p>
       <div className="slider-container">
         <div className="slider-value">{idade}<span className="unit">anos</span></div>

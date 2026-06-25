@@ -172,16 +172,16 @@ export default function Quiz() {
       {step === 12 && <StepLoading1 onDone={computeAndAdvance} />}
       {/* E10.1 */}
       {step === 13 && <StepDiagnosis results={results} onNext={next} />}
-      {/* E11 — limitações (era E6) */}
-      {step === 14 && <StepLimitations answers={answers} toggle={toggleLimitations} onNext={next} />}
-      {/* E12 */}
-      {step === 15 && <StepRoutine update={updateAnswer} onNext={next} />}
       {/* E13 — Altura */}
-      {step === 16 && <StepHeight answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 14 && <StepHeight answers={answers} update={updateAnswer} onNext={next} />}
       {/* E14 — Peso + IMC */}
-      {step === 17 && <StepWeight answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 15 && <StepWeight answers={answers} update={updateAnswer} onNext={next} />}
       {/* E15 — Idade Exata */}
-      {step === 18 && <StepAge answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 16 && <StepAge answers={answers} update={updateAnswer} onNext={next} />}
+      {/* E11 — limitações */}
+      {step === 17 && <StepLimitations answers={answers} toggle={toggleLimitations} onNext={next} />}
+      {/* E12 */}
+      {step === 18 && <StepRoutine update={updateAnswer} onNext={next} />}
       {/* E16 */}
       {step === 19 && <StepAcceptance update={updateAnswer} onNext={next} />}
       {/* E17-loading */}
