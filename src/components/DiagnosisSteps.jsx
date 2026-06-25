@@ -146,10 +146,7 @@ export function StepDiagnosis({ results, onNext }) {
         {cfg.poucas}
       </div>
 
-      <div style={{ textAlign: 'center', margin: '0 0 16px' }}>
-        <p style={{ fontSize: '16px', color: '#444', margin: '0 0 8px' }}>👇 É isso que as próximas telas vão montar pra você.</p>
-        <p style={{ fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: 0 }}>AGORA VAMOS PERSONALIZAR SUA SOLUÇÃO</p>
-      </div>
+      <p style={{ textAlign: 'center', fontSize: '16px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 16px' }}>AGORA VAMOS PERSONALIZAR SUA SOLUÇÃO</p>
 
       <button className="cta-btn proof-cta-pulse" onClick={onNext}>👇 CONTINUAR PARA MINHA SOLUÇÃO →</button>
     </div>
