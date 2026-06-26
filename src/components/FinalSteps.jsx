@@ -160,8 +160,8 @@ function TestimonialsCarousel() {
                 }}
               />
               <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                <p style={{ fontWeight: 700, fontSize: '15px', color: '#1A1A1A', margin: '0 0 4px' }}>{slide.name}</p>
-                <p style={{ fontWeight: 800, fontSize: '14px', color: '#1A1A1A', margin: 0 }}>
+                <p style={{ fontWeight: 700, fontSize: '15px', color: '#1A1A1A', margin: '0 0 4px', textAlign: 'center' }}>{slide.name}</p>
+                <p style={{ fontWeight: 800, fontSize: '14px', color: '#1A1A1A', margin: 0, textAlign: 'center' }}>
                   🔥 Reduziu <span style={{ color: ORANGE }}>{slide.cm}</span> de barriga
                 </p>
               </div>
