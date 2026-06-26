@@ -3,7 +3,7 @@ import { calculateScores } from './quiz-data.js';
 import { WelcomeAge, StepSocialProof, StepBodyType, StepBelly, StepProof } from './components/WelcomeSteps.jsx';
 import { StepPastAttempts, StepLimitations, StepImpact, StepEmotionalBridge, StepBelief, StepFrustration, StepLoading1, StepBodyChange } from './components/MiddleSteps.jsx';
 import { StepDiagnosis, StepSymptoms, StepRoutine, StepHeight, StepWeight, StepAge, StepAcceptance, StepLoading2 } from './components/DiagnosisSteps.jsx';
-import { StepProjection, StepName, StepEmail, StepFutureFear, StepCommitment, StepFinalLoading, StepProfile, StepFinal } from './components/FinalSteps.jsx';
+import { StepProjection, StepName, StepFutureFear, StepCommitment, StepFinalLoading, StepProfile, StepFinal } from './components/FinalSteps.jsx';
 
 // ─── Barra de Progresso (estilo BetterMe) ─────────────────────────────────────
 const BLOCKS = [
@@ -65,7 +65,7 @@ function QuizProgress({ step }) {
 }
 
 // E1 (WelcomeAge) não conta na barra; steps 1-26 = E1.5 até E23
-const TOTAL_STEPS = 28;
+const TOTAL_STEPS = 27;
 
 const initialAnswers = {
   age: null, bodyType: null, bellyLocation: null,
@@ -190,18 +190,16 @@ export default function Quiz() {
       {step === 21 && <StepProjection results={results} answers={answers} onNext={next} />}
       {/* E18 */}
       {step === 22 && <StepName answers={answers} update={updateAnswer} onNext={next} />}
-      {/* E19 */}
-      {step === 23 && <StepEmail answers={answers} update={updateAnswer} onNext={next} />}
       {/* E20 */}
-      {step === 24 && <StepFutureFear answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 23 && <StepFutureFear answers={answers} update={updateAnswer} onNext={next} />}
       {/* E21 */}
-      {step === 25 && <StepCommitment answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 24 && <StepCommitment answers={answers} update={updateAnswer} onNext={next} />}
       {/* E21.5 */}
-      {step === 26 && <StepFinalLoading answers={answers} onNext={next} />}
+      {step === 25 && <StepFinalLoading answers={answers} onNext={next} />}
       {/* E22 */}
-      {step === 27 && <StepProfile answers={answers} results={results} onNext={next} />}
+      {step === 26 && <StepProfile answers={answers} results={results} onNext={next} />}
       {/* E23 */}
-      {step === 28 && <StepFinal answers={answers} />}
+      {step === 27 && <StepFinal answers={answers} />}
     </div>
   );
 }
