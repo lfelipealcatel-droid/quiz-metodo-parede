@@ -72,10 +72,10 @@ function ProjectionChart({ projectionMin, projectionMax }) {
 
 // ─── Carrossel manual de depoimentos ─────────────────────────────────────────
 const CAROUSEL_SLIDES = [
-  { img: '/imagem/andreia-cavalcanti-42-2.png', name: 'Andreia Cavalcanti, 43 anos', cm: '9 cm',  days: '28 dias' },
-  { img: '/imagem/claudia-martins-45-2.png',    name: 'Cláudia Martins, 45 anos',    cm: '11 cm', days: '42 dias' },
-  { img: '/imagem/marcia-carvalho-50-2.png',    name: 'Márcia Carvalho, 52 anos',    cm: '13 cm', days: '45 dias' },
-  { img: '/imagem/vanessa-lima-46-2.png',        name: 'Vanessa Lima, 46 anos',        cm: '9 cm',  days: '35 dias' },
+  { img: '/imagem/andreia-cavalcanti-42-2-NOVA.png', name: 'Andreia Cavalcanti, 43 anos', cm: '9 cm'  },
+  { img: '/imagem/claudia-martins-45-2-NOVA.png',    name: 'Cláudia Martins, 45 anos',    cm: '11 cm' },
+  { img: '/imagem/marcia-carvalho-50-2-NOVA.png',    name: 'Márcia Carvalho, 52 anos',    cm: '13 cm' },
+  { img: '/imagem/vanessa-lima-46-2-NOVA.png',        name: 'Vanessa Lima, 46 anos',        cm: '9 cm'  },
 ];
 
 const ORANGE = '#F37021';
@@ -160,9 +160,9 @@ function TestimonialsCarousel() {
                 }}
               />
               <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                <p style={{ fontWeight: 700, fontSize: '13px', color: '#1A1A1A', margin: '0 0 4px' }}>{slide.name}</p>
+                <p style={{ fontWeight: 700, fontSize: '15px', color: '#1A1A1A', margin: '0 0 4px' }}>{slide.name}</p>
                 <p style={{ fontWeight: 800, fontSize: '14px', color: '#1A1A1A', margin: 0 }}>
-                  🔥 Reduziu <span style={{ color: ORANGE }}>{slide.cm}</span> de barriga em <span style={{ color: ORANGE }}>{slide.days}</span>
+                  🔥 Reduziu <span style={{ color: ORANGE }}>{slide.cm}</span> de barriga
                 </p>
               </div>
             </div>
@@ -189,9 +189,9 @@ export function StepProjection({ results, answers, onNext }) {
       </p>
 
       <ul style={{ fontSize: '17px', fontWeight: 500, lineHeight: 1.5, color: '#1A1A1A', paddingLeft: '20px', margin: '0 0 16px' }}>
+        <li>✅ Barriga menos inchada e mais firme em 3 a 5 dias</li>
+        <li>✅ Corpo respondendo já na primeira semana</li>
         <li>✅ Reduzir <strong>{projectionMin} a {projectionMax} cm de barriga em 21 dias</strong></li>
-        <li>✅ Sentir o corpo respondendo já na primeira semana</li>
-        <li>✅ Barriga menos inchada e visualmente mais firme em 3-5 dias</li>
       </ul>
 
       <div className="estimate-box">
