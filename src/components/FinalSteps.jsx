@@ -307,21 +307,25 @@ const TESTIMONIALS_BY_AGE = [
     minAge: 40, maxAge: 44,
     text: '"Eu achava que precisava fechar mais a boca e treinar mais. Descobrir que existia uma forma mais inteligente de lidar com essa barriga depois dos 40 mudou minha visão completamente."',
     name: 'Mariana, 43 anos',
+    photo: '/imagem/Mariana-43.png',
   },
   {
     minAge: 45, maxAge: 49,
     text: '"Eu já não me reconhecia mais nas minhas roupas. O que me ajudou foi perceber que meu corpo não precisava de mais cobrança — precisava da estratégia certa para essa fase."',
     name: 'Renata, 47 anos',
+    photo: '/imagem/Renata-47.png',
   },
   {
     minAge: 50, maxAge: 54,
     text: '"Depois dos 50 eu já tinha tentado de tudo. Pela primeira vez encontrei uma abordagem que parecia ter sido pensada para mulheres como eu."',
     name: 'Patrícia, 52 anos',
+    photo: '/imagem/Patricia-52.png',
   },
   {
     minAge: 55, maxAge: 99,
     text: '"Eu acreditava que era tarde demais para mudar. Descobrir que ainda existia um caminho possível para a minha fase foi o que mais me deu esperança."',
     name: 'Sandra, 57 anos',
+    photo: '/imagem/Sandra-57.png',
   },
 ];
 
@@ -404,13 +408,19 @@ export function StepFinalLoading({ answers, onNext }) {
         <p style={{ fontSize: '14px', fontWeight: 600, color: '#555', margin: '0 0 16px' }}>
           {testimonial.name}
         </p>
-        <div style={{
-          width: '80px', height: '80px',
-          background: '#fff',
-          border: '1px solid #E5E7EB',
-          borderRadius: '12px',
-          margin: '0 auto',
-        }} />
+        <img
+          src={testimonial.photo}
+          alt={testimonial.name}
+          style={{
+            width: '88px',
+            height: '88px',
+            borderRadius: '50%',
+            objectFit: 'cover',
+            border: '3px solid #F37021',
+            display: 'block',
+            margin: '0 auto',
+          }}
+        />
       </div>
 
       {/* Prova social */}
