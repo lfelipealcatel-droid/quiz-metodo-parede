@@ -466,7 +466,8 @@ export function StepProfile({ answers, results, onNext }) {
 
       <div style={{ fontSize: '17px', lineHeight: 1.55, color: '#1A1A1A', margin: '16px 0 20px' }}>
         <p style={{ margin: '0 0 10px' }}>Sua análise foi concluída.</p>
-        <p style={{ margin: 0 }}>Identificamos o principal fator que está dificultando a redução da sua barriga depois dos 40 — e a boa notícia é que ele tem solução.</p>
+        <p style={{ margin: '0 0 10px' }}>Você não tem um problema de força de vontade. Você tem um corpo que entrou numa nova fase hormonal — e até agora ninguém tinha te dado o caminho certo pra ela.</p>
+        <p style={{ margin: 0 }}><strong>Agora você tem.</strong></p>
       </div>
 
       <div className="profile-card">
@@ -482,8 +483,8 @@ export function StepProfile({ answers, results, onNext }) {
 
       <div style={{ background: '#FFF8E1', border: '2px solid #C9A227', borderRadius: '12px', padding: '18px 16px', margin: '20px 0', textAlign: 'center' }}>
         <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', margin: '0 0 8px' }}>🎯 Método indicado para o seu caso:</p>
-        <p style={{ fontSize: '22px', fontWeight: 700, color: '#D32F2F', margin: '0 0 4px', lineHeight: 1.2 }}>🔥 <strong>MÉTODO PAREDE 40+</strong></p>
-        <p style={{ fontSize: '14px', fontWeight: 500, color: '#666666', margin: 0 }}>O Protocolo Hormonal Personalizado da Barriga 40+</p>
+        <p style={{ fontSize: '22px', fontWeight: 700, color: '#D32F2F', margin: '0 0 4px', lineHeight: 1.2 }}>🔥 <strong>PLANO BARRIGA HORMONAL 40+</strong></p>
+        <p style={{ fontSize: '14px', fontWeight: 500, color: '#666666', margin: 0 }}>O Protocolo de 21 Dias personalizado para o seu perfil hormonal</p>
       </div>
 
       <div style={{ fontSize: '17px', lineHeight: 1.55, color: '#1A1A1A', margin: '0 0 20px' }}>
@@ -493,8 +494,16 @@ export function StepProfile({ answers, results, onNext }) {
 
       <div style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', margin: '0 0 24px', lineHeight: 1.8 }}>
         <p style={{ margin: '4px 0' }}>⏱️ <strong>8 minutos por dia</strong></p>
-        <p style={{ margin: '4px 0' }}>📍 Em casa, contra uma parede</p>
-        <p style={{ margin: '4px 0' }}>🚫 Sem cardio · sem dietas restritivas · sem contar calorias</p>
+        <p style={{ margin: '4px 0' }}>📍 Em casa, sem impacto</p>
+        <p style={{ margin: '4px 0' }}>🚫 Sem cardio · sem dieta restritiva · sem contar calorias</p>
+      </div>
+
+      <div style={{ background: '#F0FAF0', border: '1.5px solid #2E7D32', borderRadius: '12px', padding: '20px', margin: '0 0 24px' }}>
+        <p style={{ fontSize: '17px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 14px' }}>🧬 Seu plano age nas 3 causas da sua barriga ao mesmo tempo:</p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', lineHeight: 1.6, margin: '0 0 8px' }}>1. <strong>Movimento Hormonal</strong> — 8 minutos por dia que ativam o que o exercício comum não alcança</p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', lineHeight: 1.6, margin: '0 0 8px' }}>2. <strong>Alimentação Hormonal</strong> — sem cortar nada, sem contar caloria</p>
+        <p style={{ fontSize: '16px', color: '#1A1A1A', lineHeight: 1.6, margin: '0 0 14px' }}>3. <strong>Hábitos Hormonais</strong> — 3 âncoras diárias que destravam seu corpo</p>
+        <p style={{ fontSize: '15px', fontStyle: 'italic', color: '#555', margin: 0 }}>Cada pilar age numa ponta do seu Triângulo Hormonal — por isso funciona onde o resto falhou.</p>
       </div>
 
       <div style={{ background: '#FAF7F2', border: '1px solid #E8DCC4', borderRadius: '12px', padding: '20px', margin: '0 0 24px' }}>
@@ -502,8 +511,9 @@ export function StepProfile({ answers, results, onNext }) {
         <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>
           ✅ <strong>Reduzir {projectionMin} a {projectionMax} cm de barriga em 21 dias</strong>
         </p>
-        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Desinchar e voltar a vestir suas roupas com mais conforto</p>
-        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Recuperar energia e disposição</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Voltar a vestir suas roupas com conforto</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Desinchar já na primeira semana</p>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ Recuperar a energia que sumiu nos últimos meses</p>
         {dynamicBenefits.map(b => (
           <p key={b.key} style={{ fontSize: '16px', fontWeight: 500, color: '#1A1A1A', lineHeight: 1.5, margin: '0 0 8px' }}>✅ {b.text}</p>
         ))}
@@ -519,18 +529,19 @@ export function StepProfile({ answers, results, onNext }) {
           <div style={{ flex: 1, minWidth: '140px' }}>
             <p style={{ fontSize: '22px', fontWeight: 700, color: '#1A1A1A', margin: '0 0 6px', lineHeight: 1.2 }}>Renata Vasconcelos, 47 anos</p>
             <p style={{ fontSize: '15px', fontWeight: 500, color: '#666666', margin: '0 0 8px', lineHeight: 1.4 }}>Especialista em emagrecimento feminino na menopausa</p>
-            <p style={{ fontSize: '16px', fontWeight: 600, color: '#F37021', margin: 0 }}>Criadora do Método Parede 40+</p>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#F37021', margin: 0 }}>Criadora do Plano Barriga Hormonal 40+</p>
           </div>
         </div>
         <em style={{ fontSize: '16px', lineHeight: 1.55, color: '#1A1A1A', display: 'block' }}>
           "Há <strong>12 anos</strong> ajudo mulheres 40+ a reduzirem a barriga, voltarem a vestir suas roupas com confiança e recuperarem a sensação de que o próprio corpo responde novamente.
           <br /><br />
-          Foi por isso que criei o Método Parede 40+ — um caminho pensado para essa fase da mulher, feito para trabalhar <strong>a seu favor, e não contra você</strong>."
+          Foi por isso que criei o Plano Barriga Hormonal 40+ — um caminho pensado para essa fase da mulher, feito para trabalhar <strong>a seu favor, e não contra você</strong>."
         </em>
       </div>
 
-      <p style={{ fontSize: '15px', color: '#555555', textAlign: 'center', lineHeight: 1.5, margin: '24px 0 16px' }}>
-        👇 Veja os próximos passos para começar<br />a reduzir sua barriga de forma personalizada.
+      <p style={{ fontSize: '15px', color: '#555555', textAlign: 'center', lineHeight: 1.6, margin: '24px 0 16px' }}>
+        <strong>{name}</strong>, esse é o caminho que seu corpo está esperando há meses.<br /><br />
+        👇 Veja como começar seus primeiros 21 dias.
       </p>
 
       <button
@@ -538,7 +549,7 @@ export function StepProfile({ answers, results, onNext }) {
         style={{ marginTop: 0, background: '#16A34A' }}
         onClick={onNext}
       >
-        🔓 LIBERAR MEU PROTOCOLO COMPLETO →
+        🔓 QUERO MEU PLANO PERSONALIZADO →
       </button>
     </div>
   );
