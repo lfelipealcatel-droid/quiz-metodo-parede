@@ -547,7 +547,10 @@ export function StepProfile({ answers, results, onNext }) {
       <button
         className="cta-btn"
         style={{ marginTop: 0, background: '#16A34A' }}
-        onClick={onNext}
+        onClick={() => {
+          const params = new URLSearchParams({ nome: name, cm_min: projectionMin, cm_max: projectionMax });
+          window.location.href = `https://pagina-barriga-hormonal-x5b6.vercel.app/?${params.toString()}`;
+        }}
       >
         🔓 QUERO MEU PLANO PERSONALIZADO →
       </button>

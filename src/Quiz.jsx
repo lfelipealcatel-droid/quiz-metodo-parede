@@ -3,14 +3,14 @@ import { calculateScores } from './quiz-data.js';
 import { WelcomeAge, StepSocialProof, StepBodyType, StepBelly, StepProof } from './components/WelcomeSteps.jsx';
 import { StepPastAttempts, StepLimitations, StepImpact, StepEmotionalBridge, StepBelief, StepFrustration, StepLoading1, StepBodyChange } from './components/MiddleSteps.jsx';
 import { StepDiagnosis, StepSymptoms, StepRoutine, StepHeight, StepWeight, StepAge, StepAcceptance, StepLoading2 } from './components/DiagnosisSteps.jsx';
-import { StepProjection, StepName, StepFutureFear, StepCommitment, StepFinalLoading, StepProfile, StepFinal } from './components/FinalSteps.jsx';
+import { StepProjection, StepName, StepFutureFear, StepCommitment, StepFinalLoading, StepProfile } from './components/FinalSteps.jsx';
 
 // ─── Barra de Progresso (estilo BetterMe) ─────────────────────────────────────
 const BLOCKS = [
   { label: 'Seu corpo',  start: 2,  end: 4 },
   { label: 'Sua causa',  start: 5,  end: 11 },
   { label: 'Seu perfil', start: 12, end: 21 },
-  { label: 'Seu plano',  start: 22, end: 28 },
+  { label: 'Seu plano',  start: 22, end: 26 },
 ];
 
 function QuizProgress({ step }) {
@@ -65,7 +65,7 @@ function QuizProgress({ step }) {
 }
 
 // E1 (WelcomeAge) não conta na barra; steps 1-26 = E1.5 até E23
-const TOTAL_STEPS = 27;
+const TOTAL_STEPS = 26;
 
 const initialAnswers = {
   age: null, bodyType: null, bellyLocation: null,
@@ -198,8 +198,6 @@ export default function Quiz() {
       {step === 25 && <StepFinalLoading answers={answers} onNext={next} />}
       {/* E22 */}
       {step === 26 && <StepProfile answers={answers} results={results} onNext={next} />}
-      {/* E23 */}
-      {step === 27 && <StepFinal answers={answers} />}
     </div>
   );
 }
