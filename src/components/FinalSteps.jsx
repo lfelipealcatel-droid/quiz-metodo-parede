@@ -549,7 +549,7 @@ export function StepProfile({ answers, results, onNext }) {
         style={{ marginTop: 0, background: '#16A34A' }}
         onClick={() => {
           const params = new URLSearchParams({ nome: name, cm_min: projectionMin, cm_max: projectionMax });
-          window.location.href = `https://pagina-barriga-hormonal-x5b6.vercel.app/?${params.toString()}`;
+          window.location.href = `https://planobarrigahormonal.vittalle.com.br/?${params.toString()}`;
         }}
       >
         🔓 QUERO MEU PLANO PERSONALIZADO →
