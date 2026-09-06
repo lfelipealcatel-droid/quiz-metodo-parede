@@ -2,6 +2,14 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { getBellyLabel, getLimitLabel } from '../quiz-data.js';
 import { trackCtaClick } from '../lib/analytics.js';
 
+// Allowlist de tracking repassada ao redirect para a Pagina de Vendas.
+// Copia intencional (projetos independentes) espelhando checkout.js da
+// pagina-barriga-hormonal. Se mudar aqui, mudar la tambem.
+const TRACKING_PARAMS_ALLOWLIST = [
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+  'fbclid', 'gclid', 'src', 'sck', 'vtid',
+];
+
 // ─── Gráfico de projeção animado ──────────────────────────────────────────────
 function ProjectionChart({ projectionMin, projectionMax }) {
   const [animated, setAnimated] = useState(false);
@@ -550,6 +558,13 @@ export function StepProfile({ answers, results, onNext }) {
         style={{ marginTop: 0, background: '#16A34A' }}
         onClick={async () => {
           const params = new URLSearchParams({ nome: name, cm_min: projectionMin, cm_max: projectionMax });
+
+          const entryParams = new URLSearchParams(window.location.search);
+          for (const key of TRACKING_PARAMS_ALLOWLIST) {
+            const value = entryParams.get(key);
+            if (value) params.set(key, value);
+          }
+
           await trackCtaClick();
           window.location.href = `https://planobarrigahormonal.vittalle.com.br/?${params.toString()}`;
         }}
