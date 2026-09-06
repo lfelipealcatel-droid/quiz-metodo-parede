@@ -4,6 +4,7 @@ import { WelcomeAge, StepSocialProof, StepBodyType, StepBelly, StepProof } from 
 import { StepPastAttempts, StepLimitations, StepImpact, StepEmotionalBridge, StepBelief, StepFrustration, StepLoading1, StepBodyChange } from './components/MiddleSteps.jsx';
 import { StepDiagnosis, StepSymptoms, StepRoutine, StepHeight, StepWeight, StepAge, StepAcceptance, StepLoading2 } from './components/DiagnosisSteps.jsx';
 import { StepProjection, StepName, StepFutureFear, StepCommitment, StepFinalLoading, StepProfile } from './components/FinalSteps.jsx';
+import { trackSessionStart, trackStep, trackAnswer, trackDiagnosis, trackCompleted, STEP_META, QUESTION_LABELS, resolveAnswerLabel } from './lib/analytics.js';
 
 // ─── Barra de Progresso (estilo BetterMe) ─────────────────────────────────────
 const BLOCKS = [
@@ -88,6 +89,24 @@ export default function Quiz() {
     if (containerRef.current) containerRef.current.scrollTop = 0;
   }, [step]);
 
+  // ─── Instrumentação (analytics) — apenas observa, não altera nenhum fluxo ────
+  useEffect(() => {
+    trackSessionStart();
+  }, []);
+
+  useEffect(() => {
+    const meta = STEP_META[step];
+    if (meta) trackStep(step, meta.name, meta.type);
+  }, [step]);
+
+  useEffect(() => {
+    if (results) trackDiagnosis(results);
+  }, [results]);
+
+  useEffect(() => {
+    if (step === 26) trackCompleted();
+  }, [step]);
+
   const next = () => setStep(s => s + 1);
   const updateAnswer = (field, value) => setAnswers(prev => ({ ...prev, [field]: value }));
   const toggleMulti = (field, value) => {
@@ -140,60 +159,108 @@ export default function Quiz() {
     next();
   };
 
+  // ─── Wrappers de tracking — chamam a função original e SÓ DEPOIS registram o
+  // evento. Não substituem nem alteram updateAnswer/toggleMulti/togglePastAttempts/
+  // toggleLimitations; apenas observam o mesmo clique que já aciona a lógica real.
+  const trackedUpdateAnswer = (field, value) => {
+    updateAnswer(field, value);
+    const meta = QUESTION_LABELS[field];
+    if (!meta) return;
+    trackAnswer(field, meta.questionText, value, resolveAnswerLabel(field, value), meta.debounce ? 600 : 0);
+  };
+
+  const trackedToggleMulti = (field, value) => {
+    toggleMulti(field, value);
+    const meta = QUESTION_LABELS[field];
+    if (!meta) return;
+    const current = answers[field] || [];
+    const idx = current.indexOf(value);
+    const newArr = idx > -1 ? current.filter(x => x !== value) : [...current, value];
+    trackAnswer(field, meta.questionText, newArr, newArr.map(v => resolveAnswerLabel(field, v)));
+  };
+
+  const trackedTogglePastAttempts = (value) => {
+    togglePastAttempts(value);
+    const meta = QUESTION_LABELS.pastAttempts;
+    const current = answers.pastAttempts;
+    let newArr;
+    if (value === 'nenhuma') {
+      newArr = current.includes('nenhuma') ? [] : ['nenhuma'];
+    } else {
+      const semNenhuma = current.filter(v => v !== 'nenhuma');
+      newArr = semNenhuma.includes(value) ? semNenhuma.filter(v => v !== value) : [...semNenhuma, value];
+    }
+    trackAnswer('pastAttempts', meta.questionText, newArr, newArr.map(v => resolveAnswerLabel('pastAttempts', v)));
+  };
+
+  const trackedToggleLimitations = (value) => {
+    toggleLimitations(value);
+    const meta = QUESTION_LABELS.limitations;
+    const current = answers.limitations;
+    let newArr;
+    if (value === 'nenhuma') {
+      newArr = current.includes('nenhuma') ? [] : ['nenhuma'];
+    } else {
+      const semNenhuma = current.filter(v => v !== 'nenhuma');
+      newArr = semNenhuma.includes(value) ? semNenhuma.filter(v => v !== value) : [...semNenhuma, value];
+    }
+    trackAnswer('limitations', meta.questionText, newArr, newArr.map(v => resolveAnswerLabel('limitations', v)));
+  };
+
   return (
     <div className="quiz-app" ref={containerRef}>
       {step >= 2 && <QuizProgress step={step} />}
 
       {/* E1 */}
-      {step === 0  && <WelcomeAge update={updateAnswer} onNext={next} />}
+      {step === 0  && <WelcomeAge update={trackedUpdateAnswer} onNext={next} />}
       {/* E1.5 */}
       {step === 1  && <StepSocialProof answers={answers} onNext={next} />}
       {/* E2 */}
-      {step === 2  && <StepBodyType update={updateAnswer} onNext={next} />}
+      {step === 2  && <StepBodyType update={trackedUpdateAnswer} onNext={next} />}
       {/* E3 */}
-      {step === 3  && <StepBelly answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 3  && <StepBelly answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E4 */}
       {step === 4  && <StepProof onNext={next} />}
       {/* E5 */}
-      {step === 5  && <StepPastAttempts answers={answers} toggle={togglePastAttempts} onNext={next} />}
+      {step === 5  && <StepPastAttempts answers={answers} toggle={trackedTogglePastAttempts} onNext={next} />}
       {/* E7 */}
-      {step === 6  && <StepImpact toggle={toggleMulti} onNext={next} />}
+      {step === 6  && <StepImpact toggle={trackedToggleMulti} onNext={next} />}
       {/* E7.2 */}
       {step === 7  && <StepEmotionalBridge onNext={next} />}
       {/* E7.5 */}
-      {step === 8  && <StepBodyChange update={updateAnswer} onNext={next} />}
+      {step === 8  && <StepBodyChange update={trackedUpdateAnswer} onNext={next} />}
       {/* E8 */}
-      {step === 9  && <StepBelief answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 9  && <StepBelief answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E9 — sintomas (era E11) */}
-      {step === 10 && <StepSymptoms answers={answers} toggle={toggleMulti} onNext={next} />}
+      {step === 10 && <StepSymptoms answers={answers} toggle={trackedToggleMulti} onNext={next} />}
       {/* E9.5 — validação (era E9) */}
-      {step === 11 && <StepFrustration update={updateAnswer} onNext={next} />}
+      {step === 11 && <StepFrustration update={trackedUpdateAnswer} onNext={next} />}
       {/* E10 */}
       {step === 12 && <StepLoading1 onDone={computeAndAdvance} />}
       {/* E10.1 */}
       {step === 13 && <StepDiagnosis results={results} onNext={next} />}
       {/* E13 — Altura */}
-      {step === 14 && <StepHeight answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 14 && <StepHeight answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E14 — Peso + IMC */}
-      {step === 15 && <StepWeight answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 15 && <StepWeight answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E15 — Idade Exata */}
-      {step === 16 && <StepAge answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 16 && <StepAge answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E11 — limitações */}
-      {step === 17 && <StepLimitations answers={answers} toggle={toggleLimitations} onNext={next} />}
+      {step === 17 && <StepLimitations answers={answers} toggle={trackedToggleLimitations} onNext={next} />}
       {/* E12 */}
-      {step === 18 && <StepRoutine update={updateAnswer} onNext={next} />}
+      {step === 18 && <StepRoutine update={trackedUpdateAnswer} onNext={next} />}
       {/* E16 */}
-      {step === 19 && <StepAcceptance update={updateAnswer} onNext={next} />}
+      {step === 19 && <StepAcceptance update={trackedUpdateAnswer} onNext={next} />}
       {/* E17-loading */}
       {step === 20 && <StepLoading2 answers={answers} setResults={setResults} onNext={next} />}
       {/* E17-projeção */}
       {step === 21 && <StepProjection results={results} answers={answers} onNext={next} />}
       {/* E18 */}
-      {step === 22 && <StepName answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 22 && <StepName answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E20 */}
-      {step === 23 && <StepFutureFear answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 23 && <StepFutureFear answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E21 */}
-      {step === 24 && <StepCommitment answers={answers} update={updateAnswer} onNext={next} />}
+      {step === 24 && <StepCommitment answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E21.5 */}
       {step === 25 && <StepFinalLoading answers={answers} onNext={next} />}
       {/* E22 */}

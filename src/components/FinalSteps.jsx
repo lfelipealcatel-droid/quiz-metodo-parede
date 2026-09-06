@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { getBellyLabel, getLimitLabel } from '../quiz-data.js';
+import { trackCtaClick } from '../lib/analytics.js';
 
 // ─── Gráfico de projeção animado ──────────────────────────────────────────────
 function ProjectionChart({ projectionMin, projectionMax }) {
@@ -547,8 +548,9 @@ export function StepProfile({ answers, results, onNext }) {
       <button
         className="cta-btn"
         style={{ marginTop: 0, background: '#16A34A' }}
-        onClick={() => {
+        onClick={async () => {
           const params = new URLSearchParams({ nome: name, cm_min: projectionMin, cm_max: projectionMax });
+          await trackCtaClick();
           window.location.href = `https://planobarrigahormonal.vittalle.com.br/?${params.toString()}`;
         }}
       >
