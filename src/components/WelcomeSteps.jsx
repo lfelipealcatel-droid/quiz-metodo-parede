@@ -66,10 +66,10 @@ export function WelcomeAge({ update, onNext }) {
       <p className="wa-security">🔒 100% gratuito · Sem cadastro inicial</p>
 
       <p className="wa-legal">
-        Ao continuar, você concorda com nossos{' '}
-        <a href="https://app.vittalle.com.br/termos" target="_blank" rel="noopener noreferrer">Termos de Uso</a>
+        Ao escolher sua faixa etária e continuar, você concorda com nossos{' '}
+        <a href="/termos/" target="_blank" rel="noopener noreferrer">Termos de Uso</a>
         {' '}e declara estar ciente da{' '}
-        <a href="https://app.vittalle.com.br/privacidade" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
+        <a href="/privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
       </p>
     </div>
   );
