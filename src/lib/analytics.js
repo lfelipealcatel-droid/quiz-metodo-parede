@@ -128,10 +128,33 @@ export function trackStep(order, name, type) {
   track('step_entered', { step_order: order, step_name: name, step_type: type });
 }
 
-// ─── answer (com debounce opcional pra slider/texto) ──────────────────────────
+// ─── answer (com debounce opcional pra slider/texto + dedup de clique repetido) ─
 const debounceTimers = {};
 
+// Dedup: ignora uma nova chamada para o MESMO questionId com o MESMO valor se
+// chegar dentro de uma janela curta — cobre re-cliques rápidos no mesmo card
+// antes do avanço automático do step (ex.: "45-49 anos" gravado 3x seguidas).
+// Valores diferentes para o mesmo questionId NUNCA são bloqueados (troca legítima).
+const lastAnswerByQuestion = {};
+const DEDUP_WINDOW_MS = 800;
+
+function serializeAnswerValue(value) {
+  try {
+    return JSON.stringify(value);
+  } catch (err) {
+    return String(value);
+  }
+}
+
 export function trackAnswer(questionId, questionText, answerValue, answerLabel, debounceMs = 0) {
+  const valueKey = serializeAnswerValue(answerValue);
+  const now = Date.now();
+  const last = lastAnswerByQuestion[questionId];
+  if (last && last.valueKey === valueKey && (now - last.at) < DEDUP_WINDOW_MS) {
+    return;
+  }
+  lastAnswerByQuestion[questionId] = { valueKey, at: now };
+
   const payload = {
     question_id: questionId,
     question_text: questionText,

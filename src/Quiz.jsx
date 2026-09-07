@@ -169,6 +169,8 @@ export default function Quiz() {
     trackAnswer(field, meta.questionText, value, resolveAnswerLabel(field, value), meta.debounce ? 600 : 0);
   };
 
+  // emotionalImpact (step 6) é escolha única com auto-avanço por clique (não tem
+  // botão "Continuar") — continua gravando a cada clique, como updateAnswer.
   const trackedToggleMulti = (field, value) => {
     toggleMulti(field, value);
     const meta = QUESTION_LABELS[field];
@@ -179,32 +181,50 @@ export default function Quiz() {
     trackAnswer(field, meta.questionText, newArr, newArr.map(v => resolveAnswerLabel(field, v)));
   };
 
-  const trackedTogglePastAttempts = (value) => {
-    togglePastAttempts(value);
-    const meta = QUESTION_LABELS.pastAttempts;
-    const current = answers.pastAttempts;
-    let newArr;
-    if (value === 'nenhuma') {
-      newArr = current.includes('nenhuma') ? [] : ['nenhuma'];
-    } else {
-      const semNenhuma = current.filter(v => v !== 'nenhuma');
-      newArr = semNenhuma.includes(value) ? semNenhuma.filter(v => v !== value) : [...semNenhuma, value];
-    }
-    trackAnswer('pastAttempts', meta.questionText, newArr, newArr.map(v => resolveAnswerLabel('pastAttempts', v)));
+  // symptoms (step 10) é múltipla escolha com botão "Continuar" — o toggle aqui
+  // NÃO grava nada; a gravação final acontece em trackedNextMulti, no avanço.
+  const toggleMultiSilent = (field, value) => {
+    toggleMulti(field, value);
   };
 
-  const trackedToggleLimitations = (value) => {
+  // pastAttempts (step 5) é múltipla escolha com botão "Continuar" — idem acima.
+  const togglePastAttemptsSilent = (value) => {
+    togglePastAttempts(value);
+  };
+
+  // limitations (step 17) é múltipla escolha com botão "Continuar" — idem acima.
+  const toggleLimitationsSilent = (value) => {
     toggleLimitations(value);
-    const meta = QUESTION_LABELS.limitations;
-    const current = answers.limitations;
-    let newArr;
-    if (value === 'nenhuma') {
-      newArr = current.includes('nenhuma') ? [] : ['nenhuma'];
-    } else {
-      const semNenhuma = current.filter(v => v !== 'nenhuma');
-      newArr = semNenhuma.includes(value) ? semNenhuma.filter(v => v !== value) : [...semNenhuma, value];
+  };
+
+  // Usado como onNext das 3 telas de múltipla escolha com botão (pastAttempts,
+  // symptoms, limitations): grava a seleção FINAL (o estado já atualizado pelos
+  // toggles acima) uma única vez, e só então avança — nunca grava o vai-e-vem.
+  const trackedNextMulti = (field) => {
+    const meta = QUESTION_LABELS[field];
+    const current = answers[field];
+    if (meta && current && current.length > 0) {
+      trackAnswer(field, meta.questionText, current, current.map(v => resolveAnswerLabel(field, v)));
     }
-    trackAnswer('limitations', meta.questionText, newArr, newArr.map(v => resolveAnswerLabel('limitations', v)));
+    next();
+  };
+
+  // bellyLocation (step 3), belief (step 9) e routine (step 18) são escolha
+  // única, MAS com botão "Continuar" — dá pra trocar de opção antes de
+  // confirmar. O update aqui NÃO grava nada; a gravação final acontece em
+  // trackedNextSingle, no avanço (mesmo padrão de trackedNextMulti, só que
+  // para valor único em vez de array).
+  const updateAnswerSilent = (field, value) => {
+    updateAnswer(field, value);
+  };
+
+  const trackedNextSingle = (field) => {
+    const meta = QUESTION_LABELS[field];
+    const value = answers[field];
+    if (meta && value !== null && value !== undefined && value !== '') {
+      trackAnswer(field, meta.questionText, value, resolveAnswerLabel(field, value));
+    }
+    next();
   };
 
   return (
@@ -218,11 +238,11 @@ export default function Quiz() {
       {/* E2 */}
       {step === 2  && <StepBodyType update={trackedUpdateAnswer} onNext={next} />}
       {/* E3 */}
-      {step === 3  && <StepBelly answers={answers} update={trackedUpdateAnswer} onNext={next} />}
+      {step === 3  && <StepBelly answers={answers} update={updateAnswerSilent} onNext={() => trackedNextSingle('bellyLocation')} />}
       {/* E4 */}
       {step === 4  && <StepProof onNext={next} />}
       {/* E5 */}
-      {step === 5  && <StepPastAttempts answers={answers} toggle={trackedTogglePastAttempts} onNext={next} />}
+      {step === 5  && <StepPastAttempts answers={answers} toggle={togglePastAttemptsSilent} onNext={() => trackedNextMulti('pastAttempts')} />}
       {/* E7 */}
       {step === 6  && <StepImpact toggle={trackedToggleMulti} onNext={next} />}
       {/* E7.2 */}
@@ -230,9 +250,9 @@ export default function Quiz() {
       {/* E7.5 */}
       {step === 8  && <StepBodyChange update={trackedUpdateAnswer} onNext={next} />}
       {/* E8 */}
-      {step === 9  && <StepBelief answers={answers} update={trackedUpdateAnswer} onNext={next} />}
+      {step === 9  && <StepBelief answers={answers} update={updateAnswerSilent} onNext={() => trackedNextSingle('belief')} />}
       {/* E9 — sintomas (era E11) */}
-      {step === 10 && <StepSymptoms answers={answers} toggle={trackedToggleMulti} onNext={next} />}
+      {step === 10 && <StepSymptoms answers={answers} toggle={toggleMultiSilent} onNext={() => trackedNextMulti('symptoms')} />}
       {/* E9.5 — validação (era E9) */}
       {step === 11 && <StepFrustration update={trackedUpdateAnswer} onNext={next} />}
       {/* E10 */}
@@ -246,9 +266,9 @@ export default function Quiz() {
       {/* E15 — Idade Exata */}
       {step === 16 && <StepAge answers={answers} update={trackedUpdateAnswer} onNext={next} />}
       {/* E11 — limitações */}
-      {step === 17 && <StepLimitations answers={answers} toggle={trackedToggleLimitations} onNext={next} />}
+      {step === 17 && <StepLimitations answers={answers} toggle={toggleLimitationsSilent} onNext={() => trackedNextMulti('limitations')} />}
       {/* E12 */}
-      {step === 18 && <StepRoutine update={trackedUpdateAnswer} onNext={next} />}
+      {step === 18 && <StepRoutine update={updateAnswerSilent} onNext={() => trackedNextSingle('routine')} />}
       {/* E16 */}
       {step === 19 && <StepAcceptance update={trackedUpdateAnswer} onNext={next} />}
       {/* E17-loading */}
