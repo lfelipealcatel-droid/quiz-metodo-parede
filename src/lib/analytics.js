@@ -246,51 +246,56 @@ export const QUESTION_LABELS = {
   bodyType: {
     questionText: 'Como está seu corpo agora?',
     answers: {
-      'magra-engordou': 'Era magra e engordou',
-      'curva-anormal': 'Curva anormal',
-      'acima-peso': 'Acima do peso',
-      'so-barriga': 'Só a barriga',
+      'magra-engordou': 'Sempre fui magra — e do nada engordei',
+      'curva-anormal': 'Sempre tive curva, mas a barriga está fora do normal',
+      'acima-peso': 'Estou acima do peso há mais tempo',
+      'so-barriga': 'Estou bem, só essa barriga me incomoda',
     },
   },
   bellyLocation: {
     questionText: 'Sua barriga está concentrada onde?',
-    answers: { alta: 'Barriga alta', gravida: 'Formato grávida', baixa: 'Barriga baixa', inchada: 'Inchada' },
+    answers: {
+      alta: 'Alta, perto do peito ("pansa que apareceu")',
+      gravida: 'Frente, parece que estou grávida',
+      baixa: 'Baixa, "popozinho na frente"',
+      inchada: 'Tudo inchado, varia durante o dia',
+    },
   },
   pastAttempts: {
     questionText: 'O que você JÁ tentou e não funcionou?',
     answers: {
-      dieta: 'Dieta', musculacao: 'Musculação', caminhada: 'Caminhada',
-      acucar: 'Cortar açúcar', caneta: 'Caneta emagrecedora', nenhuma: 'Nenhuma',
+      dieta: 'Dieta restritiva', musculacao: 'Musculação 3-5x por semana', caminhada: 'Caminhada todos os dias',
+      acucar: 'Cortar açúcar e farinha', caneta: 'Caneta emagrecedora', nenhuma: 'Nenhuma das anteriores',
     },
   },
   emotionalImpact: {
     questionText: 'Como essa barriga tem afetado sua vida?',
     answers: {
-      fotos: 'Evita fotos', roupas: 'Roupas não servem', 'gravida-perg': 'Perguntam se está grávida',
-      'nao-reconheco': 'Não me reconheço', isolamento: 'Isolamento',
+      fotos: 'Estou evitando aparecer em fotos', roupas: 'Tem roupas que não fecham mais', 'gravida-perg': 'Já perguntaram se eu estou grávida',
+      'nao-reconheco': 'Não me reconheço mais no espelho', isolamento: 'Estou me isolando socialmente',
     },
   },
   tempo_mudanca: {
     questionText: 'Em quanto tempo você sentiu que seu corpo mudou?',
     answers: {
-      poucas_semanas: 'Poucas semanas', alguns_meses: 'Alguns meses',
-      mais_um_ano: 'Mais de um ano', perdi_nocao: 'Perdi a noção',
+      poucas_semanas: 'Em poucas semanas — foi do nada, sem aviso', alguns_meses: 'Em alguns meses — fui percebendo aos poucos',
+      mais_um_ano: 'Há mais de um ano — tem se acumulado', perdi_nocao: 'Sinceramente, perdi a noção — parece que sempre foi assim',
     },
   },
   belief: {
     questionText: 'Você acredita que pra perder a barriga depois dos 40 você precisa:',
-    answers: { carboidrato: 'Cortar carboidrato', cardio: 'Fazer cardio', caneta: 'Caneta', nenhuma: 'Nenhuma' },
+    answers: { carboidrato: 'Cortar carboidrato', cardio: 'Fazer mais cardio', caneta: 'Tomar caneta', nenhuma: 'Nenhuma dessas — não é sobre isso' },
   },
   symptoms: {
     questionText: 'Quais desses sintomas você sente HOJE?',
     answers: {
-      calorao_fogacho: 'Calorão/fogacho', cansaco: 'Cansaço', insonia: 'Insônia',
-      irritabilidade: 'Irritabilidade', ressecamento_libido: 'Ressecamento/libido', inchaco_retencao: 'Inchaço/retenção',
+      calorao_fogacho: 'Calorão / fogacho', cansaco: 'Cansaço que não passa', insonia: 'Insônia ou acordar de madrugada',
+      irritabilidade: 'Irritabilidade fora do comum', ressecamento_libido: 'Ressecamento / libido baixo', inchaco_retencao: 'Inchaço ou retenção de líquido',
     },
   },
   frustration: {
     questionText: 'Você sente que mesmo se esforçando, seu corpo deixou de responder como antes?',
-    answers: { 'sim-exatamente': 'Sim, exatamente', 'mais-ou-menos': 'Mais ou menos', 'corpo-virou': 'Meu corpo virou outro' },
+    answers: { 'sim-exatamente': 'Sim, é exatamente isso', 'mais-ou-menos': 'Mais ou menos — responde, mas muito devagar', 'corpo-virou': 'Sim, parece que meu corpo virou contra mim' },
   },
   height: {
     questionText: 'Qual é a sua altura?',
@@ -312,15 +317,24 @@ export const QUESTION_LABELS = {
   },
   limitations: {
     questionText: 'Você tem alguma dessas limitações?',
-    answers: { joelho: 'Joelho', lombar: 'Lombar', bursite: 'Bursite', diastase: 'Diástase', pes: 'Pés', nenhuma: 'Nenhuma' },
+    answers: {
+      joelho: 'Joelho com dor ou artrose', lombar: 'Dor lombar ou coluna sensível', bursite: 'Bursite no quadril',
+      diastase: 'Diástase abdominal', pes: 'Dor nos pés ou tornozelos', nenhuma: 'Nenhuma',
+    },
   },
   routine: {
     questionText: 'Como é seu dia a dia hoje?',
-    answers: { fora: 'Trabalha fora', casa: 'Trabalha em casa', familia: 'Cuida da família', aposentada: 'Aposentada' },
+    answers: {
+      fora: 'Trabalho fora, rotina corrida', casa: 'Trabalho em casa, mais flexível',
+      familia: 'Cuido da família, sem rotina fixa', aposentada: 'Aposentada / tempo livre',
+    },
   },
   acceptance: {
     questionText: 'Você está pronta para ver o que esse protocolo pode fazer pelo seu corpo?',
-    answers: { sim: 'Sim', testar: 'Quero testar', topo: 'Topo' },
+    answers: {
+      sim: 'Sim, é exatamente o que faz sentido pra mim', testar: 'Quero testar, parece diferente',
+      topo: 'Topo qualquer coisa que respeite minhas limitações',
+    },
   },
   name: {
     questionText: 'Pra finalizar seu protocolo personalizado, como podemos te chamar?',
@@ -329,11 +343,14 @@ export const QUESTION_LABELS = {
   },
   futureFear: {
     questionText: 'Se nada mudar nos próximos 6 meses, como você imagina que vai estar?',
-    answers: { piorar: 'Vai piorar', saude: 'Medo pela saúde', triste: 'Triste', 'sem-reagir': 'Sem reagir' },
+    answers: {
+      piorar: 'A barriga vai piorar — roupa vai parar de servir', saude: 'Saúde vai piorar — mais dor, menos energia',
+      triste: 'Vou estar mais triste e isolada', 'sem-reagir': 'Vou continuar vendo meu corpo mudar sem conseguir reagir',
+    },
   },
   commitment: {
     questionText: 'Você está disposta a dedicar apenas 8 minutos por dia nos próximos 21 dias para reverter isso?',
-    answers: { sim: 'Sim', tentar: 'Vou tentar' },
+    answers: { sim: 'Sim, preciso muito mudar', tentar: 'Estou disposta a tentar de verdade' },
   },
 };
 
